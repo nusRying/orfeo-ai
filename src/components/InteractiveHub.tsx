@@ -67,12 +67,12 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
 
   const goToServices = () => {
     // Look at services zone
-    cameraControlsRef.current?.setLookAt(15, 2, -2, 20, 0, -10, true);
+    cameraControlsRef.current?.setLookAt(35, 2, -5, 40, 0, -20, true);
   };
 
   const goToWork = () => {
     // Look at work zone
-    cameraControlsRef.current?.setLookAt(-15, 2, -2, -20, 0, -10, true);
+    cameraControlsRef.current?.setLookAt(-35, 2, -5, -40, 0, -20, true);
   };
 
   return (
@@ -80,14 +80,14 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
       <CameraControls 
         ref={cameraControlsRef} 
         minDistance={5} 
-        maxDistance={30}
+        maxDistance={40}
         maxPolarAngle={Math.PI / 2 - 0.05} // Prevent camera going below ground
         dollySpeed={0.5}
         smoothTime={0.4}
         draggingDampingFactor={0.1}
       />
       <ambientLight intensity={0.5} />
-      <fog attach="fog" args={['#ffffff', 10, 40]} />
+      <fog attach="fog" args={['#ffffff', 10, 50]} />
       <WaveLines />
       
       {/* Hero Zone */}
@@ -124,7 +124,7 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
 
       {/* Services Zone */}
       <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2}>
-          <group position={[20, 0, -10]} rotation={[0, -Math.PI / 8, 0]}>
+          <group position={[40, 0, -20]} rotation={[0, -Math.PI / 4, 0]}>
              <Html transform distanceFactor={15} position={[0, 2, 0]} className="w-[900px] select-none pointer-events-auto">
                 <div className="bg-white/90 backdrop-blur-xl p-12 rounded-[2rem] border border-gray-200 shadow-2xl shadow-primary/5">
                   <div className="flex justify-between items-center mb-12 border-b border-gray-100 pb-8">
@@ -154,7 +154,7 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
 
       {/* Work Zone */}
       <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.2}>
-          <group position={[-20, 0, -10]} rotation={[0, Math.PI / 8, 0]}>
+          <group position={[-40, 0, -20]} rotation={[0, Math.PI / 4, 0]}>
              <Html transform distanceFactor={15} position={[0, 2, 0]} className="w-[900px] select-none pointer-events-auto">
                 <div className="bg-white/90 backdrop-blur-xl p-12 rounded-[2rem] border border-gray-200 shadow-2xl shadow-primary/5">
                   <div className="flex justify-between items-center mb-12 border-b border-gray-100 pb-8">
