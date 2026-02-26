@@ -1,12 +1,16 @@
+'use client';
+
 import ClientWrapper from "@/components/ClientWrapper";
-import { BrainCircuit, LineChart, Network, ShieldCheck, Zap, Database } from "lucide-react";
+import { useDictionary } from '@/i18n/DictionaryProvider';
+import { Bot, LineChart, Brain, Zap, ShieldCheck, Database } from "lucide-react";
 
 export default function ServicesPage() {
+  const { dictionary } = useDictionary();
   const services = [
     {
       title: "Enterprise LLM Integration",
       description: "Secure, private deployment of large language models fine-tuned on your proprietary data. Turn fragmented knowledge into actionable intelligence.",
-      icon: <BrainCircuit className="w-8 h-8 text-primary mb-6" />
+      icon: <Brain className="w-8 h-8 text-primary mb-6" />
     },
     {
       title: "Predictive Analytics Engine",
@@ -16,7 +20,7 @@ export default function ServicesPage() {
     {
       title: "Autonomous Agents",
       description: "Custom AI agents capable of handling complex, multi-step workflows. From customer support triage to automated data entry.",
-      icon: <Network className="w-8 h-8 text-primary mb-6" />
+      icon: <Bot className="w-8 h-8 text-primary mb-6" />
     },
     {
       title: "Computer Vision Systems",
@@ -41,10 +45,10 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mb-24">
             <h1 className="text-5xl md:text-7xl font-serif text-foreground mb-8 tracking-tight">
-              Our <span className="text-primary italic">Services</span>
+              {dictionary.services.title1}<span className="text-primary italic">{dictionary.services.titleHighlight}</span>
             </h1>
             <p className="text-xl text-foreground/70 leading-relaxed font-light">
-              We don't just build models; we engineer solutions that solve complex business problems. Explore our core capabilities.
+              {dictionary.services.description}
             </p>
           </div>
 

@@ -1,0 +1,34 @@
+{
+  "common": {
+    "bookConsultation": "BOOK YOUR FREE AI CONSULTATION →",
+    "bookConsultationShort": "BOOK CONSULTATION",
+    "scroll": "Scroll",
+    "directContact": "Direct Contact",
+    "headquarters": "Headquarters",
+    "sendMessage": "SEND MESSAGE"
+  },
+  "navbar": {
+    "services": "SERVICES",
+    "work": "WORK",
+    "about": "ABOUT"
+  },
+  "hero": {
+    "eyebrow": "AI Agency",
+    "headline1": "Let's get ",
+    "headlineHighlight": "AI",
+    "headline3": " everywhere else.",
+    "subheadline": "Why wait any longer.",
+    "description": "Transforming businesses with bespoke AI solutions. We bridge the gap between technical complexity and business growth, making intelligence accessible and efficient."
+  },
+  "about": {
+    "title1": "Our ",
+    "titleHighlight": "Story",
+    "mission": "Mission",
+    "values": "Core Values"
+  },
+  "services": {
+    "title1": "Our ",
+    "titleHighlight": "Services",
+    "description": "Comprehensive AI solutions designed to transform your business operations, from intelligent automation to predictive analytics."
+  }
+}
