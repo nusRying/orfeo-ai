@@ -39,7 +39,7 @@ export default function Hero() {
         </motion.div>
       </div>
       
-      {/* Scroll indicator - can also be placed here or in a separate component */}
+      {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
         <div className="text-[8px] tracking-[0.3em] text-foreground/40 uppercase">{dictionary.common.scroll}</div>
         <motion.div 
