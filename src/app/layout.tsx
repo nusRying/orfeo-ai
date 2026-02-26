@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Modern AI solutions for forward-thinking businesses. Let's get AI everywhere else.",
 };
 
-import { motion, AnimatePresence } from "framer-motion";
+import ClientWrapper from "@/components/ClientWrapper";
 
 export default function RootLayout({
   children,
@@ -30,15 +30,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased selection:bg-cyan-500/30`}
       >
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
+        <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>
   );
