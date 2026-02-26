@@ -18,6 +18,7 @@ export default function ClientWrapper({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="relative z-10"
       >
         {children}
       </motion.div>
