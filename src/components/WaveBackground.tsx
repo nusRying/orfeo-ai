@@ -98,6 +98,7 @@ function WaveLines() {
                         count={pointsPerLine}
                         array={new Float32Array(pointsPerLine * 3)}
                         itemSize={3}
+                        args={[new Float32Array(pointsPerLine * 3), 3]}
                     />
                 </bufferGeometry>
                 <lineBasicMaterial color="#ffffff" transparent opacity={0.15} linewidth={1} />
