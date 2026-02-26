@@ -19,6 +19,9 @@ export const metadata: Metadata = {
 };
 
 import ClientWrapper from "@/components/ClientWrapper";
+import Navbar from "@/components/Navbar";
+import WaveBackground from "@/components/WaveBackground";
+import ChatWidget from "@/components/ChatWidget";
 
 export default function RootLayout({
   children,
@@ -30,7 +33,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased selection:bg-cyan-500/30`}
       >
+        <WaveBackground />
+        <Navbar />
         <ClientWrapper>{children}</ClientWrapper>
+        <ChatWidget />
       </body>
     </html>
   );

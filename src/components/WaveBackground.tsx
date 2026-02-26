@@ -117,7 +117,7 @@ function WaveLines() {
 
 export default function WaveBackground() {
   return (
-    <div className="absolute inset-0 -z-10 bg-[#081426]">
+    <div className="fixed inset-0 -z-10 bg-[#081426]">
       <Canvas camera={{ position: [0, 10, 20], fov: 45 }}>
         <fog attach="fog" args={['#081426', 10, 50]} />
         <ambientLight intensity={0.5} />
