@@ -33,10 +33,10 @@ export default function WorkPage() {
       <ClientWrapper>
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mb-24">
-            <h1 className="text-5xl md:text-7xl font-serif text-white mb-8 tracking-tight">
-              Selected <span className="text-cyan-400 italic">Work</span>
+            <h1 className="text-5xl md:text-7xl font-serif text-foreground mb-8 tracking-tight">
+              Selected <span className="text-primary italic">Work</span>
             </h1>
-            <p className="text-xl text-gray-300 leading-relaxed font-light">
+            <p className="text-xl text-foreground/70 leading-relaxed font-light">
               We measure our success by the impact we create. Here are a few examples of how we've transformed operations for our partners.
             </p>
           </div>
@@ -45,30 +45,30 @@ export default function WorkPage() {
             {projects.map((project, i) => (
               <div 
                 key={i}
-                className="group relative overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-16 p-8 md:p-12 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500"
+                className="group relative overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-16 p-8 md:p-12 rounded-3xl bg-deep-navy border border-gray-200 hover:bg-gray-200 transition-all duration-500"
               >
                 {/* Metric Highlight */}
-                <div className="flex-shrink-0 w-full md:w-64 text-center md:text-left border-b md:border-b-0 md:border-r border-white/10 pb-8 md:pb-0 md:pr-12">
-                  <div className="text-5xl md:text-6xl font-bold text-cyan-400 mb-2 truncate">
+                <div className="flex-shrink-0 w-full md:w-64 text-center md:text-left border-b md:border-b-0 md:border-r border-gray-200 pb-8 md:pb-0 md:pr-12">
+                  <div className="text-5xl md:text-6xl font-bold text-primary mb-2 truncate">
                     {project.metric}
                   </div>
-                  <div className="text-sm text-gray-400 uppercase tracking-widest font-semibold">
+                  <div className="text-sm text-foreground/60 uppercase tracking-widest font-semibold">
                     {project.metricLabel}
                   </div>
                 </div>
 
                 {/* Project Details */}
                 <div className="flex-grow">
-                  <div className="text-sm text-cyan-400 mb-2 uppercase tracking-widest">{project.client}</div>
-                  <h3 className="text-3xl font-serif text-white mb-4 group-hover:text-cyan-300 transition-colors">{project.title}</h3>
-                  <p className="text-gray-300 leading-relaxed font-light mb-6 text-lg">
+                  <div className="text-sm text-primary mb-2 uppercase tracking-widest">{project.client}</div>
+                  <h3 className="text-3xl font-serif text-foreground mb-4 group-hover:text-primary transition-colors">{project.title}</h3>
+                  <p className="text-foreground/70 leading-relaxed font-light mb-6 text-lg">
                     {project.description}
                   </p>
                   
                   {/* Tags */}
                   <div className="flex flex-wrap gap-3">
                     {project.tags.map((tag, j) => (
-                      <span key={j} className="text-xs font-mono text-gray-400 bg-black/40 px-3 py-1.5 rounded-full border border-white/5">
+                      <span key={j} className="text-xs font-mono text-foreground/60 bg-white px-3 py-1.5 rounded-full border border-gray-200">
                         {tag}
                       </span>
                     ))}

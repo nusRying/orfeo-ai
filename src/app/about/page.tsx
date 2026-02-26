@@ -13,10 +13,10 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto">
           {/* Story Section */}
           <section className="mb-32">
-            <h1 className="text-5xl md:text-7xl font-serif text-white mb-8 tracking-tight">
-              About <span className="text-cyan-400 italic">Us</span>
+            <h1 className="text-5xl md:text-7xl font-serif text-foreground mb-8 tracking-tight">
+              About <span className="text-primary italic">Us</span>
             </h1>
-            <div className="grid md:grid-cols-2 gap-12 font-light text-gray-300 text-lg leading-relaxed">
+            <div className="grid md:grid-cols-2 gap-12 font-light text-foreground/70 text-lg leading-relaxed">
               <p>
                 Founded in 2024, ORFEO AI emerged from a simple realization: the gap between cutting-edge AI research and practical business application was too wide. We exist to bridge that gap. 
               </p>
@@ -28,16 +28,16 @@ export default function AboutPage() {
 
           {/* Core Values Section */}
           <section className="mb-32">
-            <h2 className="text-3xl font-serif text-white mb-12 border-b border-white/10 pb-4">Core Principles</h2>
+            <h2 className="text-3xl font-serif text-foreground mb-12 border-b border-gray-200 pb-4">Core Principles</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { title: "Precision", desc: "We build systems that are accurate, reliable, and rigorously tested." },
                 { title: "Transparency", desc: "Clear explanations over jargon. We explain how our models arrive at their conclusions." },
                 { title: "Impact", desc: "We measure success not by lines of code, but by the tangible ROI delivered to our partners." }
               ].map((val, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-colors">
-                  <h3 className="text-xl font-bold text-white mb-4">{val.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{val.desc}</p>
+                <div key={i} className="bg-deep-navy border border-gray-200 p-8 rounded-2xl hover:bg-gray-200 transition-colors">
+                  <h3 className="text-xl font-bold text-foreground mb-4">{val.title}</h3>
+                  <p className="text-sm text-foreground/60 leading-relaxed">{val.desc}</p>
                 </div>
               ))}
             </div>
@@ -45,21 +45,21 @@ export default function AboutPage() {
 
           {/* Team Section */}
           <section>
-            <h2 className="text-3xl font-serif text-white mb-12 border-b border-white/10 pb-4">Leadership</h2>
+            <h2 className="text-3xl font-serif text-foreground mb-12 border-b border-gray-200 pb-4">Leadership</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {team.map((member, i) => (
                 <div key={i} className="group cursor-pointer">
-                  <div className="relative w-full aspect-square overflow-hidden rounded-2xl mb-6 bg-white/5">
+                  <div className="relative w-full aspect-square overflow-hidden rounded-2xl mb-6 bg-deep-navy">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
                       src={member.img} 
                       alt={member.name}
                       className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 border border-white/10 rounded-2xl z-10 pointer-events-none" />
+                    <div className="absolute inset-0 border border-gray-200 rounded-2xl z-10 pointer-events-none" />
                   </div>
-                  <h3 className="text-xl font-bold text-white tracking-wide">{member.name}</h3>
-                  <p className="text-sm text-cyan-400 mt-1 uppercase tracking-widest">{member.role}</p>
+                  <h3 className="text-xl font-bold text-foreground tracking-wide">{member.name}</h3>
+                  <p className="text-sm text-primary mt-1 uppercase tracking-widest">{member.role}</p>
                 </div>
               ))}
             </div>

@@ -101,7 +101,7 @@ function WaveLines() {
                         args={[new Float32Array(pointsPerLine * 3), 3]}
                     />
                 </bufferGeometry>
-                <lineBasicMaterial color="#ffffff" transparent opacity={0.4} linewidth={1} />
+                <lineBasicMaterial color="#fe4c23" transparent opacity={0.6} linewidth={1} />
             </line>
         );
     };
@@ -119,7 +119,7 @@ export default function WaveBackground() {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none bg-transparent">
       <Canvas camera={{ position: [0, 10, 20], fov: 45 }}>
-        <fog attach="fog" args={['#081426', 10, 50]} />
+        <fog attach="fog" args={['#ffffff', 10, 50]} />
         <ambientLight intensity={0.5} />
         <WaveLines />
         {/* <WaveParticles /> */}
