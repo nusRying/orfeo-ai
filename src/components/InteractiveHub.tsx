@@ -93,7 +93,7 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
       {/* Hero Zone */}
       <group position={[0, 0, 0]}>
         <Html transform distanceFactor={15} position={[0, 2, 0]} className="w-[800px] select-none text-center">
-          <div className="flex flex-col items-center pointer-events-auto">
+          <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="flex flex-col items-center pointer-events-auto">
             <h5 className="text-xs font-bold tracking-[0.3em] uppercase text-accent mb-6 cursor-pointer hover:scale-105 transition-transform" onClick={goToHero}>
               {dictionary.hero.eyebrow}
             </h5>
@@ -107,16 +107,16 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
             <div className="flex gap-6">
               <button onClick={goToServices} className="glow-btn bg-white border border-gray-200 shadow-xl shadow-primary/5 text-foreground font-bold tracking-widest px-8 py-4 rounded-full text-xs uppercase hover:bg-gray-50 hover:border-primary/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
                 <span>{dictionary.home?.servicesSubtitle || "SERVICES"}</span>
-                <span>&rarr;</span>
+                <span>{locale === 'ar' ? '←' : '→'}</span>
               </button>
               <button onClick={goToWork} className="glow-btn bg-deep-navy border border-gray-200 text-foreground font-bold tracking-widest px-8 py-4 rounded-full text-xs uppercase hover:bg-gray-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
-                <span>&larr;</span>
+                <span>{locale === 'ar' ? '→' : '←'}</span>
                 <span>{dictionary.home?.workSubtitle || "WORK"}</span>
               </button>
             </div>
             
             <div className="mt-16 animate-bounce text-foreground/40 text-xs tracking-[0.3em]">
-                DRAG TO EXPLORE
+                {locale === 'ar' ? "اسحب للاستكشاف" : "DRAG TO EXPLORE"}
             </div>
           </div>
         </Html>
@@ -124,22 +124,22 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
 
       {/* Services Zone */}
       <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2}>
-          <group position={[40, 0, -20]} rotation={[0, -Math.PI / 4, 0]}>
+          <group position={[35, 0, -20]} rotation={[0, -Math.PI / 4, 0]}>
              <Html transform distanceFactor={15} position={[0, 2, 0]} className="w-[900px] select-none pointer-events-auto">
-                <div className="bg-white/90 backdrop-blur-xl p-12 rounded-[2rem] border border-gray-200 shadow-2xl shadow-primary/5">
+                <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="bg-white/90 backdrop-blur-xl p-12 rounded-[2rem] border border-gray-200 shadow-2xl shadow-primary/5">
                   <div className="flex justify-between items-center mb-12 border-b border-gray-100 pb-8">
                     <h3 className="text-5xl font-serif text-foreground">
                       {dictionary.services.title1}<span className="text-primary italic">{dictionary.services.titleHighlight}</span>
                     </h3>
                     <button onClick={goToHero} className="text-xs font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors hover:-translate-x-2 flex items-center gap-2">
-                      <span>&larr;</span> BACK TO HUB
+                      <span>{locale === 'ar' ? '→' : '←'}</span> {locale === 'ar' ? 'الرجوع' : 'BACK TO HUB'}
                     </button>
                   </div>
                   <div className="grid grid-cols-3 gap-8">
                     {[
-                      { title: "Enterprise LLM", icon: <Brain className="w-8 h-8 text-primary mb-6" /> },
-                      { title: "Predictive Analytics", icon: <LineChart className="w-8 h-8 text-primary mb-6" /> },
-                      { title: "Autonomous Agents", icon: <Bot className="w-8 h-8 text-primary mb-6" /> },
+                      { title: locale === 'ar' ? "نماذج اللغات" : "Enterprise LLM", icon: <Brain className="w-8 h-8 text-primary mb-6" /> },
+                      { title: locale === 'ar' ? "التحليلات التنبؤية" : "Predictive Analytics", icon: <LineChart className="w-8 h-8 text-primary mb-6" /> },
+                      { title: locale === 'ar' ? "الوكلاء المستقلون" : "Autonomous Agents", icon: <Bot className="w-8 h-8 text-primary mb-6" /> },
                     ].map((s, i) => (
                       <div key={i} className="bg-deep-navy p-8 rounded-3xl hover:-translate-y-3 transition-transform cursor-pointer border border-transparent hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5">
                         {s.icon}
@@ -154,27 +154,27 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
 
       {/* Work Zone */}
       <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.2}>
-          <group position={[-40, 0, -20]} rotation={[0, Math.PI / 4, 0]}>
+          <group position={[-35, 0, -20]} rotation={[0, Math.PI / 4, 0]}>
              <Html transform distanceFactor={15} position={[0, 2, 0]} className="w-[900px] select-none pointer-events-auto">
-                <div className="bg-white/90 backdrop-blur-xl p-12 rounded-[2rem] border border-gray-200 shadow-2xl shadow-primary/5">
+                <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="bg-white/90 backdrop-blur-xl p-12 rounded-[2rem] border border-gray-200 shadow-2xl shadow-primary/5">
                   <div className="flex justify-between items-center mb-12 border-b border-gray-100 pb-8">
                     <h3 className="text-5xl font-serif text-foreground">
-                      Selected <span className="text-primary italic">Work</span>
+                      {locale === 'ar' ? 'أعمال ' : 'Selected '}<span className="text-primary italic">{locale === 'ar' ? 'مختارة' : 'Work'}</span>
                     </h3>
                     <button onClick={goToHero} className="text-xs font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors flex items-center gap-2 hover:translate-x-2">
-                      BACK TO HUB <span>&rarr;</span>
+                       {locale === 'ar' ? 'الرجوع' : 'BACK TO HUB'} <span>{locale === 'ar' ? '←' : '→'}</span>
                     </button>
                   </div>
                   <div className="grid grid-cols-2 gap-8">
                     <div className="p-8 bg-deep-navy rounded-3xl hover:-translate-y-2 transition-transform cursor-pointer border border-transparent hover:border-primary/20">
-                      <div className="text-5xl font-bold text-primary mb-3">+34%</div>
-                      <div className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-semibold mb-6">Efficiency Increase</div>
-                      <h4 className="text-2xl font-serif text-foreground">Global Logistics Optimization</h4>
+                      <div className="text-5xl font-bold text-primary mb-3" dir="ltr">+34%</div>
+                      <div className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-semibold mb-6">{locale === 'ar' ? 'زيادة الكفاءة' : 'Efficiency Increase'}</div>
+                      <h4 className="text-2xl font-serif text-foreground">{locale === 'ar' ? 'تحسين اللوجستيات' : 'Global Logistics Optimization'}</h4>
                     </div>
                     <div className="p-8 bg-deep-navy rounded-3xl hover:-translate-y-2 transition-transform cursor-pointer border border-transparent hover:border-primary/20">
-                      <div className="text-5xl font-bold text-primary mb-3">99.9%</div>
-                      <div className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-semibold mb-6">Anomaly Detection Rate</div>
-                      <h4 className="text-2xl font-serif text-foreground">Automated Financial Auditing</h4>
+                      <div className="text-5xl font-bold text-primary mb-3" dir="ltr">99.9%</div>
+                      <div className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-semibold mb-6">{locale === 'ar' ? 'معدل الكشف عن الشذوذ' : 'Anomaly Detection Rate'}</div>
+                      <h4 className="text-2xl font-serif text-foreground">{locale === 'ar' ? 'التدقيق المالي الآلي' : 'Automated Financial Auditing'}</h4>
                     </div>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
 export default function InteractiveHub() {
   const { dictionary, locale } = useDictionary();
   return (
-    <div className="w-full h-screen absolute inset-0 bg-white">
+    <div className="w-full h-screen absolute inset-0 bg-white" dir="ltr">
       <Canvas camera={{ position: [0, 2, 10], fov: 45 }}>
         <Scene dictionary={dictionary} locale={locale} />
       </Canvas>
@@ -196,7 +196,7 @@ export default function InteractiveHub() {
       <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-white to-transparent pointer-events-none z-10" />
       
       {/* 2D HUD Overlays */}
-      <div className="absolute bottom-0 w-full z-20 pointer-events-auto">
+      <div className="absolute bottom-0 w-full z-20 pointer-events-auto" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         <CompanyMarquee />
       </div>
     </div>

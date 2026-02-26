@@ -17,7 +17,7 @@ const puppeteer = require('puppeteer');
             console.log(`[Page Error] ${error.message}`);
         });
 
-        await page.goto('http://localhost:3000/en');
+        await page.goto('http://localhost:3000/ar');
         await new Promise(r => setTimeout(r, 5000));
         
         console.log("Collected Errors:");
