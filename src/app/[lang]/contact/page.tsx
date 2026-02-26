@@ -11,13 +11,13 @@ export default function ContactPage() {
               Get in <span className="text-primary italic">Touch</span>
             </h1>
             <p className="text-xl text-foreground/70 leading-relaxed font-light">
-              Ready to integrate enterprise-grade AI into your workflow? Drop us a line and let's discuss how we can accelerate your growth.
+              Ready to integrate enterprise-grade AI into your workflow? Drop us a line and let&apos;s discuss how we can accelerate your growth.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
             {/* Contact Form */}
-            <div className="bg-deep-navy border border-gray-200 p-8 md:p-12 rounded-3xl">
+            <div className="glass p-8 md:p-12 rounded-3xl">
               <form className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
@@ -52,13 +52,13 @@ export default function ContactPage() {
                 <h3 className="text-2xl font-serif text-foreground mb-8 border-b border-gray-200 pb-4">Direct Contact</h3>
                 <div className="space-y-6">
                   <div className="flex items-center gap-4 text-foreground/70 hover:text-primary transition-colors cursor-pointer">
-                    <div className="w-12 h-12 rounded-full bg-deep-navy border border-gray-200 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-white/60 backdrop-blur border border-white/60 shadow-sm flex items-center justify-center flex-shrink-0">
                       <Mail className="w-5 h-5" />
                     </div>
                     <span className="text-lg font-light">hello@orfeo-ai.com</span>
                   </div>
                   <div className="flex items-center gap-4 text-foreground/70 hover:text-primary transition-colors cursor-pointer">
-                    <div className="w-12 h-12 rounded-full bg-deep-navy border border-gray-200 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-white/60 backdrop-blur border border-white/60 shadow-sm flex items-center justify-center flex-shrink-0">
                       <Phone className="w-5 h-5" />
                     </div>
                     <span className="text-lg font-light">+1 (800) 555-0199</span>
@@ -69,7 +69,7 @@ export default function ContactPage() {
               <div>
                 <h3 className="text-2xl font-serif text-foreground mb-8 border-b border-gray-200 pb-4">Headquarters</h3>
                 <div className="flex items-start gap-4 text-foreground/70">
-                  <div className="w-12 h-12 rounded-full bg-deep-navy border border-gray-200 flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-12 h-12 rounded-full bg-white/60 backdrop-blur border border-white/60 shadow-sm flex items-center justify-center flex-shrink-0 mt-1">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div className="text-lg font-light leading-relaxed">

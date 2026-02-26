@@ -25,7 +25,7 @@ export default function AboutPage() {
                 Founded in 2024, ORFEO AI emerged from a simple realization: the gap between cutting-edge AI research and practical business application was too wide. We exist to bridge that gap. 
               </p>
               <p>
-                Our mission is to democratize access to enterprise-grade artificial intelligence. We believe that AI shouldn't be a black box, but a transparent, powerful lever for growth, efficiency, and human potential.
+                Our mission is to democratize access to enterprise-grade artificial intelligence. We believe that AI shouldn&apos;t be a black box, but a transparent, powerful lever for growth, efficiency, and human potential.
               </p>
             </div>
           </section>
@@ -39,7 +39,7 @@ export default function AboutPage() {
                 { title: "Transparency", desc: "Clear explanations over jargon. We explain how our models arrive at their conclusions." },
                 { title: "Impact", desc: "We measure success not by lines of code, but by the tangible ROI delivered to our partners." }
               ].map((val, i) => (
-                <div key={i} className="bg-deep-navy border border-gray-200 p-8 rounded-2xl hover:bg-gray-200 transition-colors">
+                <div key={i} className="glass p-8 rounded-2xl hover:bg-white/70 transition-all duration-300 hover:-translate-y-1">
                   <h3 className="text-xl font-bold text-foreground mb-4">{val.title}</h3>
                   <p className="text-sm text-foreground/60 leading-relaxed">{val.desc}</p>
                 </div>

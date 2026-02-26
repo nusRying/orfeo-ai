@@ -1,6 +1,7 @@
-const puppeteer = require('puppeteer');
-
 (async () => {
+    const puppeteerModule = await import('puppeteer');
+    const puppeteer = puppeteerModule.default ?? puppeteerModule;
+
     try {
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();

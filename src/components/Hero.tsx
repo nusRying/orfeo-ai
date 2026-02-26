@@ -2,19 +2,20 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
 import { useDictionary } from '@/i18n/DictionaryProvider';
+import Link from 'next/link';
 
 export default function Hero() {
-  const { dictionary } = useDictionary();
+  const { dictionary, locale } = useDictionary();
 
   return (
-    <section className="relative w-full min-h-screen flex items-center px-6 md:px-12 pt-20">
-      <div className="max-w-4xl">
+    <section className="relative w-full min-h-screen flex items-center pt-28 pb-16">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
+          className="glass rounded-[2rem] p-8 md:p-12 max-w-4xl"
         >
           <h5 className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-accent mb-6">
             {dictionary.hero.eyebrow}
@@ -25,17 +26,19 @@ export default function Hero() {
             <span className="text-foreground/80">{dictionary.hero.subheadline}</span>
           </h1>
           
-          <p className="text-foreground/70 text-sm md:text-base leading-relaxed max-w-sm mb-12">
+          <p className="text-foreground/70 text-sm md:text-base leading-relaxed max-w-xl mb-12">
             {dictionary.hero.description}
           </p>
           
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="glow-btn bg-gradient-to-r from-primary to-accent text-white font-bold tracking-widest px-8 py-4 rounded-full text-xs md:text-sm uppercase transition-all duration-300 shadow-xl shadow-primary/20"
-          >
-            {dictionary.common.bookConsultationShort || "BOOK CONSULTATION"}
-          </motion.button>
+          <Link href={`/${locale}/contact`} className="inline-block">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="glow-btn inline-flex items-center justify-center bg-gradient-to-r from-primary to-accent text-white font-bold tracking-widest px-8 py-4 rounded-full text-xs md:text-sm uppercase transition-all duration-300 shadow-xl shadow-primary/20"
+            >
+              {dictionary.common.bookConsultationShort || "BOOK CONSULTATION"}
+            </motion.span>
+          </Link>
         </motion.div>
       </div>
       

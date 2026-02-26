@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { CameraControls, Html, Float } from '@react-three/drei';
 import * as THREE from 'three';
-import { useDictionary } from '@/i18n/DictionaryProvider';
+import { useDictionary, type Dictionary } from '@/i18n/DictionaryProvider';
+import type { Locale } from '@/i18n/config';
 import { Bot, LineChart, Brain } from "lucide-react";
 import CompanyMarquee from './CompanyMarquee';
 
@@ -26,6 +27,19 @@ function WaveLines() {
 
     const LineGroup = ({ curve, index }: { curve: THREE.CatmullRomCurve3, index: number }) => {
         const ref = useRef<THREE.Line>(null!);
+        const basePositions = useMemo(() => {
+            const points = curve.getPoints(pointsPerLine - 1);
+            const positions = new Float32Array(pointsPerLine * 3);
+            for (let i = 0; i < pointsPerLine; i++) {
+                const i3 = i * 3;
+                const p = points[i];
+                positions[i3] = p.x;
+                positions[i3 + 1] = p.y;
+                positions[i3 + 2] = p.z;
+            }
+            return positions;
+        }, [curve]);
+
         useFrame((state) => {
             const t = state.clock.getElapsedTime();
             const positions = ref.current.geometry.attributes.position.array as Float32Array;
@@ -33,16 +47,18 @@ function WaveLines() {
                 const i3 = i * 3;
                 const x = positions[i3];
                 const z = positions[i3 + 2];
-                const y = Math.sin(x * 0.2 + t + index * 0.1) * 2.5 * Math.sin(t * 0.5);
+                const y =
+                    Math.sin(x * 0.2 + t + index * 0.1) * 2.5 * Math.sin(t * 0.5) +
+                    Math.cos(z * 0.25 + t) * 0.75;
                 positions[i3 + 1] = y;
             }
             ref.current.geometry.attributes.position.needsUpdate = true;
         });
         return (
-            /* @ts-ignore */
+            // @ts-expect-error r3f <line> conflicts with SVG <line> typings
             <line ref={ref}>
                 <bufferGeometry>
-                    <bufferAttribute attach="attributes-position" count={pointsPerLine} array={new Float32Array(pointsPerLine * 3)} itemSize={3} args={[new Float32Array(pointsPerLine * 3), 3]} />
+                    <bufferAttribute attach="attributes-position" args={[basePositions, 3]} />
                 </bufferGeometry>
                 <lineBasicMaterial color="#fe4c23" transparent opacity={0.4} linewidth={1} />
             </line>
@@ -58,7 +74,7 @@ function WaveLines() {
     );
 }
 
-function Scene({ dictionary, locale }: { dictionary: any, locale: string }) {
+function Scene({ dictionary, locale }: { dictionary: Dictionary; locale: Locale }) {
   const cameraControlsRef = useRef<CameraControls>(null);
 
   const goToHero = () => {

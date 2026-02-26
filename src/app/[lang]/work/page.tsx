@@ -37,7 +37,7 @@ export default function WorkPage() {
               Selected <span className="text-primary italic">Work</span>
             </h1>
             <p className="text-xl text-foreground/70 leading-relaxed font-light">
-              We measure our success by the impact we create. Here are a few examples of how we've transformed operations for our partners.
+              We measure our success by the impact we create. Here are a few examples of how we&apos;ve transformed operations for our partners.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ export default function WorkPage() {
             {projects.map((project, i) => (
               <div 
                 key={i}
-                className="group relative overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-16 p-8 md:p-12 rounded-3xl bg-deep-navy border border-gray-200 hover:bg-gray-200 transition-all duration-500"
+                className="group relative overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-16 p-8 md:p-12 rounded-3xl glass hover:bg-white/70 transition-all duration-500 hover:-translate-y-1"
               >
                 {/* Metric Highlight */}
                 <div className="flex-shrink-0 w-full md:w-64 text-center md:text-left border-b md:border-b-0 md:border-r border-gray-200 pb-8 md:pb-0 md:pr-12">

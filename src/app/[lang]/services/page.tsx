@@ -56,7 +56,7 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <div 
                 key={i} 
-                className="group p-8 rounded-2xl bg-deep-navy border border-gray-200 hover:bg-gray-200 hover:border-primary/30 transition-all duration-300"
+                className="group p-8 rounded-2xl glass hover:bg-white/70 transition-all duration-300 hover:-translate-y-1"
               >
                 {service.icon}
                 <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">{service.title}</h3>

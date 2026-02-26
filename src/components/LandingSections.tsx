@@ -31,7 +31,7 @@ export default function LandingSections() {
   return (
     <>
       <CompanyMarquee />
-      <section className="py-24 px-6 md:px-12 bg-white relative z-10 w-full">
+      <section className="py-28 px-6 md:px-12 bg-transparent relative z-10 w-full">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function LandingSections() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-deep-navy border border-gray-200 p-8 rounded-2xl hover:bg-gray-200 transition-colors group cursor-pointer"
+                className="glass p-8 rounded-2xl hover:bg-white/70 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
               >
                 {service.icon}
                 <h4 className="text-xl font-bold text-foreground mb-3">{service.title}</h4>
@@ -70,7 +70,7 @@ export default function LandingSections() {
         </div>
       </section>
 
-      <section className="py-24 px-6 md:px-12 bg-deep-navy relative z-10 w-full border-t border-gray-200">
+      <section className="py-28 px-6 md:px-12 bg-transparent relative z-10 w-full">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -92,27 +92,27 @@ export default function LandingSections() {
 
           <div className="grid md:grid-cols-2 gap-8">
              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6 }}
-                className="bg-white border border-gray-200 p-8 rounded-3xl"
-              >
-                <div className="text-5xl font-bold text-primary mb-2">+34%</div>
-                <div className="text-sm text-foreground/60 uppercase tracking-widest font-semibold mb-6">Efficiency Increase</div>
-                <h4 className="text-2xl font-serif text-foreground mb-2">Global Logistics Optimization</h4>
-                <p className="text-foreground/70 font-light">Deployed a predictive routing neural network that reduced idle times...</p>
-             </motion.div>
-             <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white border border-gray-200 p-8 rounded-3xl relative overflow-hidden"
-              >
-                <div className="text-5xl font-bold text-primary mb-2">99.9%</div>
-                <div className="text-sm text-foreground/60 uppercase tracking-widest font-semibold mb-6">Anomaly Detection Rate</div>
-                <h4 className="text-2xl font-serif text-foreground mb-2">Automated Financial Auditing</h4>
+                 initial={{ opacity: 0, scale: 0.95 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 viewport={{ once: true, margin: "-50px" }}
+                 transition={{ duration: 0.6 }}
+                 className="glass p-8 rounded-3xl"
+               >
+                 <div className="text-5xl font-bold text-primary mb-2">+34%</div>
+                 <div className="text-sm text-foreground/60 uppercase tracking-widest font-semibold mb-6">Efficiency Increase</div>
+                 <h4 className="text-2xl font-serif text-foreground mb-2">Global Logistics Optimization</h4>
+                 <p className="text-foreground/70 font-light">Deployed a predictive routing neural network that reduced idle times...</p>
+              </motion.div>
+              <motion.div 
+                 initial={{ opacity: 0, scale: 0.95 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 viewport={{ once: true, margin: "-50px" }}
+                 transition={{ duration: 0.6, delay: 0.2 }}
+                 className="glass p-8 rounded-3xl relative overflow-hidden"
+               >
+                 <div className="text-5xl font-bold text-primary mb-2">99.9%</div>
+                 <div className="text-sm text-foreground/60 uppercase tracking-widest font-semibold mb-6">Anomaly Detection Rate</div>
+                 <h4 className="text-2xl font-serif text-foreground mb-2">Automated Financial Auditing</h4>
                 <p className="text-foreground/70 font-light">Replaced manual ledger reviews with a custom LLM pipeline...</p>
              </motion.div>
           </div>

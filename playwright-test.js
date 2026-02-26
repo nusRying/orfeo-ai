@@ -1,5 +1,5 @@
-const { chromium } = require('playwright');
 (async () => {
+  const { chromium } = await import('playwright');
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const errors = [];

@@ -3,7 +3,7 @@
 import React, { createContext, useContext } from 'react';
 import type { Locale } from './config';
 
-type Dictionary = any; // You can type this more strictly based on your JSON structure
+export type Dictionary = typeof import('./dictionaries/en.json');
 
 interface DictionaryContextType {
   dictionary: Dictionary;
