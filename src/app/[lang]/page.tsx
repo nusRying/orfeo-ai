@@ -1,11 +1,9 @@
-import Hero from '@/components/Hero';
-import LandingSections from '@/components/LandingSections';
+import InteractiveHub from '@/components/InteractiveHub';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
-      <Hero />
-      <LandingSections />
+    <main className="fixed inset-0 overflow-hidden bg-white">
+      <InteractiveHub />
     </main>
   );
 }

@@ -115,7 +115,15 @@ function WaveLines() {
     );
 }
 
+import { usePathname } from 'next/navigation';
+
 export default function WaveBackground() {
+  const pathname = usePathname();
+  // Don't render the global background on the home page since it has its own InteractiveHub Canvas
+  if (pathname === '/' || pathname === '/en' || pathname === '/ar') {
+    return null;
+  }
+
   return (
     <div className="fixed inset-0 z-0 pointer-events-none bg-transparent">
       <Canvas camera={{ position: [0, 10, 20], fov: 45 }}>
