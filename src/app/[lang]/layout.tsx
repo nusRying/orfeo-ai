@@ -22,6 +22,7 @@ import ClientWrapper from "@/components/ClientWrapper";
 import Navbar from "@/components/Navbar";
 import WaveBackground from "@/components/WaveBackground";
 import ChatWidget from "@/components/ChatWidget";
+import Footer from "@/components/Footer";
 import { Locale, i18n } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { DictionaryProvider } from "@/i18n/DictionaryProvider";
@@ -49,6 +50,7 @@ export default async function RootLayout({
           <WaveBackground />
           <Navbar />
           <ClientWrapper>{children}</ClientWrapper>
+          <Footer />
           <ChatWidget />
         </DictionaryProvider>
       </body>

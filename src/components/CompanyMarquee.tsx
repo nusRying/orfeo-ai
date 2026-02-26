@@ -3,7 +3,7 @@
 import React from 'react';
 
 const companies = [
-  { name: 'Slice', style: 'font-sans font-bold tracking-tight flex items-center gap-1' },
+  { name: 'Slice', style: 'font-sans font-bold tracking-tight flex items-center gap-2' },
   { name: 'n·a', style: 'font-serif font-black tracking-tighter' },
   { name: 'SOMEDAY', style: 'font-sans font-black tracking-widest uppercase' },
   { name: 'Compose', style: 'font-serif font-medium tracking-tight' },
@@ -12,28 +12,35 @@ const companies = [
 ];
 
 export default function CompanyMarquee() {
-  // Create a base set that is definitely wider than any single screen
-  const baseItems = [...companies, ...companies, ...companies, ...companies];
-  // Duplicate it perfectly for the -50% transform
-  const allItems = [...baseItems, ...baseItems];
-
   return (
-    <div className="w-full relative overflow-hidden bg-white/50 backdrop-blur-sm py-16 border-y border-gray-100 flex items-center z-10">
-      <div className="flex whitespace-nowrap animate-marquee w-max">
-        {allItems.map((company, index) => (
-          <div 
-            key={index} 
-            className={`flex-shrink-0 mx-8 md:mx-16 text-3xl md:text-4xl lg:text-5xl text-foreground ${company.style}`}
-          >
-            {company.name === 'Slice' && (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-2 md:w-8 md:h-8">
-                <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13h-13L12 6.5z" />
-              </svg>
-            )}
-            {company.name}
+    <section className="relative z-10">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 py-10 border-y border-black/5 bg-white/80">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
+            Trusted by teams building with AI
           </div>
-        ))}
+
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-4 text-foreground/60">
+            {companies.map((company) => (
+              <div key={company.name} className={company.style}>
+                {company.name === 'Slice' ? (
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="inline-block"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13h-13L12 6.5z" />
+                  </svg>
+                ) : null}
+                <span className="text-lg md:text-xl">{company.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

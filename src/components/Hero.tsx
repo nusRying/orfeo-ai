@@ -4,54 +4,122 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 import Link from 'next/link';
+import { ArrowRight, Bot, Brain, LineChart, ShieldCheck } from 'lucide-react';
 
 export default function Hero() {
   const { dictionary, locale } = useDictionary();
 
   return (
-    <section className="relative w-full min-h-screen flex items-center pt-28 pb-16">
-      <div className="mx-auto max-w-7xl px-6 md:px-12 w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="glass rounded-[2rem] p-8 md:p-12 max-w-4xl"
-        >
-          <h5 className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-accent mb-6">
-            {dictionary.hero.eyebrow}
-          </h5>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif leading-[1.05] mb-8 max-w-3xl text-foreground">
-            {dictionary.hero.headline1}<span className="text-accent underline decoration-accent/30 underline-offset-8">{dictionary.hero.headlineHighlight}</span>{dictionary.hero.headline3} <br />
-            <span className="text-foreground/80">{dictionary.hero.subheadline}</span>
-          </h1>
-          
-          <p className="text-foreground/70 text-sm md:text-base leading-relaxed max-w-xl mb-12">
-            {dictionary.hero.description}
-          </p>
-          
-          <Link href={`/${locale}/contact`} className="inline-block">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="glow-btn inline-flex items-center justify-center bg-gradient-to-r from-primary to-accent text-white font-bold tracking-widest px-8 py-4 rounded-full text-xs md:text-sm uppercase transition-all duration-300 shadow-xl shadow-primary/20"
-            >
-              {dictionary.common.bookConsultationShort || "BOOK CONSULTATION"}
-            </motion.span>
-          </Link>
-        </motion.div>
-      </div>
-      
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <div className="text-[8px] tracking-[0.3em] text-foreground/40 uppercase">{dictionary.common.scroll}</div>
-        <motion.div 
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-foreground/50 text-lg"
-        >
-            ↓
-        </motion.div>
+    <section className="relative pt-32 pb-20">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          <motion.div
+            className="lg:col-span-7"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <div className="inline-flex items-center gap-2 surface-muted rounded-full px-4 py-2">
+              <span className="w-2 h-2 rounded-full bg-primary" aria-hidden="true" />
+              <span className="text-[10px] md:text-xs font-bold tracking-[0.32em] uppercase text-foreground/70">
+                {dictionary.hero.eyebrow}
+              </span>
+            </div>
+
+            <h1 className="mt-8 text-5xl md:text-7xl font-serif leading-[1.03] tracking-tight text-foreground">
+              {dictionary.hero.headline1}
+              <span className="text-primary">{dictionary.hero.headlineHighlight}</span>
+              {dictionary.hero.headline3}
+              <span className="block text-foreground/70 mt-4">{dictionary.hero.subheadline}</span>
+            </h1>
+
+            <p className="mt-8 text-base md:text-lg leading-relaxed text-foreground/70 max-w-xl">
+              {dictionary.hero.description}
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-4 items-center">
+              <Link href={`/${locale}/contact`} className="btn btn-primary">
+                {dictionary.common.bookConsultationShort}
+                <ArrowRight size={16} />
+              </Link>
+              <Link href={`/${locale}/work`} className="btn btn-secondary">
+                View work
+              </Link>
+            </div>
+
+            <div className="mt-10 grid sm:grid-cols-3 gap-4 max-w-2xl">
+              {[
+                { title: "Fast pilots", desc: "Prototype and validate in weeks." },
+                { title: "Production ready", desc: "Security, evals, and monitoring." },
+                { title: "Clear ROI", desc: "Measured impact, not hype." },
+              ].map((item) => (
+                <div key={item.title} className="surface rounded-2xl p-4">
+                  <div className="text-sm font-bold text-foreground">{item.title}</div>
+                  <div className="mt-1 text-xs text-foreground/60 leading-relaxed">{item.desc}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="lg:col-span-5"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.05 }}
+          >
+            <div className="surface rounded-3xl p-6 md:p-8">
+              <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/60">
+                What we build
+              </div>
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                {[
+                  {
+                    title: "LLM Apps",
+                    icon: <Brain className="w-5 h-5 text-primary" aria-hidden="true" />,
+                    desc: "Chat, RAG, and copilots.",
+                  },
+                  {
+                    title: "Agents",
+                    icon: <Bot className="w-5 h-5 text-primary" aria-hidden="true" />,
+                    desc: "Workflow automation.",
+                  },
+                  {
+                    title: "Analytics",
+                    icon: <LineChart className="w-5 h-5 text-primary" aria-hidden="true" />,
+                    desc: "Forecasting and insight.",
+                  },
+                  {
+                    title: "Governance",
+                    icon: <ShieldCheck className="w-5 h-5 text-primary" aria-hidden="true" />,
+                    desc: "Safety and controls.",
+                  },
+                ].map((card) => (
+                  <div key={card.title} className="surface-muted rounded-2xl p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center border border-black/5">
+                        {card.icon}
+                      </div>
+                      <div className="text-sm font-bold text-foreground">{card.title}</div>
+                    </div>
+                    <div className="mt-3 text-xs text-foreground/60 leading-relaxed">{card.desc}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 surface-muted rounded-2xl p-5">
+                <div className="text-sm font-bold text-foreground">A clear engagement</div>
+                <div className="mt-2 text-sm text-foreground/70 leading-relaxed">
+                  Discovery → prototype → production. Designed to fit your data, team, and constraints.
+                </div>
+                <div className="mt-4">
+                  <Link href={`/${locale}/process`} className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline underline-offset-4">
+                    See our process <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

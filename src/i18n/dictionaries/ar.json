@@ -10,7 +10,9 @@
   "navbar": {
     "services": "الخدمات",
     "work": "الأعمال",
-    "about": "من نحن"
+    "process": "المنهج",
+    "about": "من نحن",
+    "faq": "الأسئلة الشائعة"
   },
   "hero": {
     "eyebrow": "وكالة للذكاء الاصطناعي",
@@ -34,6 +36,8 @@
   "home": {
     "servicesSubtitle": "القدرات",
     "workSubtitle": "أعمال مختارة",
+    "processSubtitle": "المنهج",
+    "faqSubtitle": "الأسئلة الشائعة",
     "aboutSubtitle": "ميزتنا",
     "viewAll": "رؤية الكل"
   }

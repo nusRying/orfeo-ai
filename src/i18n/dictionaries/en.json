@@ -10,7 +10,9 @@
   "navbar": {
     "services": "SERVICES",
     "work": "WORK",
-    "about": "ABOUT"
+    "process": "PROCESS",
+    "about": "ABOUT",
+    "faq": "FAQ"
   },
   "hero": {
     "eyebrow": "AI Agency",
@@ -34,6 +36,8 @@
   "home": {
     "servicesSubtitle": "Capabilities",
     "workSubtitle": "Selected Work",
+    "processSubtitle": "Process",
+    "faqSubtitle": "FAQ",
     "aboutSubtitle": "Our Edge",
     "viewAll": "VIEW ALL"
   }

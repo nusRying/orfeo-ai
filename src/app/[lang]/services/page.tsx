@@ -1,11 +1,11 @@
 'use client';
 
-import ClientWrapper from "@/components/ClientWrapper";
 import { useDictionary } from '@/i18n/DictionaryProvider';
-import { Bot, LineChart, Brain, Zap, ShieldCheck, Database } from "lucide-react";
+import { ArrowRight, Bot, Brain, Database, LineChart, ShieldCheck, Zap } from "lucide-react";
+import Link from "next/link";
 
 export default function ServicesPage() {
-  const { dictionary } = useDictionary();
+  const { dictionary, locale } = useDictionary();
   const services = [
     {
       title: "Enterprise LLM Integration",
@@ -40,32 +40,45 @@ export default function ServicesPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-32 pb-24 px-6 md:px-12 lg:px-24">
-      <ClientWrapper>
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl mb-24">
-            <h1 className="text-5xl md:text-7xl font-serif text-foreground mb-8 tracking-tight">
-              {dictionary.services.title1}<span className="text-primary italic">{dictionary.services.titleHighlight}</span>
-            </h1>
-            <p className="text-xl text-foreground/70 leading-relaxed font-light">
-              {dictionary.services.description}
-            </p>
-          </div>
+    <main className="min-h-screen pt-32 pb-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        <div className="max-w-3xl">
+          <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">Services</div>
+          <h1 className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
+            {dictionary.services.title1}<span className="text-primary">{dictionary.services.titleHighlight}</span>
+          </h1>
+          <p className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
+            {dictionary.services.description}
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, i) => (
-              <div 
-                key={i} 
-                className="group p-8 rounded-2xl glass hover:bg-white/70 transition-all duration-300 hover:-translate-y-1"
-              >
-                {service.icon}
-                <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">{service.title}</h3>
-                <p className="text-foreground/60 leading-relaxed font-light">{service.description}</p>
-              </div>
-            ))}
+        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service) => (
+            <div key={service.title} className="surface rounded-3xl p-8">
+              {service.icon}
+              <h2 className="mt-3 text-xl font-bold text-foreground">{service.title}</h2>
+              <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{service.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 surface rounded-[2.5rem] p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div className="max-w-2xl">
+            <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">Next step</div>
+            <div className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
+              Start with a focused pilot.
+            </div>
+            <div className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">
+              We’ll map the use-case, identify the right data sources, and define success metrics before writing production code.
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <Link href={`/${locale}/contact`} className="btn btn-primary">
+              {dictionary.common.bookConsultationShort} <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
-      </ClientWrapper>
+      </div>
     </main>
   );
 }
