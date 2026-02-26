@@ -90,6 +90,7 @@ function WaveLines() {
         });
 
         return (
+            /* @ts-ignore - conflict with SVG line element types */
             <line ref={ref}>
                 <bufferGeometry>
                     <bufferAttribute
