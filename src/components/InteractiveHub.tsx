@@ -6,6 +6,7 @@ import { CameraControls, Html, Float } from '@react-three/drei';
 import * as THREE from 'three';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 import { Bot, LineChart, Brain } from "lucide-react";
+import CompanyMarquee from './CompanyMarquee';
 
 function WaveLines() {
     const linesCount = 40;
@@ -193,7 +194,11 @@ export default function InteractiveHub() {
       </Canvas>
       {/* Decorative gradients */}
       <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-white to-transparent pointer-events-none z-10" />
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
+      
+      {/* 2D HUD Overlays */}
+      <div className="absolute bottom-0 w-full z-20 pointer-events-auto">
+        <CompanyMarquee />
+      </div>
     </div>
   );
 }
