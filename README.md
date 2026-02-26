@@ -44,7 +44,7 @@ A modern, futuristic, dark-tech landing page for an AI agency, built with Next.j
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:3000](http://localhost:3000) to see the result.
+4. Open [http://localhost:3005](http://localhost:3005) to see the result.
 
 ## 🚢 Deployment
 
