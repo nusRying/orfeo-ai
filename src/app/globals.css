@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #081426;
+  --foreground: #ffffff;
+  --primary: #2d6bff;
+  --accent: #00c6ff;
+  --deep-navy: #0a1a2f;
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-deep-navy: var(--deep-navy);
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+
+  --animate-bounce-slow: bounce 3s infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+body {
+  background: radial-gradient(circle at 30% 20%, #0f2b5c, #081426 70%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-serif {
+  font-family: var(--font-serif), serif;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glow-btn {
+  box-shadow: 0 0 20px rgba(0, 140, 255, 0.4);
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 35px rgba(0, 198, 255, 0.6);
+}
