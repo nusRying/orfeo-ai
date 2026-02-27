@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -41,7 +41,7 @@ function ParticleField({ count = 1800 }: { count?: number }) {
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
       const mix = hash(i * 91.7);
-      const color = primary.clone().lerp(neutral, mix * 0.7);
+      const color = primary.clone().lerp(neutral, mix * 0.35);
       c[i3] = color.r;
       c[i3 + 1] = color.g;
       c[i3 + 2] = color.b;
@@ -76,12 +76,12 @@ function ParticleField({ count = 1800 }: { count?: number }) {
       </bufferGeometry>
       <pointsMaterial
         vertexColors
-        size={0.04}
+        size={0.06}
         sizeAttenuation
         transparent
-        opacity={0.22}
+        opacity={0.6}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        depthTest={false}
       />
     </points>
   );
@@ -104,7 +104,7 @@ function WireEdges({
         transparent
         opacity={opacity}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        depthTest={false}
       />
     </lineSegments>
   );
@@ -131,17 +131,22 @@ function OrbitRing({
         transparent
         opacity={opacity}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        depthTest={false}
       />
     </mesh>
   );
 }
 
-function Scene() {
+function Scene({
+  pointerRef,
+}: {
+  pointerRef: React.MutableRefObject<{ x: number; y: number }>;
+}) {
   const group = useRef<THREE.Group>(null!);
   const rings = useRef<THREE.Group>(null!);
   const outer = useRef<THREE.Group>(null!);
   const inner = useRef<THREE.Group>(null!);
+  const pointer = useRef({ x: 0, y: 0 });
   const { viewport } = useThree();
 
   const outerGeo = useMemo(() => new THREE.IcosahedronGeometry(5.8, 2), []);
@@ -150,8 +155,11 @@ function Scene() {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    const px = state.pointer.x;
-    const py = state.pointer.y;
+    pointer.current.x = THREE.MathUtils.lerp(pointer.current.x, pointerRef.current.x, 0.06);
+    pointer.current.y = THREE.MathUtils.lerp(pointer.current.y, pointerRef.current.y, 0.06);
+
+    const px = pointer.current.x;
+    const py = pointer.current.y;
 
     const baseX = Math.min(viewport.width * 0.18, 4.2);
     const baseY = Math.min(viewport.height * 0.05, 1.1);
@@ -177,32 +185,33 @@ function Scene() {
   return (
     <group ref={group} position={[0, 0, -10]}>
       <group ref={outer}>
+        <WireEdges geometry={outerGeo} color="#3d3d3d" opacity={0.12} />
+        <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.58} />
         <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.22} />
-        <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.08} />
       </group>
 
       <mesh geometry={coreGeo} rotation={[0.15, 0.25, 0]}>
         <meshStandardMaterial
           color="#fe4c23"
           transparent
-          opacity={0.04}
+          opacity={0.12}
           roughness={0.25}
           metalness={0}
           emissive="#fe4c23"
-          emissiveIntensity={0.55}
+          emissiveIntensity={1.05}
           depthWrite={false}
         />
       </mesh>
 
       <group ref={inner} rotation={[0.35, 0.2, 0.15]}>
-        <WireEdges geometry={innerGeo} color="#3d3d3d" opacity={0.09} />
-        <WireEdges geometry={innerGeo} color="#fe4c23" opacity={0.06} />
+        <WireEdges geometry={innerGeo} color="#3d3d3d" opacity={0.2} />
+        <WireEdges geometry={innerGeo} color="#fe4c23" opacity={0.18} />
       </group>
 
       <group ref={rings}>
-        <OrbitRing radius={9.4} tube={0.07} color="#fe4c23" opacity={0.07} rotation={[Math.PI / 2, 0, 0]} />
-        <OrbitRing radius={11.2} tube={0.06} color="#3d3d3d" opacity={0.05} rotation={[Math.PI / 2.6, 0.4, 0.2]} />
-        <OrbitRing radius={7.8} tube={0.055} color="#fe4c23" opacity={0.05} rotation={[Math.PI / 2.1, -0.2, 0.8]} />
+        <OrbitRing radius={9.4} tube={0.078} color="#fe4c23" opacity={0.18} rotation={[Math.PI / 2, 0, 0]} />
+        <OrbitRing radius={11.2} tube={0.062} color="#3d3d3d" opacity={0.12} rotation={[Math.PI / 2.6, 0.4, 0.2]} />
+        <OrbitRing radius={7.8} tube={0.062} color="#fe4c23" opacity={0.14} rotation={[Math.PI / 2.1, -0.2, 0.8]} />
       </group>
 
       <ParticleField />
@@ -211,25 +220,40 @@ function Scene() {
 }
 
 export default function WaveBackground() {
+  const pointerRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    function onPointerMove(e: PointerEvent) {
+      const x = (e.clientX / Math.max(1, window.innerWidth)) * 2 - 1;
+      const y = -((e.clientY / Math.max(1, window.innerHeight)) * 2 - 1);
+      pointerRef.current.x = THREE.MathUtils.clamp(x, -1, 1);
+      pointerRef.current.y = THREE.MathUtils.clamp(y, -1, 1);
+    }
+
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    return () => window.removeEventListener('pointermove', onPointerMove);
+  }, []);
+
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
       <Canvas
         className="absolute inset-0"
         camera={{ position: [0, 0, 26], fov: 45 }}
         dpr={[1, 1.5]}
+        style={{ filter: 'contrast(1.08) saturate(1.16)' }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >
         <color attach="background" args={['transparent']} />
-        <fog attach="fog" args={['#ffffff', 14, 60]} />
+        <fog attach="fog" args={['#ffffff', 55, 160]} />
         <ambientLight intensity={0.9} />
         <directionalLight position={[10, 12, 7]} intensity={0.35} />
-        <Scene />
+        <Scene pointerRef={pointerRef} />
       </Canvas>
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(circle at 70% 35%, rgba(255,255,255,0.05), rgba(255,255,255,0.70) 55%, rgba(255,255,255,0.98) 78%, rgba(255,255,255,1) 100%)',
+            'radial-gradient(circle at 70% 35%, rgba(254,76,35,0.12), transparent 58%), radial-gradient(circle at 66% 42%, rgba(61,61,61,0.06), transparent 62%)',
         }}
       />
     </div>
