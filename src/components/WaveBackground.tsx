@@ -139,14 +139,17 @@ function OrbitRing({
 
 function Scene({
   pointerRef,
+  scrollY,
 }: {
   pointerRef: React.MutableRefObject<{ x: number; y: number }>;
+  scrollY: React.MutableRefObject<number>;
 }) {
   const group = useRef<THREE.Group>(null!);
   const rings = useRef<THREE.Group>(null!);
   const outer = useRef<THREE.Group>(null!);
   const inner = useRef<THREE.Group>(null!);
   const pointer = useRef({ x: 0, y: 0 });
+  const scroll = useRef(0);
   const { viewport } = useThree();
 
   const outerGeo = useMemo(() => new THREE.IcosahedronGeometry(5.8, 2), []);
@@ -157,21 +160,24 @@ function Scene({
     const t = state.clock.getElapsedTime();
     pointer.current.x = THREE.MathUtils.lerp(pointer.current.x, pointerRef.current.x, 0.06);
     pointer.current.y = THREE.MathUtils.lerp(pointer.current.y, pointerRef.current.y, 0.06);
+    
+    // Smooth scroll interpolation
+    scroll.current = THREE.MathUtils.lerp(scroll.current, scrollY.current, 0.05);
 
     const px = pointer.current.x;
     const py = pointer.current.y;
 
     const baseX = Math.min(viewport.width * 0.18, 4.2);
-    const baseY = Math.min(viewport.height * 0.05, 1.1);
+    const baseY = Math.min(viewport.height * 0.05, 1.1) + scroll.current * 0.5; // Parallax up on scroll
     const baseScale = Math.min(1.12, Math.max(0.88, viewport.width / 9.5));
 
     group.current.position.x = baseX + px * 1.2;
     group.current.position.y = baseY + Math.sin(t * 0.6) * 0.28 + py * 0.65;
-    group.current.rotation.y = t * 0.1 + px * 0.25;
-    group.current.rotation.x = -0.22 + py * 0.16;
+    group.current.rotation.y = t * 0.1 + px * 0.25 - scroll.current * 0.1; // Rotate counter on scroll
+    group.current.rotation.x = -0.22 + py * 0.16 + scroll.current * 0.05;
     group.current.rotation.z = Math.sin(t * 0.25) * 0.06;
 
-    const s = baseScale + Math.sin(t * 0.35) * 0.02;
+    const s = baseScale + Math.sin(t * 0.35) * 0.02 - scroll.current * 0.03; // Shrink slightly on scroll
     group.current.scale.setScalar(s);
 
     outer.current.rotation.y = t * 0.06;
@@ -221,6 +227,7 @@ function Scene({
 
 export default function WaveBackground() {
   const pointerRef = useRef({ x: 0, y: 0 });
+  const scrollY = useRef(0);
 
   useEffect(() => {
     function onPointerMove(e: PointerEvent) {
@@ -229,9 +236,23 @@ export default function WaveBackground() {
       pointerRef.current.x = THREE.MathUtils.clamp(x, -1, 1);
       pointerRef.current.y = THREE.MathUtils.clamp(y, -1, 1);
     }
+    
+    function onScroll() {
+        // Normalize scroll between 0 (top) and ~10 (scrolled down)
+        // Adjust the divisor to control how fast the parallax moves
+        scrollY.current = Math.min(window.scrollY / 250, 10);
+    }
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
-    return () => window.removeEventListener('pointermove', onPointerMove);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Init scroll
+    onScroll();
+    
+    return () => {
+        window.removeEventListener('pointermove', onPointerMove);
+        window.removeEventListener('scroll', onScroll);
+    }
   }, []);
 
   return (
@@ -247,7 +268,7 @@ export default function WaveBackground() {
         <fog attach="fog" args={['#ffffff', 55, 160]} />
         <ambientLight intensity={0.9} />
         <directionalLight position={[10, 12, 7]} intensity={0.35} />
-        <Scene pointerRef={pointerRef} />
+        <Scene pointerRef={pointerRef} scrollY={scrollY} />
       </Canvas>
       <div
         className="absolute inset-0"
