@@ -1,7 +1,8 @@
 'use client';
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function ClientWrapper({
   children,
@@ -9,19 +10,21 @@ export default function ClientWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={pathname}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
-        className="relative z-10"
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      key={pathname}
+      initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={reducedMotion ? { duration: 0 } : { duration: 0.35, ease: "easeOut" }}
+      className="relative z-10"
+    >
+      {children}
+    </motion.div>
   );
 }

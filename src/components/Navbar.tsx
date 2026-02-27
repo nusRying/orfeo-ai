@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -64,27 +64,31 @@ export default function Navbar() {
           </Link>
           
           <nav aria-label="Primary" className="hidden lg:flex items-center gap-8 text-[11px] font-semibold tracking-widest text-foreground/70">
-            {navItems.map((item) => {
-              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "relative py-2 transition-colors hover:text-foreground",
-                    active && "text-foreground"
-                  )}
-                >
-                  {item.label}
-                  <span
+            <LayoutGroup id="primary-nav">
+              {navItems.map((item) => {
+                const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? 'page' : undefined}
                     className={cn(
-                      "pointer-events-none absolute -bottom-[3px] left-0 h-[2px] w-full bg-primary transition-opacity",
-                      active ? "opacity-100" : "opacity-0"
+                      "relative py-2 transition-colors hover:text-foreground",
+                      active && "text-foreground"
                     )}
-                  />
-                </Link>
-              );
-            })}
+                  >
+                    {item.label}
+                    {active ? (
+                      <motion.span
+                        layoutId="primary-nav-underline"
+                        className="pointer-events-none absolute -bottom-[3px] left-0 h-[2px] w-full bg-primary"
+                        transition={{ type: "spring", stiffness: 520, damping: 44 }}
+                      />
+                    ) : null}
+                  </Link>
+                );
+              })}
+            </LayoutGroup>
           </nav>
         </div>
 

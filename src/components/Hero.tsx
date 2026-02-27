@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 import Link from 'next/link';
 import { ArrowRight, Bot, Brain, LineChart, ShieldCheck } from 'lucide-react';
@@ -13,12 +12,7 @@ export default function Hero() {
     <section className="relative pt-32 pb-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          <motion.div
-            className="lg:col-span-7"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
+          <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 surface-muted rounded-full px-4 py-2">
               <span className="w-2 h-2 rounded-full bg-primary" aria-hidden="true" />
               <span className="text-[10px] md:text-xs font-bold tracking-[0.32em] uppercase text-foreground/70">
@@ -59,14 +53,9 @@ export default function Hero() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="lg:col-span-5"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.05 }}
-          >
+          <div className="lg:col-span-5">
             <div className="surface rounded-3xl p-6 md:p-8">
               <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/60">
                 What we build
@@ -118,7 +107,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
