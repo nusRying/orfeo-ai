@@ -3,11 +3,25 @@
 import { useDictionary } from '@/i18n/DictionaryProvider';
 import { ArrowLeft, ArrowRight, Bot, Brain, Database, LineChart, ShieldCheck, Zap } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function ServicesPage() {
   const { dictionary, locale } = useDictionary();
   const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
   const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
+
+  const containerVars: any = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVars: any = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+  };
 
   const services = [
     {
@@ -63,45 +77,61 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen pt-32 pb-24">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="max-w-3xl">
-          <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{dictionary.navbar.services}</div>
-          <h1 className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
+        <motion.div 
+          className="max-w-3xl"
+          initial="hidden"
+          animate="show"
+          variants={containerVars}
+        >
+          <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{dictionary.navbar.services}</motion.div>
+          <motion.h1 variants={itemVars} className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
             {dictionary.services.title1}<span className="text-primary">{dictionary.services.titleHighlight}</span>
-          </h1>
-          <p className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
+          </motion.h1>
+          <motion.p variants={itemVars} className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
             {dictionary.services.description}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial="hidden"
+          animate="show"
+          variants={containerVars}
+        >
           {services.map((service) => (
-            <div key={service.title} className="surface rounded-3xl p-8">
+            <motion.div variants={itemVars} key={service.title} className="surface rounded-3xl p-8">
               {service.icon}
               <h2 className="mt-3 text-xl font-bold text-foreground">{service.title}</h2>
               <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{service.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-16 surface rounded-[2.5rem] p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <motion.div 
+          className="mt-16 surface rounded-[2.5rem] p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={containerVars}
+        >
           <div className="max-w-2xl">
-            <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{t('Next step', 'الخطوة التالية')}</div>
-            <div className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
+            <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{t('Next step', 'الخطوة التالية')}</motion.div>
+            <motion.div variants={itemVars} className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
               {t('Start with a focused pilot.', 'ابدأ بتجربة مركزة.')}
-            </div>
-            <div className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">
+            </motion.div>
+            <motion.div variants={itemVars} className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">
               {t(
                 "We’ll map the use-case, identify the right data sources, and define success metrics before writing production code.",
                 "سنحدد حالة الاستخدام، ومصادر البيانات المناسبة، ومقاييس النجاح قبل كتابة كود الإنتاج."
               )}
-            </div>
+            </motion.div>
           </div>
-          <div className="flex flex-wrap gap-4">
+          <motion.div variants={itemVars} className="flex flex-wrap gap-4">
             <Link href={`/${locale}/contact`} className="btn btn-primary">
               {dictionary.common.bookConsultationShort} <ArrowIcon size={16} />
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </main>
   );

@@ -4,11 +4,25 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useDictionary } from '@/i18n/DictionaryProvider';
+import { motion } from 'framer-motion';
 
 export default function FaqPage() {
   const { locale, dictionary } = useDictionary();
   const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
   const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
+
+  const containerVars: any = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVars: any = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+  };
 
   const faqs = [
     {
@@ -58,54 +72,71 @@ export default function FaqPage() {
   return (
     <main className="min-h-screen pt-32 pb-24">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="max-w-3xl">
-          <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
+        <motion.div 
+          className="max-w-3xl"
+          initial="hidden"
+          animate="show"
+          variants={containerVars}
+        >
+          <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
             {dictionary.navbar.faq}
-          </div>
-          <h1 className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
+          </motion.div>
+          <motion.h1 variants={itemVars} className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
             {t('Frequently asked questions', 'الأسئلة الشائعة')}
-          </h1>
-          <p className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
+          </motion.h1>
+          <motion.p variants={itemVars} className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
             {t(
               'Clear answers about timelines, data, privacy, and how we ship reliable AI systems.',
               'إجابات واضحة حول المواعيد والبيانات والخصوصية وكيف نبني أنظمة ذكاء اصطناعي موثوقة.'
             )}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
+        <motion.div 
+          className="mt-14 grid md:grid-cols-2 gap-6"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={containerVars}
+        >
           {faqs.map((item) => (
-            <details key={item.q} className="surface rounded-[2rem] p-8 md:p-10 group">
+            <motion.details variants={itemVars} key={item.q} className="surface rounded-[2rem] p-8 md:p-10 group">
               <summary className="cursor-pointer list-none flex items-start justify-between gap-4">
                 <span className="text-base font-bold text-foreground leading-snug">{item.q}</span>
                 <span className="text-primary font-bold transition-transform group-open:rotate-45">+</span>
               </summary>
               <div className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">{item.a}</div>
-            </details>
+            </motion.details>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-16 surface rounded-[2.5rem] p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <motion.div 
+          className="mt-16 surface rounded-[2.5rem] p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={containerVars}
+        >
           <div className="max-w-2xl">
-            <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
+            <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
               {t('Still have questions?', 'هل لديك أسئلة أخرى؟')}
-            </div>
-            <div className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
+            </motion.div>
+            <motion.div variants={itemVars} className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
               {t('Tell us your use-case.', 'شاركنا حالة الاستخدام.')}
-            </div>
-            <p className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">
+            </motion.div>
+            <motion.p variants={itemVars} className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">
               {t(
                 'We’ll respond with practical recommendations and a proposed pilot plan.',
                 'سنرد بتوصيات عملية وخطة تجربة مقترحة.'
               )}
-            </p>
+            </motion.p>
           </div>
-          <div className="flex flex-wrap gap-4">
+          <motion.div variants={itemVars} className="flex flex-wrap gap-4">
             <Link href={`/${locale}/contact`} className="btn btn-primary">
               {dictionary.common.bookConsultationShort} <ArrowIcon size={16} />
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </main>
   );

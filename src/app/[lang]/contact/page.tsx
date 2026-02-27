@@ -2,15 +2,34 @@
 
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useDictionary } from "@/i18n/DictionaryProvider";
+import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const { locale, dictionary } = useDictionary();
   const t = (en: string, ar: string) => (locale === "ar" ? ar : en);
 
+  const containerVars: any = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVars: any = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+  };
+
   return (
     <main className="min-h-screen pt-32 pb-24">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="max-w-3xl">
+        <motion.div 
+          className="max-w-3xl"
+          initial="hidden"
+          animate="show"
+          variants={containerVars}
+        >
           <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
             {t("Contact", "تواصل")}
           </div>
@@ -25,17 +44,22 @@ export default function ContactPage() {
               </>
             )}
           </h1>
-          <p className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
+          <motion.p variants={itemVars} className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
             {t(
               "Share what you're trying to improve. We'll propose a concrete pilot with timeline, risks, and success metrics.",
               "شارك ما تريد تحسينه. سنقترح تجربة محددة مع جدول زمني ومخاطر ومقاييس نجاح."
             )}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-14 grid lg:grid-cols-2 gap-10 lg:gap-14">
+        <motion.div 
+          className="mt-14 grid lg:grid-cols-2 gap-10 lg:gap-14"
+          initial="hidden"
+          animate="show"
+          variants={containerVars}
+        >
           {/* Contact Form */}
-          <div className="surface rounded-[2rem] p-8 md:p-10">
+          <motion.div variants={itemVars} className="surface rounded-[2rem] p-8 md:p-10">
             <div className="text-sm font-bold text-foreground">{t("Send a message", "أرسل رسالة")}</div>
             <p className="mt-2 text-sm text-foreground/70 leading-relaxed">
               {t("We usually reply within 1–2 business days.", "نرد عادة خلال 1–2 يوم عمل.")}
@@ -87,11 +111,11 @@ export default function ContactPage() {
                 {dictionary.common.sendMessage}
               </button>
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
           <div className="space-y-6">
-            <div className="surface rounded-[2rem] p-8 md:p-10">
+            <motion.div variants={itemVars} className="surface rounded-[2rem] p-8 md:p-10">
               <div className="text-sm font-bold text-foreground">{dictionary.common.directContact}</div>
               <div className="mt-6 space-y-4">
                 <div className="flex items-center gap-4">
@@ -113,9 +137,9 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="surface rounded-[2rem] p-8 md:p-10">
+            <motion.div variants={itemVars} className="surface rounded-[2rem] p-8 md:p-10">
               <div className="text-sm font-bold text-foreground">{dictionary.common.headquarters}</div>
               <div className="mt-6 flex items-start gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-deep-navy border border-black/5 flex items-center justify-center flex-shrink-0 mt-1">
@@ -127,9 +151,9 @@ export default function ContactPage() {
                   San Francisco, CA 94105
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </main>
   );

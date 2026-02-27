@@ -1,6 +1,7 @@
 'use client';
 
 import { useDictionary } from '@/i18n/DictionaryProvider';
+import { motion } from 'framer-motion';
 
 export default function WorkPage() {
   const { locale, dictionary } = useDictionary();
@@ -42,12 +43,30 @@ export default function WorkPage() {
     }
   ];
 
+  const containerVars: any = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVars: any = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+  };
+
   return (
     <main className="min-h-screen pt-32 pb-24">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="max-w-3xl">
-          <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{dictionary.navbar.work}</div>
-          <h1 className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
+        <motion.div 
+          className="max-w-3xl"
+          initial="hidden"
+          animate="show"
+          variants={containerVars}
+        >
+          <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{dictionary.navbar.work}</motion.div>
+          <motion.h1 variants={itemVars} className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
             {locale === 'ar' ? (
               <>
                 أعمال <span className="text-primary">مختارة</span>
@@ -57,18 +76,24 @@ export default function WorkPage() {
                 Selected <span className="text-primary">Work</span>
               </>
             )}
-          </h1>
-          <p className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
+          </motion.h1>
+          <motion.p variants={itemVars} className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
             {t(
               'We measure success by outcomes. Here are examples of how AI can improve efficiency, quality, and speed.',
               'نقيس النجاح بالنتائج. فيما يلي أمثلة على كيف يمكن للذكاء الاصطناعي تحسين الكفاءة والجودة والسرعة.'
             )}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-14 space-y-6">
+        <motion.div 
+          className="mt-14 space-y-6"
+          initial="hidden"
+          animate="show"
+          variants={containerVars}
+        >
           {projects.map((project) => (
-            <div
+            <motion.div
+              variants={itemVars}
               key={project.title}
               className="surface rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-8"
             >
@@ -94,9 +119,9 @@ export default function WorkPage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </main>
   );

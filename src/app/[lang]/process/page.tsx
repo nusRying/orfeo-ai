@@ -4,11 +4,25 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ClipboardList, FlaskConical, ShieldCheck, TrendingUp } from 'lucide-react';
 import { useDictionary } from '@/i18n/DictionaryProvider';
+import { motion } from 'framer-motion';
 
 export default function ProcessPage() {
   const { locale, dictionary } = useDictionary();
   const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
   const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
+
+  const containerVars: any = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVars: any = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+  };
 
   const steps = [
     {
@@ -48,24 +62,35 @@ export default function ProcessPage() {
   return (
     <main className="min-h-screen pt-32 pb-24">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="max-w-3xl">
-          <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
+        <motion.div 
+          className="max-w-3xl"
+          initial="hidden"
+          animate="show"
+          variants={containerVars}
+        >
+          <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
             {dictionary.navbar.process}
-          </div>
-          <h1 className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
+          </motion.div>
+          <motion.h1 variants={itemVars} className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
             {t('A delivery process you can trust', 'منهج تسليم يمكنك الوثوق به')}
-          </h1>
-          <p className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
+          </motion.h1>
+          <motion.p variants={itemVars} className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
             {t(
               'A clear workflow that keeps scope tight, quality measurable, and production risk controlled.',
               'سير عمل واضح يحافظ على النطاق محددًا، والجودة قابلة للقياس، ومخاطر الإنتاج تحت السيطرة.'
             )}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
+        <motion.div 
+          className="mt-14 grid md:grid-cols-2 gap-6"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={containerVars}
+        >
           {steps.map((step, idx) => (
-            <div key={step.title} className="surface rounded-[2rem] p-8 md:p-10">
+            <motion.div variants={itemVars} key={step.title} className="surface rounded-[2rem] p-8 md:p-10">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-deep-navy border border-black/5 flex items-center justify-center">
                   {step.icon}
@@ -78,11 +103,17 @@ export default function ProcessPage() {
                 </div>
               </div>
               <p className="mt-5 text-sm md:text-base text-foreground/70 leading-relaxed">{step.desc}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-16 grid lg:grid-cols-3 gap-6">
+        <motion.div 
+          className="mt-16 grid lg:grid-cols-3 gap-6"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={containerVars}
+        >
           {[
             {
               title: t('What you get', 'ما الذي ستحصل عليه'),
@@ -112,7 +143,7 @@ export default function ProcessPage() {
               ],
             },
           ].map((card) => (
-            <div key={card.title} className="surface rounded-[2rem] p-8 md:p-10">
+            <motion.div variants={itemVars} key={card.title} className="surface rounded-[2rem] p-8 md:p-10">
               <div className="text-lg font-bold text-foreground">{card.title}</div>
               <ul className="mt-5 space-y-3 text-sm text-foreground/70">
                 {card.bullets.map((b) => (
@@ -122,31 +153,37 @@ export default function ProcessPage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-16 surface rounded-[2.5rem] p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <motion.div 
+          className="mt-16 surface rounded-[2.5rem] p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={containerVars}
+        >
           <div className="max-w-2xl">
-            <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
+            <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
               {t('Next step', 'الخطوة التالية')}
-            </div>
-            <div className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
+            </motion.div>
+            <motion.div variants={itemVars} className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
               {t('Let’s define a pilot for your team.', 'لنحدد تجربة لفريقك.')}
-            </div>
-            <p className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">
+            </motion.div>
+            <motion.p variants={itemVars} className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">
               {t(
                 'Share your use-case and we’ll map scope, data, and success metrics before committing to build.',
                 'شارك حالة الاستخدام وسنحدد النطاق والبيانات ومقاييس النجاح قبل البدء بالتنفيذ.'
               )}
-            </p>
+            </motion.p>
           </div>
-          <div className="flex flex-wrap gap-4">
+          <motion.div variants={itemVars} className="flex flex-wrap gap-4">
             <Link href={`/${locale}/contact`} className="btn btn-primary">
               {dictionary.common.bookConsultationShort} <ArrowIcon size={16} />
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </main>
   );
