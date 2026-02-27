@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Cairo, Noto_Naskh_Arabic } from "next/font/google";
 import "../globals.css";
 
 const playfair = Playfair_Display({
@@ -10,6 +10,16 @@ const playfair = Playfair_Display({
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
+});
+
+const cairo = Cairo({
+  variable: "--font-sans-ar",
+  subsets: ["arabic"],
+});
+
+const notoNaskhArabic = Noto_Naskh_Arabic({
+  variable: "--font-serif-ar",
+  subsets: ["arabic"],
 });
 
 export const metadata: Metadata = {
@@ -44,7 +54,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased selection:bg-cyan-500/30`}
+        className={`${inter.variable} ${playfair.variable} ${cairo.variable} ${notoNaskhArabic.variable} antialiased selection:bg-cyan-500/30`}
       >
         <DictionaryProvider dictionary={dictionary} locale={lang as Locale}>
           <WaveBackground />

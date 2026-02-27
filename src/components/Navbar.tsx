@@ -13,6 +13,7 @@ export default function Navbar() {
   const { dictionary, locale } = useDictionary();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
 
   useEffect(() => {
     const updateTime = () => {
@@ -63,7 +64,13 @@ export default function Navbar() {
             ORFEO <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> AI
           </Link>
           
-          <nav aria-label="Primary" className="hidden lg:flex items-center gap-8 text-[11px] font-semibold tracking-widest text-foreground/70">
+          <nav
+            aria-label={t('Primary navigation', 'التنقل الرئيسي')}
+            className={cn(
+              'hidden lg:flex items-center gap-8 text-[11px] font-semibold text-foreground/70',
+              locale === 'ar' ? 'tracking-normal' : 'tracking-widest'
+            )}
+          >
             <LayoutGroup id="primary-nav">
               {navItems.map((item) => {
                 const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -96,9 +103,12 @@ export default function Navbar() {
           <Link 
             href={toggleLanguage()} 
             onClick={handleLanguageChange}
-            className="text-[10px] md:text-xs font-bold tracking-widest text-foreground/60 hover:text-primary transition-colors"
+            className={cn(
+              'text-[10px] md:text-xs font-bold text-foreground/60 hover:text-primary transition-colors',
+              locale === 'ar' ? 'tracking-normal' : 'tracking-widest'
+            )}
           >
-            {locale === 'en' ? 'عربي' : 'EN'}
+            {locale === 'en' ? 'العربية' : 'EN'}
           </Link>
           <div className="hidden lg:block font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">
             {time}
@@ -114,7 +124,7 @@ export default function Navbar() {
           <button
             type="button"
             className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-black/10 bg-white text-foreground"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label={menuOpen ? t('Close menu', 'إغلاق القائمة') : t('Open menu', 'فتح القائمة')}
             onClick={() => setMenuOpen((v) => !v)}
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -132,7 +142,7 @@ export default function Navbar() {
           >
             <button
               type="button"
-              aria-label="Close menu overlay"
+              aria-label={t('Close menu overlay', 'إغلاق غطاء القائمة')}
               className="absolute inset-0 bg-black/30"
               onClick={() => setMenuOpen(false)}
             />
@@ -144,11 +154,13 @@ export default function Navbar() {
               transition={{ type: "spring", damping: 22, stiffness: 260 }}
             >
               <div className="flex items-center justify-between mb-8">
-                <div className="text-sm font-bold tracking-widest">MENU</div>
+                <div className={cn('text-sm font-bold', locale === 'ar' ? 'tracking-normal' : 'tracking-widest')}>
+                  {t('MENU', 'القائمة')}
+                </div>
                 <button
                   type="button"
                   className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-black/10 bg-white text-foreground"
-                  aria-label="Close menu"
+                  aria-label={t('Close menu', 'إغلاق القائمة')}
                   onClick={() => setMenuOpen(false)}
                 >
                   <X size={18} />
@@ -164,7 +176,8 @@ export default function Navbar() {
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
                       className={cn(
-                        "surface rounded-2xl px-4 py-3 text-sm font-semibold tracking-widest uppercase transition-colors hover:border-primary/40",
+                        'surface rounded-2xl px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40',
+                        locale === 'ar' ? 'tracking-normal' : 'tracking-widest uppercase',
                         active && "border-primary/60"
                       )}
                     >
@@ -190,7 +203,7 @@ export default function Navbar() {
                   }}
                   className="btn btn-secondary w-full"
                 >
-                  {locale === 'en' ? 'عربي' : 'English'}
+                  {locale === 'en' ? 'العربية' : 'English'}
                 </Link>
               </div>
 

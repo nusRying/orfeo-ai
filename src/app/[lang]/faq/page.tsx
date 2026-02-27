@@ -2,12 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 
 export default function FaqPage() {
   const { locale, dictionary } = useDictionary();
   const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
+  const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
 
   const faqs = [
     {
@@ -101,7 +102,7 @@ export default function FaqPage() {
           </div>
           <div className="flex flex-wrap gap-4">
             <Link href={`/${locale}/contact`} className="btn btn-primary">
-              {dictionary.common.bookConsultationShort} <ArrowRight size={16} />
+              {dictionary.common.bookConsultationShort} <ArrowIcon size={16} />
             </Link>
           </div>
         </div>
@@ -109,4 +110,3 @@ export default function FaqPage() {
     </main>
   );
 }
-

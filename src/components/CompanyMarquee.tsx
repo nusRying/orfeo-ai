@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useDictionary } from '@/i18n/DictionaryProvider';
 
 const companies = [
   { name: 'Slice', style: 'font-sans font-bold tracking-tight flex items-center gap-2' },
@@ -12,12 +13,15 @@ const companies = [
 ];
 
 export default function CompanyMarquee() {
+  const { locale } = useDictionary();
+  const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
+
   return (
     <section className="relative z-10">
       <div className="mx-auto max-w-7xl px-6 md:px-12 py-10 border-y border-black/5 bg-white/80">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
-            Trusted by teams building with AI
+            {t('Trusted by teams building with AI', 'موثوق من فرق تبني بالذكاء الاصطناعي')}
           </div>
 
           <div className="flex flex-wrap items-center gap-x-10 gap-y-4 text-foreground/60">

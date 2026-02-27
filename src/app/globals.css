@@ -101,3 +101,32 @@ h6,
 .btn-secondary:hover {
   border-color: rgba(254, 76, 35, 0.35);
 }
+
+html[lang="ar"] body {
+  font-family: var(--font-sans-ar), var(--font-sans), system-ui, sans-serif;
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6,
+html[lang="ar"] .font-serif {
+  font-family: var(--font-serif-ar), var(--font-serif), serif;
+}
+
+html[lang="ar"] .btn {
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+html[lang="ar"] .tracking-widest {
+  letter-spacing: 0.06em !important;
+}
+
+html[lang="ar"] [class*="tracking-[0.32em]"],
+html[lang="ar"] [class*="tracking-[0.22em]"],
+html[lang="ar"] [class*="tracking-[0.18em]"] {
+  letter-spacing: 0.06em !important;
+}
