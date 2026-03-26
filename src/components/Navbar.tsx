@@ -59,8 +59,15 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 w-full z-50 border-b border-black/5 bg-white/95">
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 md:px-12">
         <div className="flex items-center gap-8 lg:gap-12">
-          <Link href={`/${locale}`} className="text-xl md:text-2xl font-sans font-bold tracking-tighter flex items-center text-foreground">
-            ORFEO <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> AI
+          <Link href={`/${locale}`} className="flex items-center gap-2 group">
+            <img 
+              src="/logo/logo-orange.svg" 
+              alt="ORFEO AI" 
+              className="h-8 w-auto transition-transform group-hover:scale-105" 
+            />
+            <span className="text-xl md:text-2xl font-sans font-bold tracking-tighter text-foreground">
+              ORFEO <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> AI
+            </span>
           </Link>
           
           <nav

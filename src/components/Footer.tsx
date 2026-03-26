@@ -15,9 +15,16 @@ export default function Footer() {
           <div className="md:col-span-5">
             <Link
               href={`/${locale}`}
-              className="text-xl font-sans font-bold tracking-tighter text-foreground inline-flex items-center"
+              className="flex items-center gap-2 group"
             >
-              ORFEO <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent" /> AI
+              <img 
+                src="/logo/logo-orange.svg" 
+                alt="ORFEO AI" 
+                className="h-6 w-auto transition-transform group-hover:scale-105" 
+              />
+              <span className="text-xl font-sans font-bold tracking-tighter text-foreground">
+                ORFEO <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent" /> AI
+              </span>
             </Link>
             <p className="mt-4 text-sm text-foreground/70 max-w-sm leading-relaxed">
               {dictionary.footer.description}

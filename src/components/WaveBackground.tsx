@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
+import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader';
 
 function hash(n: number) {
   const x = Math.sin(n) * 43758.5453123;
@@ -137,6 +138,44 @@ function OrbitRing({
   );
 }
 
+function Logo3D() {
+  const svgData = useLoader(SVGLoader, '/logo/logo-orange.svg');
+  const shapes = useMemo(() => {
+    return svgData.paths.flatMap((path) => {
+      return path.toShapes(true);
+    });
+  }, [svgData]);
+
+  return (
+    <group scale={0.06} rotation={[Math.PI, 0, 0]} position={[-2.8, 3, 0]}>
+      {shapes.map((shape, i) => (
+        <mesh key={i}>
+          <extrudeGeometry
+            args={[
+              shape,
+              {
+                depth: 8,
+                bevelEnabled: true,
+                bevelThickness: 1.2,
+                bevelSize: 0.8,
+                bevelOffset: 0,
+                bevelSegments: 5,
+              },
+            ]}
+          />
+          <meshStandardMaterial
+            color="#fe4c23"
+            roughness={0.2}
+            metalness={0.8}
+            emissive="#fe4c23"
+            emissiveIntensity={0.65}
+          />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
 function Scene({
   pointerRef,
   scrollY,
@@ -154,7 +193,6 @@ function Scene({
 
   const outerGeo = useMemo(() => new THREE.IcosahedronGeometry(5.8, 2), []);
   const innerGeo = useMemo(() => new THREE.OctahedronGeometry(4.25, 1), []);
-  const coreGeo = useMemo(() => new THREE.SphereGeometry(3.75, 48, 48), []);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -196,18 +234,7 @@ function Scene({
         <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.22} />
       </group>
 
-      <mesh geometry={coreGeo} rotation={[0.15, 0.25, 0]}>
-        <meshStandardMaterial
-          color="#fe4c23"
-          transparent
-          opacity={0.12}
-          roughness={0.25}
-          metalness={0}
-          emissive="#fe4c23"
-          emissiveIntensity={1.05}
-          depthWrite={false}
-        />
-      </mesh>
+      <Logo3D />
 
       <group ref={inner} rotation={[0.35, 0.2, 0.15]}>
         <WireEdges geometry={innerGeo} color="#3d3d3d" opacity={0.2} />
