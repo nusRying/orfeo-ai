@@ -20,7 +20,7 @@ export default function Footer() {
               className="flex items-center gap-2 group"
             >
               <Image 
-                src="/logo/logo-orange.svg" 
+                src={process.env.NODE_ENV === 'production' ? '/orfeo-ai/logo/logo-orange.svg' : '/logo/logo-orange.svg'} 
                 alt="ORFEO AI" 
                 width={24}
                 height={24}

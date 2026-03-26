@@ -62,7 +62,7 @@ export default function Navbar() {
         <div className="flex items-center gap-8 lg:gap-12">
           <Link href={`/${locale}`} className="flex items-center gap-2 group">
             <Image 
-              src="/logo/logo-orange.svg" 
+              src={process.env.NODE_ENV === 'production' ? '/orfeo-ai/logo/logo-orange.svg' : '/logo/logo-orange.svg'} 
               alt="ORFEO AI" 
               width={32}
               height={32}

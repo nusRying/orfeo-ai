@@ -139,7 +139,9 @@ function OrbitRing({
 }
 
 function Logo3D() {
-  const svgData = useLoader(SVGLoader, '/logo/logo-orange.svg');
+  const isProd = process.env.NODE_ENV === 'production';
+  const logoPath = isProd ? '/orfeo-ai/logo/logo-orange.svg' : '/logo/logo-orange.svg';
+  const svgData = useLoader(SVGLoader, logoPath);
   const shapes = useMemo(() => {
     return svgData.paths.flatMap((path) => {
       return path.toShapes(true);
