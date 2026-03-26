@@ -5,41 +5,31 @@ import { motion } from 'framer-motion';
 
 export default function WorkPage() {
   const { locale, dictionary } = useDictionary();
-  const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
 
   const projects = [
     {
-      title: t("Global Logistics Optimization", "تحسين الخدمات اللوجستية"),
+      title: dictionary.work.projects.logistics.title,
       client: "TransCorp International",
-      metric: "+34%",
-      metricLabel: t("Efficiency Increase", "زيادة الكفاءة"),
-      description: t(
-        "Deployed a predictive routing neural network that reduced idle times and fuel consumption across a fleet of 5,000 vehicles.",
-        "نشرنا نموذج توجيه تنبؤي خفّض أوقات التوقف واستهلاك الوقود عبر أسطول مكوّن من 5,000 مركبة."
-      ),
-      tags: [t("Predictive Analytics", "تحليلات تنبؤية"), t("Computer Vision", "رؤية حاسوبية")]
+      metric: dictionary.work.projects.logistics.metric,
+      metricLabel: dictionary.work.efficiencyIncrease,
+      description: dictionary.work.projects.logistics.desc,
+      tags: [dictionary.work.tags.predictiveAnalytics, dictionary.work.tags.computerVision]
     },
     {
-      title: t("Automated Financial Auditing", "تدقيق مالي آلي"),
+      title: dictionary.work.projects.auditing.title,
       client: "Apex Financial Partners",
-      metric: "99.9%",
-      metricLabel: t("Anomaly Detection Rate", "معدل كشف الشذوذ"),
-      description: t(
-        "Replaced manual ledger reviews with a custom LLM pipeline capable of parsing millions of transactions in real-time to flag fraud.",
-        "استبدلنا مراجعة الدفاتر اليدوية بخط معالجة يعتمد على نماذج اللغة لتحليل ملايين المعاملات لحظيًا ورصد الاحتيال."
-      ),
-      tags: [t("LLM Integration", "دمج نماذج اللغة"), t("Data Architecture", "معمارية البيانات")]
+      metric: dictionary.work.projects.auditing.metric,
+      metricLabel: dictionary.work.anomalyDetectionRate,
+      description: dictionary.work.projects.auditing.desc,
+      tags: [dictionary.work.tags.llmIntegration, dictionary.work.tags.dataArchitecture]
     },
     {
-      title: t("Intelligent Customer Triage", "فرز ذكي لطلبات العملاء"),
+      title: dictionary.work.projects.triage.title,
       client: "Nova Retail Group",
-      metric: "-60%",
-      metricLabel: t("Support Resolution Time", "وقت حل الدعم"),
-      description: t(
-        "Implemented an autonomous agent system that handles 80% of tier-1 support queries without human intervention.",
-        "نفذنا نظام وكلاء مستقلين يعالج 80% من استفسارات الدعم من المستوى الأول دون تدخل بشري."
-      ),
-      tags: [t("Autonomous Agents", "وكلاء مستقلون"), t("NLU", "فهم اللغة (NLU)")]
+      metric: dictionary.work.projects.triage.metric,
+      metricLabel: dictionary.work.supportResolutionTime,
+      description: dictionary.work.projects.triage.desc,
+      tags: [dictionary.work.tags.autonomousAgents, dictionary.work.tags.nlu]
     }
   ];
 
@@ -67,21 +57,11 @@ export default function WorkPage() {
         >
           <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{dictionary.navbar.work}</motion.div>
           <motion.h1 variants={itemVars} className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
-            {locale === 'ar' ? (
-              <>
-                أعمال <span className="text-primary">مختارة</span>
-              </>
-            ) : (
-              <>
-                Selected <span className="text-primary">Work</span>
-              </>
-            )}
+            {dictionary.work.title1}
+            <span className="text-primary">{dictionary.work.titleHighlight}</span>
           </motion.h1>
           <motion.p variants={itemVars} className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
-            {t(
-              'We measure success by outcomes. Here are examples of how AI can improve efficiency, quality, and speed.',
-              'نقيس النجاح بالنتائج. فيما يلي أمثلة على كيف يمكن للذكاء الاصطناعي تحسين الكفاءة والجودة والسرعة.'
-            )}
+            {dictionary.work.description}
           </motion.p>
         </motion.div>
 

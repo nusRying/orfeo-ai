@@ -13,7 +13,6 @@ export default function Navbar() {
   const { dictionary, locale } = useDictionary();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
 
   useEffect(() => {
     const updateTime = () => {
@@ -65,7 +64,7 @@ export default function Navbar() {
           </Link>
           
           <nav
-            aria-label={t('Primary navigation', 'التنقل الرئيسي')}
+            aria-label={dictionary.navbar.primaryNav}
             className={cn(
               'hidden lg:flex items-center gap-8 text-[11px] font-semibold text-foreground/70',
               locale === 'ar' ? 'tracking-normal' : 'tracking-widest'
@@ -124,7 +123,7 @@ export default function Navbar() {
           <button
             type="button"
             className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-black/10 bg-white text-foreground"
-            aria-label={menuOpen ? t('Close menu', 'إغلاق القائمة') : t('Open menu', 'فتح القائمة')}
+            aria-label={menuOpen ? dictionary.navbar.closeMenu : dictionary.navbar.openMenu}
             onClick={() => setMenuOpen((v) => !v)}
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -142,7 +141,7 @@ export default function Navbar() {
           >
             <button
               type="button"
-              aria-label={t('Close menu overlay', 'إغلاق غطاء القائمة')}
+              aria-label={dictionary.navbar.closeMenuOverlay}
               className="absolute inset-0 bg-black/30"
               onClick={() => setMenuOpen(false)}
             />
@@ -155,12 +154,12 @@ export default function Navbar() {
             >
               <div className="flex items-center justify-between mb-8">
                 <div className={cn('text-sm font-bold', locale === 'ar' ? 'tracking-normal' : 'tracking-widest')}>
-                  {t('MENU', 'القائمة')}
+                  {dictionary.navbar.menu}
                 </div>
                 <button
                   type="button"
                   className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-black/10 bg-white text-foreground"
-                  aria-label={t('Close menu', 'إغلاق القائمة')}
+                  aria-label={dictionary.navbar.closeMenu}
                   onClick={() => setMenuOpen(false)}
                 >
                   <X size={18} />

@@ -5,14 +5,24 @@
     "scroll": "Scroll",
     "directContact": "Direct Contact",
     "headquarters": "Headquarters",
-    "sendMessage": "SEND MESSAGE"
+    "sendMessage": "SEND MESSAGE",
+    "nextStep": "Next step",
+    "email": "Email",
+    "phone": "Phone",
+    "step": "Step",
+    "note": "Note"
   },
   "navbar": {
     "services": "SERVICES",
     "work": "WORK",
     "process": "PROCESS",
     "about": "ABOUT",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "menu": "MENU",
+    "primaryNav": "Primary navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "closeMenuOverlay": "Close menu overlay"
   },
   "hero": {
     "eyebrow": "AI Agency",
@@ -20,18 +30,146 @@
     "headlineHighlight": "AI",
     "headline3": " everywhere else.",
     "subheadline": "Why wait any longer.",
-    "description": "Transforming businesses with bespoke AI solutions. We bridge the gap between technical complexity and business growth, making intelligence accessible and efficient."
+    "description": "Transforming businesses with bespoke AI solutions. We bridge the gap between technical complexity and business growth, making intelligence accessible and efficient.",
+    "viewWork": "View work",
+    "fastPilots": {
+      "title": "Fast pilots",
+      "desc": "Prototype and validate in weeks."
+    },
+    "productionReady": {
+      "title": "Production ready",
+      "desc": "Security, evals, and monitoring."
+    },
+    "clearROI": {
+      "title": "Clear ROI",
+      "desc": "Measured impact, not hype."
+    },
+    "whatWeBuild": "What we build",
+    "buildItems": {
+      "llmApps": {
+        "title": "LLM Apps",
+        "desc": "Chat, RAG, and copilots."
+      },
+      "agents": {
+        "title": "Agents",
+        "desc": "Workflow automation."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "desc": "Forecasting and insight."
+      },
+      "governance": {
+        "title": "Governance",
+        "desc": "Safety and controls."
+      }
+    },
+    "engagement": {
+      "title": "A clear engagement",
+      "desc": "Discovery → prototype → production. Designed to fit your data, team, and constraints.",
+      "link": "See our process"
+    }
   },
   "about": {
     "title1": "Our ",
     "titleHighlight": "Story",
-    "mission": "Mission",
-    "values": "Core Values"
+    "description": "We design AI systems that are understandable, testable, and built for real operations. No magic—just strong engineering and clear scope.",
+    "ourStory": {
+      "title": "Our story",
+      "desc": "Founded in 2024, ORFEO AI emerged from a simple realization: the gap between cutting-edge AI research and practical business application was too wide. We exist to bridge that gap."
+    },
+    "mission": {
+      "title": "Our mission",
+      "desc": "Our mission is to democratize access to enterprise-grade artificial intelligence. We believe that AI shouldn't be a black box, but a transparent, powerful lever for growth, efficiency, and human potential."
+    },
+    "values": {
+      "subtitle": "Core Values",
+      "title": "Principles we ship by",
+      "items": {
+        "precision": {
+          "title": "Precision",
+          "desc": "We build systems that are accurate, reliable, and rigorously tested."
+        },
+        "transparency": {
+          "title": "Transparency",
+          "desc": "Clear explanations over jargon. We explain how models reach outcomes."
+        },
+        "impact": {
+          "title": "Impact",
+          "desc": "We measure success by measurable operational improvement and ROI."
+        }
+      }
+    },
+    "team": {
+      "subtitle": "Team",
+      "title": "People behind the work",
+      "roles": {
+        "ceo": "CEO & Founder",
+        "headOfAi": "Head of AI Engineering",
+        "leadDataScientist": "Lead Data Scientist"
+      }
+    }
   },
   "services": {
     "title1": "Our ",
     "titleHighlight": "Services",
-    "description": "Comprehensive AI solutions designed to transform your business operations, from intelligent automation to predictive analytics."
+    "description": "Comprehensive AI solutions designed to transform your business operations, from intelligent automation to predictive analytics.",
+    "exploreServices": "Explore services",
+    "pilot": {
+      "title": "Start with a focused pilot.",
+      "desc": "We’ll map the use-case, identify the right data sources, and define success metrics before writing production code."
+    },
+    "items": {
+      "llmIntegration": {
+        "title": "Enterprise LLM Integration",
+        "desc": "Secure, private deployment of large language models fine-tuned on your proprietary data. Turn fragmented knowledge into actionable intelligence."
+      },
+      "predictiveEngine": {
+        "title": "Predictive Analytics Engine",
+        "desc": "Machine learning models that forecast demand, identify market anomalies, and optimize resource allocation before the need arises."
+      },
+      "autonomousAgents": {
+        "title": "Autonomous Agents",
+        "desc": "Custom AI agents capable of handling complex, multi-step workflows. From customer support triage to automated data entry."
+      },
+      "computerVision": {
+        "title": "Computer Vision Systems",
+        "desc": "Real-time visual data processing for quality control, security monitoring, and automated spatial analysis."
+      },
+      "dataArchitecture": {
+        "title": "Data Architecture & Pipeline",
+        "desc": "Building the scalable, clean data infrastructure required for high-performance AI integration. Garbage in, garbage out stops here."
+      },
+      "securityGovernance": {
+        "title": "AI Security & Governance",
+        "desc": "Auditing, red-teaming, and securing AI deployments against prompt injection, data leakage, and adversarial attacks."
+      }
+    },
+    "capabilities": {
+      "llmRAG": {
+        "title": "LLM Apps & RAG",
+        "desc": "Search, chat, copilots, and knowledge systems that are accurate and explainable."
+      },
+      "autonomousAgents": {
+        "title": "Autonomous Agents",
+        "desc": "Multi-step automation that plugs into your tools and follows your rules."
+      },
+      "dataPipelines": {
+        "title": "Data Pipelines",
+        "desc": "Clean ingestion, labeling, and retrieval pipelines optimized for cost and speed."
+      },
+      "predictiveAnalytics": {
+        "title": "Predictive Analytics",
+        "desc": "Forecasting and anomaly detection for operations, risk, and growth planning."
+      },
+      "securityGovernance": {
+        "title": "Security & Governance",
+        "desc": "Evals, guardrails, and access control to keep AI safe in production."
+      },
+      "automation": {
+        "title": "Automation",
+        "desc": "From intake to resolution—reduce manual effort with reliable workflows."
+      }
+    }
   },
   "home": {
     "servicesSubtitle": "Capabilities",
@@ -39,6 +177,273 @@
     "processSubtitle": "Process",
     "faqSubtitle": "FAQ",
     "aboutSubtitle": "Our Edge",
-    "viewAll": "VIEW ALL"
+    "viewAll": "VIEW ALL",
+    "trustedBy": "Trusted by teams building with AI"
+  },
+  "work": {
+    "title1": "Selected ",
+    "titleHighlight": "Work",
+    "description": "We measure success by outcomes. Here are examples of how AI can improve efficiency, quality, and speed.",
+    "caseStudy": "Case study",
+    "efficiencyIncrease": "Efficiency Increase",
+    "anomalyDetectionRate": "Anomaly Detection Rate",
+    "supportResolutionTime": "Support Resolution Time",
+    "tags": {
+      "predictiveAnalytics": "Predictive Analytics",
+      "computerVision": "Computer Vision",
+      "llmIntegration": "LLM Integration",
+      "dataArchitecture": "Data Architecture",
+      "autonomousAgents": "Autonomous Agents",
+      "nlu": "NLU"
+    },
+    "projects": {
+      "logistics": {
+        "metric": "+34%",
+        "label": "Efficiency increase",
+        "title": "Global logistics optimization",
+        "desc": "Deployed a predictive routing neural network that reduced idle times and fuel consumption across a fleet of 5,000 vehicles."
+      },
+      "auditing": {
+        "metric": "99.9%",
+        "label": "Anomaly detection",
+        "title": "Automated financial auditing",
+        "desc": "Replaced manual ledger reviews with a custom LLM pipeline capable of parsing millions of transactions in real-time to flag fraud."
+      },
+      "triage": {
+        "metric": "-60%",
+        "label": "Resolution time",
+        "title": "Intelligent customer triage",
+        "desc": "Implemented an autonomous agent system that handles 80% of tier-1 support queries without human intervention."
+      }
+    }
+  },
+  "process": {
+    "title1": "From idea to ",
+    "titleHighlight": "production",
+    "description": "A transparent delivery flow that keeps scope clear, risk controlled, and outcomes measurable.",
+    "learnMore": "Learn more",
+    "deliveryTitle": "A delivery process you can trust",
+    "deliveryDescription": "A clear workflow that keeps scope tight, quality measurable, and production risk controlled.",
+    "steps": {
+      "discovery": {
+        "title": "Discovery",
+        "desc": "Define the use-case, success metrics, data sources, and constraints. We align on scope and risks before building."
+      },
+      "prototype": {
+        "title": "Prototype",
+        "desc": "Ship a pilot on real workflows. We validate quality, cost, and adoption signals with an evaluation baseline."
+      },
+      "production": {
+        "title": "Production",
+        "desc": "Harden the system with guardrails, monitoring, and access control. Make behavior consistent and auditable."
+      },
+      "scale": {
+        "title": "Scale",
+        "desc": "Improve quality, latency, and cost over time. Add new workflows safely with regression testing and feedback loops."
+      }
+    },
+    "cards": {
+      "whatYouGet": {
+        "title": "What you get",
+        "bullets": [
+          "A scoped pilot plan",
+          "Evaluation baseline",
+          "Production checklist",
+          "Ongoing improvement loop"
+        ]
+      },
+      "qualitySafety": {
+        "title": "Quality & safety",
+        "bullets": [
+          "Regression tests for prompts and retrieval",
+          "Guardrails and access control",
+          "Monitoring and feedback capture",
+          "Cost controls and budgets"
+        ]
+      },
+      "startingPoints": {
+        "title": "Typical starting points",
+        "bullets": [
+          "Support and triage automation",
+          "Internal knowledge assistant",
+          "Operational forecasting",
+          "Document processing pipelines"
+        ]
+      }
+    },
+    "pilotCTA": {
+      "title": "Let’s define a pilot for your team.",
+      "desc": "Share your use-case and we’ll map scope, data, and success metrics before committing to build."
+    }
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "description": "Clear answers about timelines, data, privacy, and how we ship reliable AI systems.",
+    "viewFaq": "View FAQ",
+    "stillQuestions": "Still have questions?",
+    "tellUseCase": "Tell us your use-case.",
+    "respondRecommendations": "We’ll respond with practical recommendations and a proposed pilot plan.",
+    "questions": {
+      "sideNeed": {
+        "q": "What do you need from our side?",
+        "a": "A point of contact, access to relevant data sources, and a clear success metric. We handle the rest."
+      },
+      "privateData": {
+        "q": "Can you work with private data?",
+        "a": "Yes. We design with least-privilege access, strong isolation, and clear retention rules."
+      },
+      "measureQuality": {
+        "q": "How do you measure quality?",
+        "a": "We define eval sets and run regression tests so improvements are measurable and repeatable."
+      },
+      "deploymentMonitoring": {
+        "q": "Do you support deployment and monitoring?",
+        "a": "Yes. We ship production setups with logging, feedback loops, and cost controls."
+      },
+      "engagement": {
+        "q": "What does a typical engagement look like?",
+        "a": "We start with discovery, ship a prototype, and then harden it for production with evals, guardrails, and monitoring."
+      },
+      "privateSensitive": {
+        "q": "Can you work with private or sensitive data?",
+        "a": "Yes. We follow least-privilege access, clear retention rules, and strong isolation. We can also support on-prem or VPC setups depending on your needs."
+      },
+      "llmQuality": {
+        "q": "How do you measure quality for LLM systems?",
+        "a": "We define evaluation datasets and run regression tests so changes are measurable and repeatable over time."
+      },
+      "maintainAfterLaunch": {
+        "q": "Do you build and maintain the system after launch?",
+        "a": "Yes. We can support deployment, monitoring, and iterative improvements—or hand off to your team with documentation and training."
+      },
+      "toolsStacks": {
+        "q": "What tools and stacks do you support?",
+        "a": "We work with modern web stacks, cloud platforms, vector databases, and LLM providers. We choose based on your constraints and security needs."
+      },
+      "controlCost": {
+        "q": "How do you control cost?",
+        "a": "We optimize prompts and retrieval, cache where possible, set budgets and alerts, and measure cost per successful outcome."
+      }
+    }
+  },
+  "contact": {
+    "subtitle": "Contact",
+    "title1": "Let's talk ",
+    "titleHighlight": "AI",
+    "description": "Share what you're trying to improve. We'll propose a concrete pilot with timeline, risks, and success metrics.",
+    "sendMessage": {
+      "title": "Send a message",
+      "desc": "We usually reply within 1–2 business days."
+    },
+    "form": {
+      "firstName": "First name",
+      "firstNamePlaceholder": "John",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Doe",
+      "companyEmail": "Company email",
+      "whatBuilding": "What are you building?",
+      "whatBuildingPlaceholder": "Tell us about your use-case, timeline, and what success looks like..."
+    }
+  },
+  "privacy": {
+    "subtitle": "Privacy",
+    "title": "Privacy policy",
+    "lastUpdated": "Last updated: February 26, 2026.",
+    "legalNote": "Note: This page is a general template and should be reviewed by legal counsel for your specific business and jurisdiction.",
+    "sections": {
+      "collection": {
+        "title": "Information we collect",
+        "items": [
+          "Contact details you provide (name, email, company).",
+          "Message content submitted via forms.",
+          "Basic analytics (device, pages visited) if enabled."
+        ]
+      },
+      "usage": {
+        "title": "How we use information",
+        "items": [
+          "To respond to inquiries and provide requested services.",
+          "To improve the website and user experience.",
+          "To maintain security and prevent abuse."
+        ]
+      },
+      "sharing": {
+        "title": "Sharing",
+        "items": [
+          "We do not sell personal information.",
+          "We may share with service providers (hosting, analytics) as needed to operate the site.",
+          "We may disclose if required by law."
+        ]
+      },
+      "retention": {
+        "title": "Retention",
+        "items": [
+          "We keep data only as long as needed for the purposes above.",
+          "You can request deletion of your information."
+        ]
+      },
+      "contact": {
+        "title": "Contact",
+        "items": [
+          "For privacy requests, email: hello@orfeo-ai.com"
+        ]
+      }
+    }
+  },
+  "terms": {
+    "subtitle": "Terms",
+    "title": "Terms of service",
+    "lastUpdated": "Last updated: February 26, 2026.",
+    "legalNote": "Note: This page is a general template and should be reviewed by legal counsel for your specific business and jurisdiction.",
+    "sections": {
+      "use": {
+        "title": "Use of the website",
+        "items": [
+          "Do not misuse the site or attempt to disrupt service.",
+          "Content is provided “as is” without warranties."
+        ]
+      },
+      "ip": {
+        "title": "Intellectual property",
+        "items": [
+          "All trademarks, logos, and site content remain the property of their owners.",
+          "You may not copy or redistribute content without permission."
+        ]
+      },
+      "liability": {
+        "title": "Limitation of liability",
+        "items": [
+          "We are not liable for indirect or consequential damages arising from site use."
+        ]
+      },
+      "changes": {
+        "title": "Changes",
+        "items": [
+          "We may update these terms from time to time. The updated date will be shown above."
+        ]
+      },
+      "contact": {
+        "title": "Contact",
+        "items": [
+          "For questions about these terms, email: hello@orfeo-ai.com"
+        ]
+      }
+    }
+  },
+  "cta": {
+    "nextStep": "Next step",
+    "title": "Get a focused AI plan for your team.",
+    "description": "Tell us what you want to improve, and we’ll propose a concrete pilot with timeline, risks, and success metrics."
+  },
+  "footer": {
+    "description": "Premium AI systems and automation, designed for clarity, reliability, and measurable business impact.",
+    "company": "Company",
+    "resources": "Resources",
+    "legal": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "contact": "Contact",
+    "rights": "© {year} ORFEO AI. All rights reserved.",
+    "builtWith": "Built with Next.js • Tailwind • Three.js"
   }
 }

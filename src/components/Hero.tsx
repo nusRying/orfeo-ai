@@ -7,7 +7,6 @@ import { ArrowLeft, ArrowRight, Bot, Brain, LineChart, ShieldCheck } from 'lucid
 
 export default function Hero() {
   const { dictionary, locale } = useDictionary();
-  const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
   const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
 
   return (
@@ -39,15 +38,15 @@ export default function Hero() {
                 <ArrowIcon size={16} />
               </Link>
               <Link href={`/${locale}/work`} className="btn btn-secondary">
-                {t('View work', 'عرض الأعمال')}
+                {dictionary.hero.viewWork}
               </Link>
             </div>
 
             <div className="mt-10 grid sm:grid-cols-3 gap-4 max-w-2xl">
               {[
-                { title: t('Fast pilots', 'تجارب سريعة'), desc: t('Prototype and validate in weeks.', 'نموذج أولي وتحقق خلال أسابيع.') },
-                { title: t('Production ready', 'جاهز للإنتاج'), desc: t('Security, evals, and monitoring.', 'أمان، تقييمات، ومراقبة.') },
-                { title: t('Clear ROI', 'عائد واضح'), desc: t('Measured impact, not hype.', 'أثر مقاس، بلا مبالغة.') },
+                { title: dictionary.hero.fastPilots.title, desc: dictionary.hero.fastPilots.desc },
+                { title: dictionary.hero.productionReady.title, desc: dictionary.hero.productionReady.desc },
+                { title: dictionary.hero.clearROI.title, desc: dictionary.hero.clearROI.desc },
               ].map((item) => (
                 <div key={item.title} className="surface rounded-2xl p-4">
                   <div className="text-sm font-bold text-foreground">{item.title}</div>
@@ -60,29 +59,29 @@ export default function Hero() {
           <div className="lg:col-span-5">
             <div className="surface rounded-3xl p-6 md:p-8">
               <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/60">
-                {t('What we build', 'ماذا نبني')}
+                {dictionary.hero.whatWeBuild}
               </div>
               <div className="mt-6 grid grid-cols-2 gap-4">
                 {[
                   {
-                    title: t('LLM Apps', 'تطبيقات LLM'),
+                    title: dictionary.hero.buildItems.llmApps.title,
                     icon: <Brain className="w-5 h-5 text-primary" aria-hidden="true" />,
-                    desc: t('Chat, RAG, and copilots.', 'محادثة، RAG، ومساعدون.'),
+                    desc: dictionary.hero.buildItems.llmApps.desc,
                   },
                   {
-                    title: t('Agents', 'وكلاء'),
+                    title: dictionary.hero.buildItems.agents.title,
                     icon: <Bot className="w-5 h-5 text-primary" aria-hidden="true" />,
-                    desc: t('Workflow automation.', 'أتمتة سير العمل.'),
+                    desc: dictionary.hero.buildItems.agents.desc,
                   },
                   {
-                    title: t('Analytics', 'تحليلات'),
+                    title: dictionary.hero.buildItems.analytics.title,
                     icon: <LineChart className="w-5 h-5 text-primary" aria-hidden="true" />,
-                    desc: t('Forecasting and insight.', 'تنبؤات ورؤى.'),
+                    desc: dictionary.hero.buildItems.analytics.desc,
                   },
                   {
-                    title: t('Governance', 'حوكمة'),
+                    title: dictionary.hero.buildItems.governance.title,
                     icon: <ShieldCheck className="w-5 h-5 text-primary" aria-hidden="true" />,
-                    desc: t('Safety and controls.', 'سلامة وضوابط.'),
+                    desc: dictionary.hero.buildItems.governance.desc,
                   },
                 ].map((card) => (
                   <div key={card.title} className="surface-muted rounded-2xl p-4">
@@ -98,16 +97,13 @@ export default function Hero() {
               </div>
 
               <div className="mt-8 surface-muted rounded-2xl p-5">
-                <div className="text-sm font-bold text-foreground">{t('A clear engagement', 'تعاون واضح')}</div>
+                <div className="text-sm font-bold text-foreground">{dictionary.hero.engagement.title}</div>
                 <div className="mt-2 text-sm text-foreground/70 leading-relaxed">
-                  {t(
-                    'Discovery → prototype → production. Designed to fit your data, team, and constraints.',
-                    'اكتشاف → نموذج أولي → إنتاج. مصمم ليناسب بياناتك وفريقك وقيودك.'
-                  )}
+                  {dictionary.hero.engagement.desc}
                 </div>
                 <div className="mt-4">
                   <Link href={`/${locale}/process`} className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline underline-offset-4">
-                    {t('See our process', 'اطّلع على المنهج')} <ArrowIcon size={16} />
+                    {dictionary.hero.engagement.link} <ArrowIcon size={16} />
                   </Link>
                 </div>
               </div>

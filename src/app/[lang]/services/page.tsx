@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 
 export default function ServicesPage() {
   const { dictionary, locale } = useDictionary();
-  const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
   const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
 
   const containerVars: any = {
@@ -25,51 +24,33 @@ export default function ServicesPage() {
 
   const services = [
     {
-      title: t("Enterprise LLM Integration", "دمج نماذج اللغة للمؤسسات"),
-      description: t(
-        "Secure, private deployment of large language models fine-tuned on your proprietary data. Turn fragmented knowledge into actionable intelligence.",
-        "نشر آمن وخاص لنماذج اللغة الكبيرة مع ضبطها على بياناتك. حوّل المعرفة المتفرقة إلى ذكاء قابل للتنفيذ."
-      ),
+      title: dictionary.services.items.llmIntegration.title,
+      description: dictionary.services.items.llmIntegration.desc,
       icon: <Brain className="w-8 h-8 text-primary mb-6" />
     },
     {
-      title: t("Predictive Analytics Engine", "محرك تحليلات تنبؤية"),
-      description: t(
-        "Machine learning models that forecast demand, identify market anomalies, and optimize resource allocation before the need arises.",
-        "نماذج تعلم آلي تتنبأ بالطلب وتكشف الشذوذ وتحسّن توزيع الموارد قبل الحاجة."
-      ),
+      title: dictionary.services.items.predictiveEngine.title,
+      description: dictionary.services.items.predictiveEngine.desc,
       icon: <LineChart className="w-8 h-8 text-primary mb-6" />
     },
     {
-      title: t("Autonomous Agents", "وكلاء مستقلون"),
-      description: t(
-        "Custom AI agents capable of handling complex, multi-step workflows. From customer support triage to automated data entry.",
-        "وكلاء مخصصون ينفذون مهام متعددة الخطوات. من فرز دعم العملاء إلى إدخال البيانات تلقائيًا."
-      ),
+      title: dictionary.services.items.autonomousAgents.title,
+      description: dictionary.services.items.autonomousAgents.desc,
       icon: <Bot className="w-8 h-8 text-primary mb-6" />
     },
     {
-      title: t("Computer Vision Systems", "أنظمة رؤية حاسوبية"),
-      description: t(
-        "Real-time visual data processing for quality control, security monitoring, and automated spatial analysis.",
-        "معالجة بصرية لحظية لضبط الجودة ومراقبة الأمن والتحليل المكاني الآلي."
-      ),
+      title: dictionary.services.items.computerVision.title,
+      description: dictionary.services.items.computerVision.desc,
       icon: <Zap className="w-8 h-8 text-primary mb-6" />
     },
     {
-      title: t("Data Architecture & Pipeline", "معمارية البيانات وخطوط المعالجة"),
-      description: t(
-        "Building the scalable, clean data infrastructure required for high-performance AI integration. Garbage in, garbage out stops here.",
-        "بناء بنية بيانات نظيفة وقابلة للتوسع لدمج ذكاء اصطناعي عالي الأداء. تنتهي مشكلة «بيانات سيئة تعني نتائج سيئة» هنا."
-      ),
+      title: dictionary.services.items.dataArchitecture.title,
+      description: dictionary.services.items.dataArchitecture.desc,
       icon: <Database className="w-8 h-8 text-primary mb-6" />
     },
     {
-      title: t("AI Security & Governance", "أمن وحوكمة الذكاء الاصطناعي"),
-      description: t(
-        "Auditing, red-teaming, and securing AI deployments against prompt injection, data leakage, and adversarial attacks.",
-        "تدقيق واختبارات هجومية وتأمين النشر ضد حقن الأوامر وتسريب البيانات والهجمات الخصمية."
-      ),
+      title: dictionary.services.items.securityGovernance.title,
+      description: dictionary.services.items.securityGovernance.desc,
       icon: <ShieldCheck className="w-8 h-8 text-primary mb-6" />
     }
   ];
@@ -115,15 +96,12 @@ export default function ServicesPage() {
           variants={containerVars}
         >
           <div className="max-w-2xl">
-            <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{t('Next step', 'الخطوة التالية')}</motion.div>
+            <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">{dictionary.common.nextStep}</motion.div>
             <motion.div variants={itemVars} className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
-              {t('Start with a focused pilot.', 'ابدأ بتجربة مركزة.')}
+              {dictionary.services.pilot.title}
             </motion.div>
             <motion.div variants={itemVars} className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed">
-              {t(
-                "We’ll map the use-case, identify the right data sources, and define success metrics before writing production code.",
-                "سنحدد حالة الاستخدام، ومصادر البيانات المناسبة، ومقاييس النجاح قبل كتابة كود الإنتاج."
-              )}
+              {dictionary.services.pilot.desc}
             </motion.div>
           </div>
           <motion.div variants={itemVars} className="flex flex-wrap gap-4">

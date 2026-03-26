@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const { locale, dictionary } = useDictionary();
-  const t = (en: string, ar: string) => (locale === "ar" ? ar : en);
 
   const containerVars: any = {
     hidden: { opacity: 0 },
@@ -31,24 +30,13 @@ export default function ContactPage() {
           variants={containerVars}
         >
           <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
-            {t("Contact", "تواصل")}
+            {dictionary.contact.subtitle}
           </div>
           <h1 className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
-            {locale === "ar" ? (
-              <>
-                لنتحدث عن <span className="text-primary">الذكاء الاصطناعي</span>
-              </>
-            ) : (
-              <>
-                Let&apos;s talk <span className="text-primary">AI</span>
-              </>
-            )}
+            {dictionary.contact.title1}<span className="text-primary">{dictionary.contact.titleHighlight}</span>
           </h1>
           <motion.p variants={itemVars} className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
-            {t(
-              "Share what you're trying to improve. We'll propose a concrete pilot with timeline, risks, and success metrics.",
-              "شارك ما تريد تحسينه. سنقترح تجربة محددة مع جدول زمني ومخاطر ومقاييس نجاح."
-            )}
+            {dictionary.contact.description}
           </motion.p>
         </motion.div>
 
@@ -60,50 +48,47 @@ export default function ContactPage() {
         >
           {/* Contact Form */}
           <motion.div variants={itemVars} className="surface rounded-[2rem] p-8 md:p-10">
-            <div className="text-sm font-bold text-foreground">{t("Send a message", "أرسل رسالة")}</div>
+            <div className="text-sm font-bold text-foreground">{dictionary.contact.sendMessage.title}</div>
             <p className="mt-2 text-sm text-foreground/70 leading-relaxed">
-              {t("We usually reply within 1–2 business days.", "نرد عادة خلال 1–2 يوم عمل.")}
+              {dictionary.contact.sendMessage.desc}
             </p>
 
             <form className="mt-8 space-y-5">
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{t("First name", "الاسم الأول")}</label>
+                  <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.firstName}</label>
                   <input
                     type="text"
                     className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors"
-                    placeholder={t("John", "أحمد")}
+                    placeholder={dictionary.contact.form.firstNamePlaceholder}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{t("Last name", "اسم العائلة")}</label>
+                  <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.lastName}</label>
                   <input
                     type="text"
                     className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors"
-                    placeholder={t("Doe", "الهاشمي")}
+                    placeholder={dictionary.contact.form.lastNamePlaceholder}
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{t("Company email", "بريد العمل")}</label>
+                <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.companyEmail}</label>
                 <input
                   type="email"
                   dir="ltr"
                   className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors"
-                  placeholder="john@company.com"
+                  placeholder="hello@company.com"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{t("What are you building?", "ماذا تبنون؟")}</label>
+                <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.whatBuilding}</label>
                 <textarea
                   rows={5}
                   className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors resize-none"
-                  placeholder={t(
-                    "Tell us about your use-case, timeline, and what success looks like...",
-                    "أخبرنا عن حالة الاستخدام والجدول الزمني وما يعنيه النجاح بالنسبة لك..."
-                  )}
+                  placeholder={dictionary.contact.form.whatBuildingPlaceholder}
                 />
               </div>
 
@@ -123,7 +108,7 @@ export default function ContactPage() {
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/50">{t("Email", "البريد")}</div>
+                    <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/50">{dictionary.common.email}</div>
                     <div className="text-base text-foreground" dir="ltr">hello@orfeo-ai.com</div>
                   </div>
                 </div>
@@ -132,7 +117,7 @@ export default function ContactPage() {
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/50">{t("Phone", "الهاتف")}</div>
+                    <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/50">{dictionary.common.phone}</div>
                     <div className="text-base text-foreground" dir="ltr">+1 (800) 555-0199</div>
                   </div>
                 </div>

@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 
 export default function Footer() {
-  const { locale } = useDictionary();
-  const t = (en: string, ar: string) => (locale === 'ar' ? ar : en);
+  const { dictionary, locale } = useDictionary();
   const year = new Date().getFullYear();
 
   return (
@@ -21,43 +20,40 @@ export default function Footer() {
               ORFEO <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent" /> AI
             </Link>
             <p className="mt-4 text-sm text-foreground/70 max-w-sm leading-relaxed">
-              {t(
-                'Premium AI systems and automation, designed for clarity, reliability, and measurable business impact.',
-                'أنظمة وأتمتة ذكاء اصطناعي متميزة، مصممة للوضوح والموثوقية وأثر أعمال قابل للقياس.'
-              )}
+              {dictionary.footer.description}
             </p>
           </div>
 
           <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10">
             <div>
               <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">
-                {t('Company', 'الشركة')}
+                {dictionary.footer.company}
               </div>
               <div className="mt-4 flex flex-col gap-3 text-sm text-foreground/70">
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/services`}>{t('Services', 'الخدمات')}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/work`}>{t('Work', 'الأعمال')}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/process`}>{t('Process', 'المنهج')}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/about`}>{t('About', 'من نحن')}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/contact`}>{t('Contact', 'تواصل')}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/${locale}/services`}>{dictionary.navbar.services}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/${locale}/work`}>{dictionary.navbar.work}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/${locale}/process`}>{dictionary.navbar.process}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/${locale}/about`}>{dictionary.navbar.about}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/${locale}/contact`}>{dictionary.footer.contact}</Link>
               </div>
             </div>
 
             <div>
               <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">
-                {t('Resources', 'الموارد')}
+                {dictionary.footer.resources}
               </div>
               <div className="mt-4 flex flex-col gap-3 text-sm text-foreground/70">
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/faq`}>{t('FAQ', 'الأسئلة الشائعة')}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/${locale}/faq`}>{dictionary.navbar.faq}</Link>
               </div>
             </div>
 
             <div>
               <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">
-                {t('Legal', 'قانوني')}
+                {dictionary.footer.legal}
               </div>
               <div className="mt-4 flex flex-col gap-3 text-sm text-foreground/70">
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/privacy`}>{t('Privacy', 'الخصوصية')}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/terms`}>{t('Terms', 'الشروط')}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/${locale}/privacy`}>{dictionary.footer.privacy}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/${locale}/terms`}>{dictionary.footer.terms}</Link>
               </div>
             </div>
           </div>
@@ -65,10 +61,10 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-black/5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="text-xs text-foreground/60 tracking-[0.15em] uppercase">
-            {t(`© ${year} ORFEO AI. All rights reserved.`, `© ${year} ORFEO AI. جميع الحقوق محفوظة.`)}
+            {dictionary.footer.rights.replace('{year}', year.toString())}
           </div>
           <div className="text-xs text-foreground/50">
-            {t('Built with Next.js • Tailwind • Three.js', 'مبني باستخدام Next.js • Tailwind • Three.js')}
+            {dictionary.footer.builtWith}
           </div>
         </div>
       </div>
