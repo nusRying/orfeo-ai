@@ -18,7 +18,7 @@
             console.log(`[Page Error] ${error.message}`);
         });
 
-        await page.goto('http://localhost:3000/ar');
+        await page.goto('http://localhost:3005/ar');
         await new Promise(r => setTimeout(r, 5000));
         
         console.log("Collected Errors:");

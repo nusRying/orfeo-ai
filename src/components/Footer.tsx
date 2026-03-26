@@ -4,6 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 
+import Image from 'next/image';
+
 export default function Footer() {
   const { dictionary, locale } = useDictionary();
   const year = new Date().getFullYear();
@@ -17,9 +19,11 @@ export default function Footer() {
               href={`/${locale}`}
               className="flex items-center gap-2 group"
             >
-              <img 
+              <Image 
                 src="/logo/logo-orange.svg" 
                 alt="ORFEO AI" 
+                width={24}
+                height={24}
                 className="h-6 w-auto transition-transform group-hover:scale-105" 
               />
               <span className="text-xl font-sans font-bold tracking-tighter text-foreground">

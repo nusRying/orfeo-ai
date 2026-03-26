@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader';
+import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 
 function hash(n: number) {
   const x = Math.sin(n) * 43758.5453123;

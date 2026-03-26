@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
@@ -60,9 +61,11 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 md:px-12">
         <div className="flex items-center gap-8 lg:gap-12">
           <Link href={`/${locale}`} className="flex items-center gap-2 group">
-            <img 
+            <Image 
               src="/logo/logo-orange.svg" 
               alt="ORFEO AI" 
+              width={32}
+              height={32}
               className="h-8 w-auto transition-transform group-hover:scale-105" 
             />
             <span className="text-xl md:text-2xl font-sans font-bold tracking-tighter text-foreground">

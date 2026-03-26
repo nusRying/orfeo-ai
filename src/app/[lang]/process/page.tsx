@@ -4,13 +4,13 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ClipboardList, FlaskConical, ShieldCheck, TrendingUp } from 'lucide-react';
 import { useDictionary } from '@/i18n/DictionaryProvider';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export default function ProcessPage() {
   const { locale, dictionary } = useDictionary();
   const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
 
-  const containerVars: any = {
+  const containerVars: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -18,7 +18,7 @@ export default function ProcessPage() {
     }
   };
 
-  const itemVars: any = {
+  const itemVars: Variants = {
     hidden: { opacity: 0, y: 30 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
   };

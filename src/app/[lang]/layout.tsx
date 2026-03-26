@@ -36,6 +36,7 @@ import Footer from "@/components/Footer";
 import { Locale, i18n } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { DictionaryProvider } from "@/i18n/DictionaryProvider";
+import LanguageSynchronizer from "@/components/LanguageSynchronizer";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -52,18 +53,15 @@ export default async function RootLayout({
   const dictionary = await getDictionary(lang as Locale);
 
   return (
-    <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
-      <body
-        className={`${inter.variable} ${playfair.variable} ${cairo.variable} ${notoNaskhArabic.variable} antialiased selection:bg-cyan-500/30`}
-      >
-        <DictionaryProvider dictionary={dictionary} locale={lang as Locale}>
-          <WaveBackground />
-          <Navbar />
-          <ClientWrapper>{children}</ClientWrapper>
-          <Footer />
-          <ChatWidget />
-        </DictionaryProvider>
-      </body>
-    </html>
+    <div className={`${inter.variable} ${playfair.variable} ${cairo.variable} ${notoNaskhArabic.variable} antialiased selection:bg-cyan-500/30 min-h-screen`}>
+      <LanguageSynchronizer lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} />
+      <DictionaryProvider dictionary={dictionary} locale={lang as Locale}>
+        <WaveBackground />
+        <Navbar />
+        <ClientWrapper>{children}</ClientWrapper>
+        <Footer />
+        <ChatWidget />
+      </DictionaryProvider>
+    </div>
   );
 }

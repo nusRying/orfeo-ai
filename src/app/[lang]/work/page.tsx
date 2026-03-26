@@ -1,10 +1,10 @@
 'use client';
 
 import { useDictionary } from '@/i18n/DictionaryProvider';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export default function WorkPage() {
-  const { locale, dictionary } = useDictionary();
+  const { dictionary } = useDictionary();
 
   const projects = [
     {
@@ -33,7 +33,7 @@ export default function WorkPage() {
     }
   ];
 
-  const containerVars: any = {
+  const containerVars: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -41,7 +41,7 @@ export default function WorkPage() {
     }
   };
 
-  const itemVars: any = {
+  const itemVars: Variants = {
     hidden: { opacity: 0, y: 30 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
   };
