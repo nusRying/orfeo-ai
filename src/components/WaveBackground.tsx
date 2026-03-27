@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 
 function hash(n: number) {
   const x = Math.sin(n) * 43758.5453123;
@@ -138,46 +137,6 @@ function OrbitRing({
   );
 }
 
-function Logo3D({ logoRef }: { logoRef: React.RefObject<THREE.Group> }) {
-  const isProd = process.env.NODE_ENV === 'production';
-  const logoPath = isProd ? '/orfeo-ai/logo/logo-orange.svg' : '/logo/logo-orange.svg';
-  const svgData = useLoader(SVGLoader, logoPath);
-  const shapes = useMemo(() => {
-    return svgData.paths.flatMap((path) => {
-      return path.toShapes(true);
-    });
-  }, [svgData]);
-
-  return (
-    <group ref={logoRef} scale={0.15} rotation={[Math.PI, 0, 0]} position={[-7, 7, 0]}>
-      {shapes.map((shape, i) => (
-        <mesh key={i}>
-          <extrudeGeometry
-            args={[
-              shape,
-              {
-                depth: 8,
-                bevelEnabled: true,
-                bevelThickness: 1.2,
-                bevelSize: 0.8,
-                bevelOffset: 0,
-                bevelSegments: 5,
-              },
-            ]}
-          />
-          <meshStandardMaterial
-            color="#fe4c23"
-            roughness={0.2}
-            metalness={0.8}
-            emissive="#fe4c23"
-            emissiveIntensity={0.65}
-          />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
 function Scene({
   pointerRef,
   scrollY,
@@ -186,17 +145,22 @@ function Scene({
   scrollY: React.MutableRefObject<number>;
 }) {
   const group = useRef<THREE.Group>(null!);
-  const logoRef = useRef<THREE.Group>(null!);
   const rings = useRef<THREE.Group>(null!);
+  const outer = useRef<THREE.Group>(null!);
+  const inner = useRef<THREE.Group>(null!);
   const pointer = useRef({ x: 0, y: 0 });
   const scroll = useRef(0);
   const { viewport } = useThree();
+
+  const outerGeo = useMemo(() => new THREE.IcosahedronGeometry(5.8, 2), []);
+  const innerGeo = useMemo(() => new THREE.OctahedronGeometry(4.25, 1), []);
+  const coreGeo = useMemo(() => new THREE.SphereGeometry(3.75, 48, 48), []);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     pointer.current.x = THREE.MathUtils.lerp(pointer.current.x, pointerRef.current.x, 0.06);
     pointer.current.y = THREE.MathUtils.lerp(pointer.current.y, pointerRef.current.y, 0.06);
-    
+
     // Smooth scroll interpolation
     scroll.current = THREE.MathUtils.lerp(scroll.current, scrollY.current, 0.05);
 
@@ -204,30 +168,51 @@ function Scene({
     const py = pointer.current.y;
 
     const baseX = Math.min(viewport.width * 0.18, 4.2);
-    const baseY = Math.min(viewport.height * 0.05, 1.1) + scroll.current * 0.5; // Parallax up on scroll
+    const baseY = Math.min(viewport.height * 0.05, 1.1) + scroll.current * 0.5; // Parallax up on scroll 
     const baseScale = Math.min(1.12, Math.max(0.88, viewport.width / 9.5));
 
     group.current.position.x = baseX + px * 1.2;
     group.current.position.y = baseY + Math.sin(t * 0.6) * 0.28 + py * 0.65;
-    group.current.rotation.y = t * 0.1 + px * 0.25 - scroll.current * 0.1; // Rotate counter on scroll
+    group.current.rotation.y = t * 0.1 + px * 0.25 - scroll.current * 0.1; // Rotate counter on scroll   
     group.current.rotation.x = -0.22 + py * 0.16 + scroll.current * 0.05;
     group.current.rotation.z = Math.sin(t * 0.25) * 0.06;
 
     const s = baseScale + Math.sin(t * 0.35) * 0.02 - scroll.current * 0.03; // Shrink slightly on scroll
     group.current.scale.setScalar(s);
 
-    if (logoRef.current) {
-        logoRef.current.rotation.y = t * 0.4;
-        logoRef.current.rotation.z = Math.sin(t * 0.5) * 0.1;
-    }
-    
+    outer.current.rotation.y = t * 0.06;
+    outer.current.rotation.x = t * 0.03;
+    inner.current.rotation.y = -t * 0.08;
+    inner.current.rotation.x = t * 0.05;
     rings.current.rotation.y = -t * 0.14;
     rings.current.rotation.x = -t * 0.04;
   });
 
   return (
     <group ref={group} position={[0, 0, -10]}>
-      <Logo3D logoRef={logoRef} />
+      <group ref={outer}>
+        <WireEdges geometry={outerGeo} color="#3d3d3d" opacity={0.12} />
+        <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.58} />
+        <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.22} />
+      </group>
+
+      <mesh geometry={coreGeo} rotation={[0.15, 0.25, 0]}>
+        <meshStandardMaterial
+          color="#fe4c23"
+          transparent
+          opacity={0.12}
+          roughness={0.25}
+          metalness={0}
+          emissive="#fe4c23"
+          emissiveIntensity={1.05}
+          depthWrite={false}
+        />
+      </mesh>
+
+      <group ref={inner} rotation={[0.35, 0.2, 0.15]}>
+        <WireEdges geometry={innerGeo} color="#3d3d3d" opacity={0.2} />
+        <WireEdges geometry={innerGeo} color="#fe4c23" opacity={0.18} />
+      </group>
 
       <group ref={rings}>
         <OrbitRing radius={9.4} tube={0.078} color="#fe4c23" opacity={0.18} rotation={[Math.PI / 2, 0, 0]} />
@@ -251,7 +236,7 @@ export default function WaveBackground() {
       pointerRef.current.x = THREE.MathUtils.clamp(x, -1, 1);
       pointerRef.current.y = THREE.MathUtils.clamp(y, -1, 1);
     }
-    
+
     function onScroll() {
         // Normalize scroll between 0 (top) and ~10 (scrolled down)
         // Adjust the divisor to control how fast the parallax moves
@@ -260,10 +245,10 @@ export default function WaveBackground() {
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
-    
+
     // Init scroll
     onScroll();
-    
+
     return () => {
         window.removeEventListener('pointermove', onPointerMove);
         window.removeEventListener('scroll', onScroll);
