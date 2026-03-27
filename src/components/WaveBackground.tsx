@@ -138,7 +138,7 @@ function OrbitRing({
   );
 }
 
-function Logo3D() {
+function Logo3D({ logoRef }: { logoRef: React.RefObject<THREE.Group> }) {
   const isProd = process.env.NODE_ENV === 'production';
   const logoPath = isProd ? '/orfeo-ai/logo/logo-orange.svg' : '/logo/logo-orange.svg';
   const svgData = useLoader(SVGLoader, logoPath);
@@ -149,7 +149,7 @@ function Logo3D() {
   }, [svgData]);
 
   return (
-    <group scale={0.06} rotation={[Math.PI, 0, 0]} position={[-2.8, 3, 0]}>
+    <group ref={logoRef} scale={0.15} rotation={[Math.PI, 0, 0]} position={[-7, 7, 0]}>
       {shapes.map((shape, i) => (
         <mesh key={i}>
           <extrudeGeometry
@@ -186,15 +186,11 @@ function Scene({
   scrollY: React.MutableRefObject<number>;
 }) {
   const group = useRef<THREE.Group>(null!);
+  const logoRef = useRef<THREE.Group>(null!);
   const rings = useRef<THREE.Group>(null!);
-  const outer = useRef<THREE.Group>(null!);
-  const inner = useRef<THREE.Group>(null!);
   const pointer = useRef({ x: 0, y: 0 });
   const scroll = useRef(0);
   const { viewport } = useThree();
-
-  const outerGeo = useMemo(() => new THREE.IcosahedronGeometry(5.8, 2), []);
-  const innerGeo = useMemo(() => new THREE.OctahedronGeometry(4.25, 1), []);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -220,28 +216,18 @@ function Scene({
     const s = baseScale + Math.sin(t * 0.35) * 0.02 - scroll.current * 0.03; // Shrink slightly on scroll
     group.current.scale.setScalar(s);
 
-    outer.current.rotation.y = t * 0.06;
-    outer.current.rotation.x = t * 0.03;
-    inner.current.rotation.y = -t * 0.08;
-    inner.current.rotation.x = t * 0.05;
+    if (logoRef.current) {
+        logoRef.current.rotation.y = t * 0.4;
+        logoRef.current.rotation.z = Math.sin(t * 0.5) * 0.1;
+    }
+    
     rings.current.rotation.y = -t * 0.14;
     rings.current.rotation.x = -t * 0.04;
   });
 
   return (
     <group ref={group} position={[0, 0, -10]}>
-      <group ref={outer}>
-        <WireEdges geometry={outerGeo} color="#3d3d3d" opacity={0.12} />
-        <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.58} />
-        <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.22} />
-      </group>
-
-      <Logo3D />
-
-      <group ref={inner} rotation={[0.35, 0.2, 0.15]}>
-        <WireEdges geometry={innerGeo} color="#3d3d3d" opacity={0.2} />
-        <WireEdges geometry={innerGeo} color="#fe4c23" opacity={0.18} />
-      </group>
+      <Logo3D logoRef={logoRef} />
 
       <group ref={rings}>
         <OrbitRing radius={9.4} tube={0.078} color="#fe4c23" opacity={0.18} rotation={[Math.PI / 2, 0, 0]} />
