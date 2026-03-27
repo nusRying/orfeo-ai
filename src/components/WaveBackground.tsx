@@ -169,11 +169,8 @@ function Scene({
     const shape2 = createShapeFromPoly("92.506965786802539 42.550689697265625 17.402961880552539 42.550689697265625 17.402961880552539 18.550689697265625 72.001852208350101 18.550689694813627 92.511329800474414 0 92.506965786802539 42.550689697265625");
     
     const geo = new THREE.ExtrudeGeometry([shape1, shape2], {
-      depth: 8,
-      bevelEnabled: true,
-      bevelThickness: 0.5,
-      bevelSize: 0.5,
-      bevelSegments: 2,
+      depth: 3,
+      bevelEnabled: false,
     });
     
     geo.computeBoundingBox();
@@ -183,14 +180,14 @@ function Scene({
       geo.translate(-centerOffset.x, -centerOffset.y, -centerOffset.z);
     }
     
-    geo.scale(0.09, 0.09, 0.09);
+    geo.scale(0.065, 0.065, 0.065);
 
     return geo;
   }, []);
 
   const coreGeo = useMemo(() => {
     const geo = logoGeo.clone();
-    geo.scale(0.9, 0.9, 0.9);
+    geo.scale(0.95, 0.95, 0.95);
     return geo;
   }, [logoGeo]);
 
@@ -205,24 +202,23 @@ function Scene({
     const px = pointer.current.x;
     const py = pointer.current.y;
 
-    const baseX = Math.min(viewport.width * 0.18, 4.2);
-    const baseY = Math.min(viewport.height * 0.05, 1.1) + scroll.current * 0.5; // Parallax up on scroll 
+    const baseX = Math.min(viewport.width * 0.35, 7.5);
+    const baseY = Math.min(viewport.height * 0.1, 1.5) + scroll.current * 0.5; // Parallax up on scroll 
     const baseScale = Math.min(1.12, Math.max(0.88, viewport.width / 9.5));
 
     group.current.position.x = baseX + px * 1.2;
     group.current.position.y = baseY + Math.sin(t * 0.6) * 0.28 + py * 0.65;
-    group.current.rotation.y = t * 0.1 + px * 0.25 - scroll.current * 0.1; // Rotate counter on scroll   
-    group.current.rotation.x = -0.22 + py * 0.16 + scroll.current * 0.05;
-    group.current.rotation.z = Math.sin(t * 0.25) * 0.06;
+    group.current.rotation.y = Math.sin(t * 0.1) * 0.15 + px * 0.25 - scroll.current * 0.05;  
+    group.current.rotation.x = -0.1 + py * 0.15 + scroll.current * 0.02;
+    group.current.rotation.z = Math.sin(t * 0.2) * 0.05;
 
-    const s = baseScale + Math.sin(t * 0.35) * 0.02 - scroll.current * 0.03; // Shrink slightly on scroll
+    const s = baseScale + Math.sin(t * 0.35) * 0.02 - scroll.current * 0.03;
     group.current.scale.setScalar(s);
 
-    outer.current.rotation.y = t * 0.05;
-    outer.current.rotation.x = t * 0.02;
-    // Core naturally inherits outer rotations since they are in the same scene, but we apply inner rotation specifically if we wanted.
-    inner.current.rotation.y = -t * 0.04;
-    inner.current.rotation.x = t * 0.03;
+    outer.current.rotation.y = Math.sin(t * 0.15) * 0.1;
+    outer.current.rotation.x = Math.cos(t * 0.15) * 0.05;
+    inner.current.rotation.y = -Math.sin(t * 0.15) * 0.1;
+    inner.current.rotation.x = -Math.cos(t * 0.15) * 0.05;
   });
 
   return (
