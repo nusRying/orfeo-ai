@@ -137,6 +137,18 @@ function OrbitRing({
   );
 }
 
+function createShapeFromPoly(pointsString: string) {
+  const points = pointsString.trim().split(/\s+/).map(Number);
+  const shape = new THREE.Shape();
+  if (points.length >= 2) {
+    shape.moveTo(points[0], -points[1]); // Negative Y to match SVG coordinate space
+    for (let i = 2; i < points.length; i += 2) {
+      shape.lineTo(points[i], -points[i + 1]);
+    }
+  }
+  return shape;
+}
+
 function Scene({
   pointerRef,
   scrollY,
@@ -152,9 +164,35 @@ function Scene({
   const scroll = useRef(0);
   const { viewport } = useThree();
 
-  const outerGeo = useMemo(() => new THREE.IcosahedronGeometry(5.8, 2), []);
-  const innerGeo = useMemo(() => new THREE.OctahedronGeometry(4.25, 1), []);
-  const coreGeo = useMemo(() => new THREE.SphereGeometry(3.75, 48, 48), []);
+  const logoGeo = useMemo(() => {
+    const shape1 = createShapeFromPoly("17.407325894224414 52.269927978515625 92.511329800474414 52.269927978515625 92.511329800474414 76.269927978515625 37.912439472676851 76.269927980967623 17.402961880552539 94.82061767578125 17.407325894224414 52.269927978515625");
+    const shape2 = createShapeFromPoly("92.506965786802539 42.550689697265625 17.402961880552539 42.550689697265625 17.402961880552539 18.550689697265625 72.001852208350101 18.550689694813627 92.511329800474414 0 92.506965786802539 42.550689697265625");
+    
+    const geo = new THREE.ExtrudeGeometry([shape1, shape2], {
+      depth: 8,
+      bevelEnabled: true,
+      bevelThickness: 0.5,
+      bevelSize: 0.5,
+      bevelSegments: 2,
+    });
+    
+    geo.computeBoundingBox();
+    const centerOffset = new THREE.Vector3();
+    if (geo.boundingBox) {
+      geo.boundingBox.getCenter(centerOffset);
+      geo.translate(-centerOffset.x, -centerOffset.y, -centerOffset.z);
+    }
+    
+    geo.scale(0.09, 0.09, 0.09);
+
+    return geo;
+  }, []);
+
+  const coreGeo = useMemo(() => {
+    const geo = logoGeo.clone();
+    geo.scale(0.9, 0.9, 0.9);
+    return geo;
+  }, [logoGeo]);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -180,23 +218,22 @@ function Scene({
     const s = baseScale + Math.sin(t * 0.35) * 0.02 - scroll.current * 0.03; // Shrink slightly on scroll
     group.current.scale.setScalar(s);
 
-    outer.current.rotation.y = t * 0.06;
-    outer.current.rotation.x = t * 0.03;
-    inner.current.rotation.y = -t * 0.08;
-    inner.current.rotation.x = t * 0.05;
-    rings.current.rotation.y = -t * 0.14;
-    rings.current.rotation.x = -t * 0.04;
+    outer.current.rotation.y = t * 0.05;
+    outer.current.rotation.x = t * 0.02;
+    // Core naturally inherits outer rotations since they are in the same scene, but we apply inner rotation specifically if we wanted.
+    inner.current.rotation.y = -t * 0.04;
+    inner.current.rotation.x = t * 0.03;
   });
 
   return (
     <group ref={group} position={[0, 0, -10]}>
       <group ref={outer}>
-        <WireEdges geometry={outerGeo} color="#3d3d3d" opacity={0.12} />
-        <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.58} />
-        <WireEdges geometry={outerGeo} color="#fe4c23" opacity={0.22} />
+        <WireEdges geometry={logoGeo} color="#3d3d3d" opacity={0.12} />
+        <WireEdges geometry={logoGeo} color="#fe4c23" opacity={0.58} />
+        <WireEdges geometry={logoGeo} color="#fe4c23" opacity={0.22} />
       </group>
 
-      <mesh geometry={coreGeo} rotation={[0.15, 0.25, 0]}>
+      <mesh geometry={coreGeo} rotation={[0, 0, 0]}>
         <meshStandardMaterial
           color="#fe4c23"
           transparent
@@ -209,15 +246,9 @@ function Scene({
         />
       </mesh>
 
-      <group ref={inner} rotation={[0.35, 0.2, 0.15]}>
-        <WireEdges geometry={innerGeo} color="#3d3d3d" opacity={0.2} />
-        <WireEdges geometry={innerGeo} color="#fe4c23" opacity={0.18} />
-      </group>
-
-      <group ref={rings}>
-        <OrbitRing radius={9.4} tube={0.078} color="#fe4c23" opacity={0.18} rotation={[Math.PI / 2, 0, 0]} />
-        <OrbitRing radius={11.2} tube={0.062} color="#3d3d3d" opacity={0.12} rotation={[Math.PI / 2.6, 0.4, 0.2]} />
-        <OrbitRing radius={7.8} tube={0.062} color="#fe4c23" opacity={0.14} rotation={[Math.PI / 2.1, -0.2, 0.8]} />
+      <group ref={inner} rotation={[0, 0, 0]}>
+        <WireEdges geometry={coreGeo} color="#3d3d3d" opacity={0.15} />
+        <WireEdges geometry={coreGeo} color="#fe4c23" opacity={0.15} />
       </group>
 
       <ParticleField />
