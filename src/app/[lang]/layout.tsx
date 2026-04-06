@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Cairo, Noto_Naskh_Arabic } from "next/font/google";
+import ClientWrapper from "@/components/ClientWrapper";
+import Navbar from "@/components/Navbar";
+import WaveBackground from "@/components/WaveBackground";
+import ChatWidget from "@/components/ChatWidget";
+import Footer from "@/components/Footer";
+import LanguageSynchronizer from "@/components/LanguageSynchronizer";
+import { DictionaryProvider } from "@/i18n/DictionaryProvider";
+import { Locale, i18n } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
+import { siteConfig } from "@/lib/site-config";
 import "../globals.css";
 
 const playfair = Playfair_Display({
@@ -23,20 +33,9 @@ const notoNaskhArabic = Noto_Naskh_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: "ORFEO AI | Premium AI Agency",
-  description:
-    "Modern AI solutions for forward-thinking businesses. Let's get AI everywhere else.",
+  title: siteConfig.metadataTitle,
+  description: siteConfig.metadataDescription,
 };
-
-import ClientWrapper from "@/components/ClientWrapper";
-import Navbar from "@/components/Navbar";
-import WaveBackground from "@/components/WaveBackground";
-import ChatWidget from "@/components/ChatWidget";
-import Footer from "@/components/Footer";
-import { Locale, i18n } from "@/i18n/config";
-import { getDictionary } from "@/i18n/getDictionary";
-import { DictionaryProvider } from "@/i18n/DictionaryProvider";
-import LanguageSynchronizer from "@/components/LanguageSynchronizer";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));

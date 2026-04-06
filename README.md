@@ -1,29 +1,28 @@
 # ORFEO AI - Premium AI Agency Landing Page
 
-A modern, futuristic, dark-tech landing page for an AI agency, built with Next.js, Three.js, and Framer Motion.
+A modern marketing site built with Next.js, Three.js, and Framer Motion.
 
-## 🚀 Live Demo
+## Live Demo
 
 [View Live Site on GitHub Pages](https://nusRying.github.io/orfeo-ai/)
 
-## ✨ Features
+## Features
 
-- **3D Animated Wave**: A high-end wireframe wave background powered by Three.js and React Three Fiber.
-- **Dynamic EST Clock**: Real-time Eastern Standard Time display in the navigation bar.
-- **Premium Branding**: Custom logo and typography using Playfair Display and Inter.
-- **Micro-animations**: Fluid transitions and hover effects using Framer Motion.
-- **Responsive Design**: Optimized for mobile, tablet, and desktop viewports.
-- **Automated Deployment**: Integrated GitHub Actions workflow for seamless deployment to GitHub Pages.
+- 3D animated wave background powered by Three.js and React Three Fiber
+- Real-time EST clock in the navigation bar
+- Responsive layout for mobile, tablet, and desktop
+- GitHub Pages deployment through GitHub Actions
+- Env-based site branding and contact configuration
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/)
-- **3D Graphics**: [Three.js](https://threejs.org/) & [@react-three/fiber](https://github.com/pmndrs/react-three-fiber)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Icons**: [Lucide React](https://lucide.dev/)
+- Framework: [Next.js](https://nextjs.org/)
+- 3D Graphics: [Three.js](https://threejs.org/) and [@react-three/fiber](https://github.com/pmndrs/react-three-fiber)
+- Styling: [Tailwind CSS 4](https://tailwindcss.com/)
+- Animations: [Framer Motion](https://www.framer.com/motion/)
+- Icons: [Lucide React](https://lucide.dev/)
 
-## 🏗️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -32,28 +31,34 @@ A modern, futuristic, dark-tech landing page for an AI agency, built with Next.j
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository.
    ```bash
    git clone https://github.com/nusRying/orfeo-ai.git
    ```
-2. Install dependencies:
+2. Install dependencies.
    ```bash
    npm install
    ```
-3. Run the development server:
+3. Copy the env template.
+   ```bash
+   cp .env.example .env.local
+   ```
+4. Update the values in `.env.local`.
+   - `NEXT_PUBLIC_SITE_LOGO_PATH` should point to a file inside `public/`, for example `/logo/logo-orange.svg`
+   - `NEXT_PUBLIC_SITE_ADDRESS` uses `|` to split address lines
+5. Run the development server.
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:3005](http://localhost:3005) to see the result.
+6. Open [http://localhost:3005](http://localhost:3005).
 
-## 🚢 Deployment
+## Deployment
 
-The project is configured for **GitHub Pages**. To deploy your own version:
+The project is configured for GitHub Pages.
 
 1. Push your changes to the `main` branch.
-2. Ensure `next.config.ts` has the correct `basePath` if hosting on a subpath.
-3. Enable **GitHub Actions** under **Settings > Pages**.
+2. Add the `NEXT_PUBLIC_*` values from `.env.example` in GitHub under `Settings -> Secrets and variables -> Actions -> Variables` if you want to manage site info from GitHub.
+3. Set `NEXT_PUBLIC_SITE_BASE_PATH` when deploying on a subpath such as GitHub Pages.
+4. Enable GitHub Actions under `Settings -> Pages`.
 
----
-
-Built with passion by ORFEO AI.
+Environment values are applied at build time, so any update requires a rebuild and redeploy.

@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { getPublicAssetPath, siteConfig } from '@/lib/site-config';
 
 export default function Navbar() {
   const [time, setTime] = useState('');
@@ -62,14 +63,15 @@ export default function Navbar() {
         <div className="flex items-center gap-8 lg:gap-12">
           <Link href={`/${locale}`} className="flex items-center gap-2 group">
             <Image 
-              src={process.env.NODE_ENV === 'production' ? '/orfeo-ai/logo/logo-orange.svg' : '/logo/logo-orange.svg'} 
-              alt="ORFEO AI" 
+              src={getPublicAssetPath(siteConfig.logoPath)}
+              alt={siteConfig.logoAlt}
               width={32}
               height={32}
               className="h-8 w-auto transition-transform group-hover:scale-105" 
             />
             <span className="text-xl md:text-2xl font-sans font-bold tracking-tighter text-foreground">
-              ORFEO <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> AI
+              {siteConfig.name}
+              <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
             </span>
           </Link>
           

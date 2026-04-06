@@ -3,6 +3,7 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useDictionary } from "@/i18n/DictionaryProvider";
 import { motion, Variants } from "framer-motion";
+import { getPhoneHref, siteConfig } from "@/lib/site-config";
 
 export default function ContactPage() {
   const { dictionary } = useDictionary();
@@ -109,7 +110,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/50">{dictionary.common.email}</div>
-                    <div className="text-base text-foreground" dir="ltr">hello@orfeo-ai.com</div>
+                    <a className="text-base text-foreground hover:text-primary transition-colors" dir="ltr" href={`mailto:${siteConfig.email}`}>
+                      {siteConfig.email}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -118,7 +121,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/50">{dictionary.common.phone}</div>
-                    <div className="text-base text-foreground" dir="ltr">+1 (800) 555-0199</div>
+                    <a className="text-base text-foreground hover:text-primary transition-colors" dir="ltr" href={getPhoneHref()}>
+                      {siteConfig.phone}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -131,9 +136,9 @@ export default function ContactPage() {
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div className="text-base text-foreground leading-relaxed" dir="ltr">
-                  100 Tech Nexus Blvd<br />
-                  Suite 4400<br />
-                  San Francisco, CA 94105
+                  {siteConfig.addressLines.map((line) => (
+                    <div key={line}>{line}</div>
+                  ))}
                 </div>
               </div>
             </motion.div>

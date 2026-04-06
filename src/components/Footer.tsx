@@ -3,8 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { useDictionary } from '@/i18n/DictionaryProvider';
-
 import Image from 'next/image';
+import { getPublicAssetPath, siteConfig } from '@/lib/site-config';
 
 export default function Footer() {
   const { dictionary, locale } = useDictionary();
@@ -20,14 +20,15 @@ export default function Footer() {
               className="flex items-center gap-2 group"
             >
               <Image 
-                src={process.env.NODE_ENV === 'production' ? '/orfeo-ai/logo/logo-orange.svg' : '/logo/logo-orange.svg'} 
-                alt="ORFEO AI" 
+                src={getPublicAssetPath(siteConfig.logoPath)}
+                alt={siteConfig.logoAlt}
                 width={24}
                 height={24}
                 className="h-6 w-auto transition-transform group-hover:scale-105" 
               />
               <span className="text-xl font-sans font-bold tracking-tighter text-foreground">
-                ORFEO <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent" /> AI
+                {siteConfig.name}
+                <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent" />
               </span>
             </Link>
             <p className="mt-4 text-sm text-foreground/70 max-w-sm leading-relaxed">
