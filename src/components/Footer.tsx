@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 import Image from 'next/image';
-import { getPublicAssetPath, siteConfig } from '@/lib/site-config';
+import { getPublicAssetPath, getSiteLogoAlt, getSiteName, siteConfig } from '@/lib/site-config';
 
 export default function Footer() {
   const { dictionary, locale } = useDictionary();
@@ -21,13 +21,13 @@ export default function Footer() {
             >
               <Image 
                 src={getPublicAssetPath(siteConfig.logoPath)}
-                alt={siteConfig.logoAlt}
+                alt={getSiteLogoAlt(locale)}
                 width={24}
                 height={24}
                 className="h-6 w-auto transition-transform group-hover:scale-105" 
               />
               <span className="text-xl font-sans font-bold tracking-tighter text-foreground">
-                {siteConfig.name}
+                {getSiteName(locale)}
                 <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent" />
               </span>
             </Link>

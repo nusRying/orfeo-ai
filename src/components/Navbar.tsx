@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { getPublicAssetPath, siteConfig } from '@/lib/site-config';
+import { getPublicAssetPath, getSiteLogoAlt, getSiteName, siteConfig } from '@/lib/site-config';
 
 export default function Navbar() {
   const [time, setTime] = useState('');
@@ -64,13 +64,13 @@ export default function Navbar() {
           <Link href={`/${locale}`} className="flex items-center gap-2 group">
             <Image 
               src={getPublicAssetPath(siteConfig.logoPath)}
-              alt={siteConfig.logoAlt}
+              alt={getSiteLogoAlt(locale)}
               width={32}
               height={32}
               className="h-8 w-auto transition-transform group-hover:scale-105" 
             />
             <span className="text-xl md:text-2xl font-sans font-bold tracking-tighter text-foreground">
-              {siteConfig.name}
+              {getSiteName(locale)}
               <span className="text-primary ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
             </span>
           </Link>

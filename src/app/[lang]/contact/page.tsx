@@ -3,10 +3,10 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useDictionary } from "@/i18n/DictionaryProvider";
 import { motion, Variants } from "framer-motion";
-import { getPhoneHref, siteConfig } from "@/lib/site-config";
+import { getPhoneHref, getSiteAddressLines, siteConfig } from "@/lib/site-config";
 
 export default function ContactPage() {
-  const { dictionary } = useDictionary();
+  const { dictionary, locale } = useDictionary();
 
   const containerVars: Variants = {
     hidden: { opacity: 0 },
@@ -136,7 +136,7 @@ export default function ContactPage() {
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div className="text-base text-foreground leading-relaxed" dir="ltr">
-                  {siteConfig.addressLines.map((line) => (
+                  {getSiteAddressLines(locale).map((line) => (
                     <div key={line}>{line}</div>
                   ))}
                 </div>

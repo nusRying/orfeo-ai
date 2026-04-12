@@ -46,6 +46,7 @@ A modern marketing site built with Next.js, Three.js, and Framer Motion.
 4. Update the values in `.env.local`.
    - `NEXT_PUBLIC_SITE_LOGO_PATH` should point to a file inside `public/`, for example `/logo/logo-orange.svg`
    - `NEXT_PUBLIC_SITE_ADDRESS` uses `|` to split address lines
+   - For bilingual site info, set both the English and Arabic versions such as `NEXT_PUBLIC_SITE_NAME` and `NEXT_PUBLIC_SITE_NAME_AR`
 5. Run the development server.
    ```bash
    npm run dev

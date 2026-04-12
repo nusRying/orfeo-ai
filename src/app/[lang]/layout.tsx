@@ -9,7 +9,7 @@ import LanguageSynchronizer from "@/components/LanguageSynchronizer";
 import { DictionaryProvider } from "@/i18n/DictionaryProvider";
 import { Locale, i18n } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { siteConfig } from "@/lib/site-config";
+import { getSiteMetadataDescription, getSiteMetadataTitle } from "@/lib/site-config";
 import "../globals.css";
 
 const playfair = Playfair_Display({
@@ -32,10 +32,19 @@ const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ["arabic"],
 });
 
-export const metadata: Metadata = {
-  title: siteConfig.metadataTitle,
-  description: siteConfig.metadataDescription,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = i18n.locales.includes(lang as Locale) ? (lang as Locale) : i18n.defaultLocale;
+
+  return {
+    title: getSiteMetadataTitle(locale),
+    description: getSiteMetadataDescription(locale),
+  };
+}
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
