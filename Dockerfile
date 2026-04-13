@@ -15,10 +15,10 @@ COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
 
 # Build arguments for environment variables
+# These must match the ones in your .env.example
 ARG NEXT_PUBLIC_SITE_NAME
 ARG NEXT_PUBLIC_SITE_NAME_AR
 ARG NEXT_PUBLIC_SITE_METADATA_TITLE
@@ -62,21 +62,8 @@ RUN rm -rf ./*
 # Copy the static export from the builder stage
 COPY --from=builder /app/out .
 
-# Add a basic nginx config to handle SPA routing if needed
-# (Though for Next.js static export, it usually generates .html files)
-RUN printf 'server {\n\
-    listen 80;\n\
-    location / {\n\
-        root /usr/share/nginx/html;\n\
-        index index.html index.htm;\n\
-        try_files $uri $uri.html $uri/ /index.html;\n\
-    }\n\
-    error_page 404 /404.html;\n\
-    location = /404.html {\n\
-        root /usr/share/nginx/html;\n\
-        internal;\n\
-    }\n\
-}' > /etc/nginx/conf.d/default.conf
+# Copy custom nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
