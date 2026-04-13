@@ -110,7 +110,7 @@ export const siteConfig = {
   email: process.env.NEXT_PUBLIC_SITE_EMAIL?.trim() || defaultSiteEmail,
   phone: process.env.NEXT_PUBLIC_SITE_PHONE?.trim() || defaultSitePhone,
   addressLines: localizedAddressLines,
-  basePath: configuredBasePath || (process.env.NODE_ENV === 'production' ? '/orfeo-ai' : ''),
+  basePath: configuredBasePath || '',
 } as const;
 
 export const getSiteName = (locale: Locale) => siteConfig.names[locale] || siteConfig.name;

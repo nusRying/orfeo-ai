@@ -9,7 +9,7 @@ const normalizedBasePath =
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: normalizedBasePath || (isProd ? '/orfeo-ai' : ''),
+  basePath: normalizedBasePath || '',
   images: {
     unoptimized: true,
   },
