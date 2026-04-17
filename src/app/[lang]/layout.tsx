@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Cairo, Noto_Naskh_Arabic } from "next/font/google";
+import { Playfair_Display, Inter, IBM_Plex_Sans_Arabic } from "next/font/google";
 import ClientWrapper from "@/components/ClientWrapper";
 import Navbar from "@/components/Navbar";
 import WaveBackground from "@/components/WaveBackground";
@@ -22,14 +22,10 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const cairo = Cairo({
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   variable: "--font-sans-ar",
   subsets: ["arabic"],
-});
-
-const notoNaskhArabic = Noto_Naskh_Arabic({
-  variable: "--font-serif-ar",
-  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export async function generateMetadata({
@@ -61,7 +57,7 @@ export default async function RootLayout({
   const dictionary = await getDictionary(lang as Locale);
 
   return (
-    <div className={`${inter.variable} ${playfair.variable} ${cairo.variable} ${notoNaskhArabic.variable} antialiased selection:bg-cyan-500/30 min-h-screen`}>
+    <div className={`${inter.variable} ${playfair.variable} ${ibmPlexArabic.variable} antialiased selection:bg-cyan-500/30 min-h-screen`}>
       <LanguageSynchronizer lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} />
       <DictionaryProvider dictionary={dictionary} locale={lang as Locale}>
         <WaveBackground />

@@ -113,7 +113,7 @@ html[lang="ar"] h4,
 html[lang="ar"] h5,
 html[lang="ar"] h6,
 html[lang="ar"] .font-serif {
-  font-family: var(--font-serif-ar), var(--font-serif), serif;
+  font-family: var(--font-sans-ar), var(--font-sans), sans-serif;
 }
 
 html[lang="ar"] .btn {
