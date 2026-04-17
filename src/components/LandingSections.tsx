@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useDictionary } from '@/i18n/DictionaryProvider';
 import { ArrowLeft, ArrowRight, Bot, Brain, Database, LineChart, ShieldCheck, Zap } from "lucide-react";
 import Link from 'next/link';
-import CompanyMarquee from './CompanyMarquee';
+
 
 export default function LandingSections() {
   const { dictionary, locale } = useDictionary();
@@ -46,7 +46,7 @@ export default function LandingSections() {
 
   return (
     <>
-      <CompanyMarquee />
+
       {/* Capabilities */}
       <section className="relative z-10 py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-12">
