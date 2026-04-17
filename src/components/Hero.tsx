@@ -16,7 +16,7 @@ export default function Hero() {
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 surface-muted rounded-full px-4 py-2">
               <span className="w-2 h-2 rounded-full bg-primary" aria-hidden="true" />
-              <span className="text-[10px] md:text-xs font-bold tracking-[0.32em] uppercase text-foreground/70">
+              <span className="text-xs md:text-sm font-bold tracking-[0.32em] uppercase text-foreground/70">
                 {dictionary.hero.eyebrow}
               </span>
             </div>
@@ -28,7 +28,7 @@ export default function Hero() {
               <span className="block text-foreground/70 mt-4">{dictionary.hero.subheadline}</span>
             </h1>
 
-            <p className="mt-8 text-base md:text-lg leading-relaxed text-foreground/70 max-w-xl">
+            <p className="mt-8 text-lg md:text-xl leading-relaxed text-foreground/70 max-w-xl">
               {dictionary.hero.description}
             </p>
 
