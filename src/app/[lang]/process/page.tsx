@@ -61,9 +61,6 @@ export default function ProcessPage() {
           animate="show"
           variants={containerVars}
         >
-          <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
-            {dictionary.navbar.process}
-          </motion.div>
           <motion.h1 variants={itemVars} className="mt-4 text-5xl md:text-7xl font-serif text-foreground tracking-tight">
             {dictionary.process.deliveryTitle}
           </motion.h1>

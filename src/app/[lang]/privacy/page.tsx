@@ -27,10 +27,6 @@ export default function PrivacyPage() {
           <p className="mt-6 text-base md:text-lg text-foreground/70 leading-relaxed">
             {dictionary.privacy.lastUpdated}
           </p>
-
-          <div className="mt-8 surface-muted rounded-[2rem] p-6 text-sm text-foreground/70 leading-relaxed">
-            {dictionary.common.note}: {dictionary.privacy.legalNote}
-          </div>
         </div>
 
         <div className="mt-14 grid gap-6">

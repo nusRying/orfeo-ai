@@ -75,7 +75,7 @@
     "description": "We design AI systems that are understandable, testable, and built for real operations. No magic—just strong engineering and clear scope.",
     "ourStory": {
       "title": "Our story",
-      "desc": "Founded in 2024, ORFEO AI emerged from a simple realization: the gap between cutting-edge AI research and practical business application was too wide. We exist to bridge that gap."
+      "desc": "Founded in 2024, Kutraa emerged from a simple realization: the gap between cutting-edge AI research and practical business application was too wide. We exist to bridge that gap."
     },
     "mission": {
       "title": "Our mission",
@@ -385,7 +385,7 @@
       "contact": {
         "title": "Contact",
         "items": [
-          "For privacy requests, email: hello@orfeo-ai.com"
+          "For privacy requests, email: Contact@kutraa.com"
         ]
       }
     }
@@ -425,7 +425,7 @@
       "contact": {
         "title": "Contact",
         "items": [
-          "For questions about these terms, email: hello@orfeo-ai.com"
+          "For questions about these terms, email: Contact@kutraa.com"
         ]
       }
     }
@@ -443,7 +443,7 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "contact": "Contact",
-    "rights": "© {year} ORFEO AI. All rights reserved.",
+    "rights": "© {year} Kutraa. All rights reserved.",
     "builtWith": "Built with Next.js • Tailwind • Three.js"
   }
 }

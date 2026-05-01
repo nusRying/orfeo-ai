@@ -49,7 +49,6 @@ export default function Navbar() {
   const navItems = useMemo(
     () => [
       { href: `/${locale}/services`, label: dictionary.navbar.services },
-      { href: `/${locale}/work`, label: dictionary.navbar.work },
       { href: `/${locale}/process`, label: dictionary.navbar.process },
       { href: `/${locale}/about`, label: dictionary.navbar.about },
       { href: `/${locale}/faq`, label: dictionary.navbar.faq },

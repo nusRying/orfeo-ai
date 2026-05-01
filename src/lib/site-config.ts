@@ -1,13 +1,13 @@
 import type { Locale } from '@/i18n/config';
 
-const defaultSiteName = 'ORFEO AI';
+const defaultSiteName = 'Kutraa';
 const defaultArabicSiteName = defaultSiteName;
-const defaultSiteEmail = 'hello@orfeo-ai.com';
-const defaultSitePhone = '+1 (800) 555-0199';
+const defaultSiteEmail = 'Contact@kutraa.com';
+const defaultSitePhone = '+966553587720';
 const defaultSiteAddress = [
-  '100 Tech Nexus Blvd',
-  'Suite 4400',
-  'San Francisco, CA 94105',
+  'Saudi Arabia',
+  'Riyadh City',
+  'Alfalah Dist',
 ] as const;
 const defaultMetadataTitle = `${defaultSiteName} | Premium AI Agency`;
 const defaultArabicMetadataTitle = defaultMetadataTitle;

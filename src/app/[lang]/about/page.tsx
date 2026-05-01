@@ -5,6 +5,7 @@ import { motion, Variants } from 'framer-motion';
 
 export default function AboutPage() {
   const { dictionary } = useDictionary();
+  const showTeamSection = false;
   
   const containerVars: Variants = {
     hidden: { opacity: 0 },
@@ -98,39 +99,41 @@ export default function AboutPage() {
         </motion.section>
 
         {/* Team */}
-        <motion.section 
-          className="mt-20"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={containerVars}
-        >
-          <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
-            {dictionary.about.team.subtitle}
-          </motion.div>
-          <motion.h2 variants={itemVars} className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
-            {dictionary.about.team.title}
-          </motion.h2>
+        {showTeamSection ? (
+          <motion.section 
+            className="mt-20"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={containerVars}
+          >
+            <motion.div variants={itemVars} className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
+              {dictionary.about.team.subtitle}
+            </motion.div>
+            <motion.h2 variants={itemVars} className="mt-4 text-3xl md:text-4xl font-serif text-foreground tracking-tight">
+              {dictionary.about.team.title}
+            </motion.h2>
 
-          <div className="mt-10 grid md:grid-cols-3 gap-6">
-            {team.map((member) => (
-              <motion.div variants={itemVars} key={member.name} className="surface rounded-3xl overflow-hidden">
-                <div className="relative w-full aspect-square bg-deep-navy">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="text-lg font-bold text-foreground">{member.name}</div>
-                  <div className="mt-1 text-xs font-bold tracking-[0.22em] uppercase text-primary">{member.role}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
+            <div className="mt-10 grid md:grid-cols-3 gap-6">
+              {team.map((member) => (
+                <motion.div variants={itemVars} key={member.name} className="surface rounded-3xl overflow-hidden">
+                  <div className="relative w-full aspect-square bg-deep-navy">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={member.img}
+                      alt={member.name}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="text-lg font-bold text-foreground">{member.name}</div>
+                    <div className="mt-1 text-xs font-bold tracking-[0.22em] uppercase text-primary">{member.role}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+        ) : null}
 
       </div>
     </main>

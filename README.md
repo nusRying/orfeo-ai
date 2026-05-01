@@ -1,4 +1,4 @@
-# ORFEO AI - Premium AI Agency Landing Page
+# Kutraa - Premium AI Agency Landing Page
 
 A modern marketing site built with Next.js, Three.js, and Framer Motion.
 
