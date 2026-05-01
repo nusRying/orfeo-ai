@@ -93,64 +93,6 @@ export default function LandingSections() {
         </div>
       </section>
 
-      {/* Selected work */}
-      <section className="relative z-10 py-20 border-t border-black/5">
-        <div className="mx-auto max-w-7xl px-6 md:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-          >
-            <div className="max-w-2xl">
-              <div className="text-xs font-bold tracking-[0.32em] uppercase text-foreground/50">
-                {dictionary.home.workSubtitle}
-              </div>
-              <h2 className="mt-4 text-4xl md:text-5xl font-serif text-foreground tracking-tight">
-                {dictionary.work.title1}
-                <span className="text-primary">{dictionary.work.titleHighlight}</span>
-              </h2>
-              <p className="mt-5 text-sm md:text-base text-foreground/70 leading-relaxed">
-                {dictionary.work.description}
-              </p>
-            </div>
-            <Link href={`/${locale}/work`} className="btn btn-secondary">
-              {dictionary.home.viewAll} <ArrowIcon size={16} />
-            </Link>
-          </motion.div>
-
-          <div className="mt-12 grid lg:grid-cols-3 gap-6">
-            {[
-              dictionary.work.projects.logistics,
-              dictionary.work.projects.auditing,
-              dictionary.work.projects.triage,
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="surface rounded-3xl p-7"
-              >
-                <div className="flex items-end justify-between gap-6">
-                  <div>
-                    <div className="text-5xl font-bold text-primary leading-none">{item.metric}</div>
-                    <div className="mt-2 text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{item.label}</div>
-                  </div>
-                  <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/40">
-                    {dictionary.work.caseStudy}
-                  </div>
-                </div>
-                <div className="mt-6 text-xl font-bold text-foreground">{item.title}</div>
-                <div className="mt-2 text-sm text-foreground/70 leading-relaxed">{item.desc}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Process */}
       <section className="relative z-10 py-20 border-t border-black/5">
         <div className="mx-auto max-w-7xl px-6 md:px-12">
