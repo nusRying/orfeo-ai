@@ -102,7 +102,12 @@ h6,
   border-color: rgba(254, 76, 35, 0.35);
 }
 
-html[lang="ar"] body {
+html[lang="ar"] {
+  --font-sans: var(--font-sans-ar);
+}
+
+html[lang="ar"] body,
+html[lang="ar"] body * {
   font-family: var(--font-sans-ar), var(--font-sans), system-ui, sans-serif;
 }
 

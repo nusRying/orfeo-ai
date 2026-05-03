@@ -26,9 +26,9 @@
   },
   "hero": {
     "eyebrow": "AI DESIGNED FOR YOUR BUSINESS",
-    "headline1": "Making AI (",
+    "headline1": "Making AI",
     "headlineHighlight": " work for you",
-    "headline3": ")",
+    "headline3": "",
     "subheadline": "",
     "description": "We design AI solutions that work with your existing systems, simplifying operations and boosting efficiency — without the complexity.",
     "viewWork": "View work",
@@ -443,7 +443,6 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "contact": "Contact",
-    "rights": "© {year} Kutraa. All rights reserved.",
-    "builtWith": "Built with Next.js • Tailwind • Three.js"
+    "rights": "© {year} Kutraa. All rights reserved."
   }
 }

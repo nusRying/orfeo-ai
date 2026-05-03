@@ -75,9 +75,6 @@ export default function Footer() {
           <div className="text-xs text-foreground/60 tracking-[0.15em] uppercase">
             {dictionary.footer.rights.replace('{year}', year.toString())}
           </div>
-          <div className="text-xs text-foreground/50">
-            {dictionary.footer.builtWith}
-          </div>
         </div>
       </div>
     </footer>

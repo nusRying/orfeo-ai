@@ -102,8 +102,17 @@ export default function LandingSections() {
                 {dictionary.home.processSubtitle}
               </div>
               <h2 className="mt-4 text-4xl md:text-5xl font-serif text-foreground tracking-tight">
-                {dictionary.process.title1}
-                <span className="text-primary">{dictionary.process.titleHighlight}</span>
+                {locale === 'ar' ? (
+                  <>
+                    <span className="text-primary">{dictionary.process.titleHighlight}</span>
+                    {dictionary.process.title1}
+                  </>
+                ) : (
+                  <>
+                    {dictionary.process.title1}
+                    <span className="text-primary">{dictionary.process.titleHighlight}</span>
+                  </>
+                )}
               </h2>
               <p className="mt-5 text-sm md:text-base text-foreground/70 leading-relaxed">
                 {dictionary.process.description}
