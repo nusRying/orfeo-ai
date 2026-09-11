@@ -10,6 +10,7 @@ import { DictionaryProvider } from "@/i18n/DictionaryProvider";
 import { Locale, i18n } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { getSiteMetadataDescription, getSiteMetadataTitle } from "@/lib/site-config";
+import { notFound } from "next/navigation";
 import "../globals.css";
 
 const playfair = Playfair_Display({
@@ -34,7 +35,10 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const locale = i18n.locales.includes(lang as Locale) ? (lang as Locale) : i18n.defaultLocale;
+  if (!i18n.locales.some((locale) => locale === lang)) {
+    notFound();
+  }
+  const locale = lang as Locale;
 
   return {
     title: getSiteMetadataTitle(locale),
@@ -54,6 +58,9 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  if (!i18n.locales.some((locale) => locale === lang)) {
+    notFound();
+  }
   const dictionary = await getDictionary(lang as Locale);
 
   return (

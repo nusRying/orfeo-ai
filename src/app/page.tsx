@@ -2,17 +2,20 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { i18n, type Locale } from '@/i18n/config';
 
 export default function RootPage() {
   const router = useRouter();
 
   useEffect(() => {
     const savedLocale = localStorage.getItem('locale');
-    if (savedLocale) {
+    if (savedLocale && i18n.locales.some((locale) => locale === savedLocale)) {
       router.replace(`/${savedLocale}`);
     } else {
       const browserLang = navigator.language.split('-')[0];
-      const defaultLocale = browserLang === 'ar' ? 'ar' : 'en';
+      const defaultLocale = i18n.locales.some((locale) => locale === browserLang)
+        ? browserLang
+        : i18n.defaultLocale;
       router.replace(`/${defaultLocale}`);
     }
   }, [router]);

@@ -9,6 +9,7 @@ import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getPublicAssetPath, getSiteLogoAlt, getSiteName, siteConfig } from '@/lib/site-config';
+import { showEnglish } from '@/i18n/config';
 
 export default function Navbar() {
   const [time, setTime] = useState('');
@@ -110,16 +111,18 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link 
-            href={toggleLanguage()} 
-            onClick={handleLanguageChange}
-            className={cn(
-              'text-[10px] md:text-xs font-bold text-foreground/60 hover:text-primary transition-colors',
-              locale === 'ar' ? 'tracking-normal' : 'tracking-widest'
-            )}
-          >
-            {locale === 'en' ? 'العربية' : 'EN'}
-          </Link>
+          {showEnglish ? (
+            <Link
+              href={toggleLanguage()}
+              onClick={handleLanguageChange}
+              className={cn(
+                'text-[10px] md:text-xs font-bold text-foreground/60 hover:text-primary transition-colors',
+                locale === 'ar' ? 'tracking-normal' : 'tracking-widest'
+              )}
+            >
+              {locale === 'en' ? 'العربية' : 'EN'}
+            </Link>
+          ) : null}
           <div className="hidden lg:block font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">
             {time}
           </div>
@@ -205,16 +208,18 @@ export default function Navbar() {
                 >
                   {dictionary.common.bookConsultationShort}
                 </Link>
-                <Link
-                  href={toggleLanguage()}
-                  onClick={() => {
-                    handleLanguageChange();
-                    setMenuOpen(false);
-                  }}
-                  className="btn btn-secondary w-full"
-                >
-                  {locale === 'en' ? 'العربية' : 'English'}
-                </Link>
+                {showEnglish ? (
+                  <Link
+                    href={toggleLanguage()}
+                    onClick={() => {
+                      handleLanguageChange();
+                      setMenuOpen(false);
+                    }}
+                    className="btn btn-secondary w-full"
+                  >
+                    {locale === 'en' ? 'العربية' : 'English'}
+                  </Link>
+                ) : null}
               </div>
 
               <div className="mt-auto pt-8 text-[10px] font-mono tracking-[0.2em] text-foreground/50 uppercase">
