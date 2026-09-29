@@ -8,6 +8,7 @@ import { useDictionary, type Dictionary } from '@/i18n/DictionaryProvider';
 import type { Locale } from '@/i18n/config';
 import { Bot, LineChart, Brain } from "lucide-react";
 import CompanyMarquee from './CompanyMarquee';
+import { useWebGLSupport } from '@/hooks/useWebGLSupport';
 
 function WaveLines() {
     const linesCount = 40;
@@ -203,11 +204,24 @@ function Scene({ dictionary, locale }: { dictionary: Dictionary; locale: Locale 
 
 export default function InteractiveHub() {
   const { dictionary, locale } = useDictionary();
+  const webGLSupport = useWebGLSupport();
+
   return (
     <div className="w-full h-screen absolute inset-0 bg-white" dir="ltr">
-      <Canvas camera={{ position: [0, 2, 10], fov: 45 }}>
-        <Scene dictionary={dictionary} locale={locale} />
-      </Canvas>
+      {webGLSupport ? (
+        <Canvas camera={{ position: [0, 2, 10], fov: 45 }}>
+          <Scene dictionary={dictionary} locale={locale} />
+        </Canvas>
+      ) : (
+        <div
+          className="absolute inset-0"
+          data-testid={webGLSupport === false ? 'interactive-hub-webgl-fallback' : undefined}
+          style={{
+            background:
+              'radial-gradient(circle at 50% 42%, rgba(254,76,35,0.14), transparent 42%)',
+          }}
+        />
+      )}
       {/* Decorative gradients */}
       <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-white to-transparent pointer-events-none z-10" />
       

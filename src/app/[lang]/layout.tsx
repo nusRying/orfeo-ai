@@ -3,7 +3,6 @@ import { Playfair_Display, Inter, IBM_Plex_Sans_Arabic } from "next/font/google"
 import ClientWrapper from "@/components/ClientWrapper";
 import Navbar from "@/components/Navbar";
 import WaveBackground from "@/components/WaveBackground";
-import ChatWidget from "@/components/ChatWidget";
 import Footer from "@/components/Footer";
 import LanguageSynchronizer from "@/components/LanguageSynchronizer";
 import { DictionaryProvider } from "@/i18n/DictionaryProvider";
@@ -71,7 +70,6 @@ export default async function RootLayout({
         <Navbar />
         <ClientWrapper>{children}</ClientWrapper>
         <Footer />
-        <ChatWidget />
       </DictionaryProvider>
     </div>
   );

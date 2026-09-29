@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useWebGLSupport } from '@/hooks/useWebGLSupport';
 
 function hash(n: number) {
   const x = Math.sin(n) * 43758.5453123;
@@ -255,6 +256,7 @@ function Scene({
 export default function WaveBackground() {
   const pointerRef = useRef({ x: 0, y: 0 });
   const scrollY = useRef(0);
+  const webGLSupport = useWebGLSupport();
 
   useEffect(() => {
     function onPointerMove(e: PointerEvent) {
@@ -284,21 +286,24 @@ export default function WaveBackground() {
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
-      <Canvas
-        className="absolute inset-0"
-        camera={{ position: [0, 0, 26], fov: 45 }}
-        dpr={[1, 1.5]}
-        style={{ filter: 'contrast(1.08) saturate(1.16)' }}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-      >
-        <color attach="background" args={['transparent']} />
-        <fog attach="fog" args={['#ffffff', 55, 160]} />
-        <ambientLight intensity={0.9} />
-        <directionalLight position={[10, 12, 7]} intensity={0.35} />
-        <Scene pointerRef={pointerRef} scrollY={scrollY} />
-      </Canvas>
+      {webGLSupport ? (
+        <Canvas
+          className="absolute inset-0"
+          camera={{ position: [0, 0, 26], fov: 45 }}
+          dpr={[1, 1.5]}
+          style={{ filter: 'contrast(1.08) saturate(1.16)' }}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        >
+          <color attach="background" args={['transparent']} />
+          <fog attach="fog" args={['#ffffff', 55, 160]} />
+          <ambientLight intensity={0.9} />
+          <directionalLight position={[10, 12, 7]} intensity={0.35} />
+          <Scene pointerRef={pointerRef} scrollY={scrollY} />
+        </Canvas>
+      ) : null}
       <div
         className="absolute inset-0"
+        data-testid={webGLSupport === false ? 'webgl-fallback' : undefined}
         style={{
           background:
             'radial-gradient(circle at 70% 35%, rgba(254,76,35,0.12), transparent 58%), radial-gradient(circle at 66% 42%, rgba(61,61,61,0.06), transparent 62%)',
