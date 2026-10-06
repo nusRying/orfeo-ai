@@ -7,7 +7,7 @@ This guide connects the contact form to a Google Sheet in ~3 minutes, with **zer
 ## Step 1 — Create the Google Sheet
 
 1. Go to [sheets.new](https://sheets.new) to create a new Google Sheet.
-2. Rename the first sheet tab to **`Submissions`** (double-click the tab at the bottom).
+2. Rename the first sheet tab to **`Sheet1`** (double-click the tab at the bottom).
 3. Add these headers in **Row 1**:
 
 | A | B | C | D | E |
@@ -22,12 +22,34 @@ This guide connects the contact form to a Google Sheet in ~3 minutes, with **zer
 2. Delete any existing code and paste the following:
 
 ```javascript
-const SHEET_NAME = 'Submissions';
+const SHEET_NAME = 'Sheet1';
 
 function doPost(e) {
+  return handleRequest(e);
+}
+
+function doGet(e) {
+  return handleRequest(e);
+}
+
+function handleRequest(e) {
+  const output = ContentService.createTextOutput();
+  output.setMimeType(ContentService.MimeType.JSON);
+
   try {
-    const data = JSON.parse(e.postData.contents);
+    let data = {};
+
+    if (e.postData && e.postData.contents) {
+      data = JSON.parse(e.postData.contents);
+    } else if (e.parameter) {
+      data = e.parameter;
+    }
+
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['Timestamp', 'First Name', 'Last Name', 'Email', 'Message']);
+    }
 
     sheet.appendRow([
       data.timestamp || new Date().toISOString(),
@@ -37,15 +59,12 @@ function doPost(e) {
       data.message   || '',
     ]);
 
-    return ContentService
-      .createTextOutput(JSON.stringify({ result: 'success' }))
-      .setMimeType(ContentService.MimeType.JSON);
-
+    output.setContent(JSON.stringify({ result: 'success' }));
   } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ result: 'error', error: err.message }))
-      .setMimeType(ContentService.MimeType.JSON);
+    output.setContent(JSON.stringify({ result: 'error', error: err.message }));
   }
+
+  return output;
 }
 ```
 
@@ -72,7 +91,7 @@ function doPost(e) {
 Open (or create) `.env.local` in the project root and add:
 
 ```
-GOOGLE_SHEETS_SCRIPT_URL=https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
+NEXT_PUBLIC_GOOGLE_SHEETS_SCRIPT_URL=https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
 ```
 
 Restart the dev server (`npm run dev`) and test the form. A new row should appear in your sheet!

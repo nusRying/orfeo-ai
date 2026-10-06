@@ -31,34 +31,42 @@ export default function ContactPage() {
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
   };
 
+  const SCRIPT_URL = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_SCRIPT_URL ?? '';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState('loading');
     setErrorMsg('');
 
     try {
-      const res = await fetch('/api/contact', {
+      // Static export: call Apps Script directly from the browser.
+      // no-cors is required — Google Apps Script doesn't return CORS headers,
+      // so we can't read the response, but the request still goes through.
+      await fetch(SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, lastName, email, message }),
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          firstName,
+          lastName,
+          email,
+          message,
+        }),
       });
 
-      if (res.ok) {
-        setFormState('success');
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setMessage('');
-      } else {
-        const data = await res.json().catch(() => ({}));
-        setErrorMsg(data.error || 'Something went wrong. Please try again.');
-        setFormState('error');
-      }
+      // With no-cors we can't read the response, so we optimistically show success.
+      setFormState('success');
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setMessage('');
     } catch {
       setErrorMsg('Network error. Please check your connection and try again.');
       setFormState('error');
     }
   };
+
 
   return (
     <main className="min-h-screen pt-32 pb-24">
