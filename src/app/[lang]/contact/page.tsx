@@ -1,12 +1,22 @@
 'use client';
 
-import { Mail, MapPin, Phone } from "lucide-react";
+import { MapPin, Phone, CheckCircle, Loader2 } from "lucide-react";
 import { useDictionary } from "@/i18n/DictionaryProvider";
 import { motion, Variants } from "framer-motion";
 import { getPhoneHref, getSiteAddressLines, siteConfig } from "@/lib/site-config";
+import { useState } from "react";
+
+type FormState = 'idle' | 'loading' | 'success' | 'error';
 
 export default function ContactPage() {
   const { dictionary, locale } = useDictionary();
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [formState, setFormState] = useState<FormState>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const containerVars: Variants = {
     hidden: { opacity: 0 },
@@ -19,6 +29,35 @@ export default function ContactPage() {
   const itemVars: Variants = {
     hidden: { opacity: 0, y: 30 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormState('loading');
+    setErrorMsg('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName, lastName, email, message }),
+      });
+
+      if (res.ok) {
+        setFormState('success');
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+        setFormState('error');
+      }
+    } catch {
+      setErrorMsg('Network error. Please check your connection and try again.');
+      setFormState('error');
+    }
   };
 
   return (
@@ -54,49 +93,97 @@ export default function ContactPage() {
               {dictionary.contact.sendMessage.desc}
             </p>
 
-            <form className="mt-8 space-y-5">
-              <div className="grid md:grid-cols-2 gap-4">
+            {formState === 'success' ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="mt-8 flex flex-col items-center justify-center gap-4 py-12 text-center"
+              >
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                  <CheckCircle className="w-8 h-8 text-primary" />
+                </div>
+                <div className="text-lg font-bold text-foreground">{dictionary.contact.success.title}</div>
+                <p className="text-sm text-foreground/60">{dictionary.contact.success.desc}</p>
+                <button
+                  type="button"
+                  onClick={() => setFormState('idle')}
+                  className="mt-2 text-xs font-bold tracking-widest uppercase text-primary hover:underline"
+                >
+                  {dictionary.contact.success.sendAnother}
+                </button>
+              </motion.div>
+            ) : (
+              <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.firstName}</label>
+                    <input
+                      type="text"
+                      required
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors"
+                      placeholder={dictionary.contact.form.firstNamePlaceholder}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.lastName}</label>
+                    <input
+                      type="text"
+                      required
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors"
+                      placeholder={dictionary.contact.form.lastNamePlaceholder}
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
-                  <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.firstName}</label>
+                  <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.companyEmail}</label>
                   <input
-                    type="text"
+                    type="email"
+                    required
+                    dir="ltr"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors"
-                    placeholder={dictionary.contact.form.firstNamePlaceholder}
+                    placeholder="hello@company.com"
                   />
                 </div>
+
                 <div className="space-y-2">
-                  <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.lastName}</label>
-                  <input
-                    type="text"
-                    className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors"
-                    placeholder={dictionary.contact.form.lastNamePlaceholder}
+                  <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.whatBuilding}</label>
+                  <textarea
+                    rows={5}
+                    required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors resize-none"
+                    placeholder={dictionary.contact.form.whatBuildingPlaceholder}
                   />
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.companyEmail}</label>
-                <input
-                  type="email"
-                  dir="ltr"
-                  className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors"
-                  placeholder="hello@company.com"
-                />
-              </div>
+                {formState === 'error' && (
+                  <p className="text-sm text-red-500">{errorMsg}</p>
+                )}
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/60">{dictionary.contact.form.whatBuilding}</label>
-                <textarea
-                  rows={5}
-                  className="w-full bg-white border border-black/10 rounded-2xl px-4 py-3 text-foreground focus:outline-none focus:border-primary/60 transition-colors resize-none"
-                  placeholder={dictionary.contact.form.whatBuildingPlaceholder}
-                />
-              </div>
-
-              <button type="button" className="btn btn-primary w-full justify-center">
-                {dictionary.common.sendMessage}
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  disabled={formState === 'loading'}
+                  className="btn btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {formState === 'loading' ? (
+                    <span className="flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      {dictionary.contact.sending}
+                    </span>
+                  ) : (
+                    dictionary.common.sendMessage
+                  )}
+                </button>
+              </form>
+            )}
           </motion.div>
 
           {/* Contact Info */}
@@ -104,17 +191,6 @@ export default function ContactPage() {
             <motion.div variants={itemVars} className="surface rounded-[2rem] p-8 md:p-10">
               <div className="text-sm font-bold text-foreground">{dictionary.common.directContact}</div>
               <div className="mt-6 space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-deep-navy border border-black/5 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold tracking-[0.22em] uppercase text-foreground/50">{dictionary.common.email}</div>
-                    <a className="text-base text-foreground hover:text-primary transition-colors" dir="ltr" href={`mailto:${siteConfig.email}`}>
-                      {siteConfig.email}
-                    </a>
-                  </div>
-                </div>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-deep-navy border border-black/5 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-primary" />

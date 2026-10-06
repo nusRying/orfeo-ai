@@ -343,7 +343,13 @@
       "companyEmail": "Company email",
       "whatBuilding": "What are you building?",
       "whatBuildingPlaceholder": "Tell us about your use-case, timeline, and what success looks like..."
-    }
+    },
+    "success": {
+      "title": "Message received!",
+      "desc": "We'll get back to you within a working day.",
+      "sendAnother": "Send another message"
+    },
+    "sending": "Sending…"
   },
   "privacy": {
     "subtitle": "Privacy",
@@ -385,7 +391,7 @@
       "contact": {
         "title": "Contact",
         "items": [
-          "For privacy requests, email: Contact@kutraa.com"
+          "For privacy requests, please use the contact form on our website."
         ]
       }
     }
@@ -425,7 +431,7 @@
       "contact": {
         "title": "Contact",
         "items": [
-          "For questions about these terms, email: Contact@kutraa.com"
+          "For questions about these terms, please use the contact form on our website."
         ]
       }
     }
