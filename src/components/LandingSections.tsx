@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -67,7 +67,7 @@ export default function LandingSections() {
                 {dictionary.services.description}
               </p>
             </div>
-            <Link href={`/${locale}/services`} className="btn btn-secondary">
+            <Link href={`/services`} className="btn btn-secondary">
               {dictionary.home.viewAll} <ArrowIcon size={16} />
             </Link>
           </motion.div>
@@ -118,7 +118,7 @@ export default function LandingSections() {
                 {dictionary.process.description}
               </p>
             </div>
-            <Link href={`/${locale}/process`} className="btn btn-secondary">
+            <Link href={`/process`} className="btn btn-secondary">
               {dictionary.process.learnMore} <ArrowIcon size={16} />
             </Link>
           </div>
@@ -159,7 +159,7 @@ export default function LandingSections() {
                 {dictionary.faq.description}
               </p>
             </div>
-            <Link href={`/${locale}/faq`} className="btn btn-secondary">
+            <Link href={`/faq`} className="btn btn-secondary">
               {dictionary.faq.viewFaq} <ArrowIcon size={16} />
             </Link>
           </div>
@@ -199,10 +199,10 @@ export default function LandingSections() {
               </div>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Link href={`/${locale}/contact`} className="btn btn-primary">
+              <Link href={`/contact`} className="btn btn-primary">
                 {dictionary.common.bookConsultationShort} <ArrowIcon size={16} />
               </Link>
-              <Link href={`/${locale}/services`} className="btn btn-secondary">
+              <Link href={`/services`} className="btn btn-secondary">
                 {dictionary.services.exploreServices}
               </Link>
             </div>
@@ -212,3 +212,4 @@ export default function LandingSections() {
     </>
   );
 }
+

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <Link
-              href={`/${locale}`}
+              href={`/`}
               className="flex items-center gap-2 group"
             >
               <Image 
@@ -42,11 +42,11 @@ export default function Footer() {
                 {dictionary.footer.company}
               </div>
               <div className="mt-4 flex flex-col gap-3 text-sm text-foreground/70">
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/services`}>{dictionary.navbar.services}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/work`}>{dictionary.navbar.work}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/process`}>{dictionary.navbar.process}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/about`}>{dictionary.navbar.about}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/contact`}>{dictionary.footer.contact}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/services`}>{dictionary.navbar.services}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/work`}>{dictionary.navbar.work}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/process`}>{dictionary.navbar.process}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/about`}>{dictionary.navbar.about}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/contact`}>{dictionary.footer.contact}</Link>
               </div>
             </div>
 
@@ -55,7 +55,7 @@ export default function Footer() {
                 {dictionary.footer.resources}
               </div>
               <div className="mt-4 flex flex-col gap-3 text-sm text-foreground/70">
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/faq`}>{dictionary.navbar.faq}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/faq`}>{dictionary.navbar.faq}</Link>
               </div>
             </div>
 
@@ -64,8 +64,8 @@ export default function Footer() {
                 {dictionary.footer.legal}
               </div>
               <div className="mt-4 flex flex-col gap-3 text-sm text-foreground/70">
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/privacy`}>{dictionary.footer.privacy}</Link>
-                <Link className="hover:text-primary transition-colors" href={`/${locale}/terms`}>{dictionary.footer.terms}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/privacy`}>{dictionary.footer.privacy}</Link>
+                <Link className="hover:text-primary transition-colors" href={`/terms`}>{dictionary.footer.terms}</Link>
               </div>
             </div>
           </div>
@@ -80,3 +80,4 @@ export default function Footer() {
     </footer>
   );
 }
+

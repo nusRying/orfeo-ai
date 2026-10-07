@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { useDictionary } from '@/i18n/DictionaryProvider';
@@ -33,11 +33,11 @@ export default function Hero() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4 items-center">
-              <Link href={`/${locale}/contact`} className="btn btn-primary">
+              <Link href={`/contact`} className="btn btn-primary">
                 {dictionary.common.bookConsultationShort}
                 <ArrowIcon size={16} />
               </Link>
-              <Link href={`/${locale}/work`} className="btn btn-secondary">
+              <Link href={`/work`} className="btn btn-secondary">
                 {dictionary.hero.viewWork}
               </Link>
             </div>
@@ -102,7 +102,7 @@ export default function Hero() {
                   {dictionary.hero.engagement.desc}
                 </div>
                 <div className="mt-4">
-                  <Link href={`/${locale}/process`} className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline underline-offset-4">
+                  <Link href={`/process`} className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline underline-offset-4">
                     {dictionary.hero.engagement.link} <ArrowIcon size={16} />
                   </Link>
                 </div>
@@ -114,3 +114,4 @@ export default function Hero() {
     </section>
   );
 }
+

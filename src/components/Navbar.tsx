@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
@@ -38,7 +38,7 @@ export default function Navbar() {
 
   const toggleLanguage = () => {
     const newLocale = locale === 'en' ? 'ar' : 'en';
-    const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
+    const pathWithoutLocale = pathname.replace(`/`, '') || '/';
     return `/${newLocale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
   };
 
@@ -49,10 +49,10 @@ export default function Navbar() {
 
   const navItems = useMemo(
     () => [
-      { href: `/${locale}/services`, label: dictionary.navbar.services },
-      { href: `/${locale}/process`, label: dictionary.navbar.process },
-      { href: `/${locale}/about`, label: dictionary.navbar.about },
-      { href: `/${locale}/faq`, label: dictionary.navbar.faq },
+      { href: `/services`, label: dictionary.navbar.services },
+      { href: `/process`, label: dictionary.navbar.process },
+      { href: `/about`, label: dictionary.navbar.about },
+      { href: `/faq`, label: dictionary.navbar.faq },
     ],
     [dictionary, locale]
   );
@@ -61,7 +61,7 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 w-full z-50 border-b border-black/5 bg-white/95">
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 md:px-12">
         <div className="flex items-center gap-8 lg:gap-12">
-          <Link href={`/${locale}`} className="flex items-center gap-2 group">
+          <Link href={`/`} className="flex items-center gap-2 group">
             <Image 
               src={getPublicAssetPath(siteConfig.logoPath)}
               alt={getSiteLogoAlt(locale)}
@@ -120,7 +120,7 @@ export default function Navbar() {
                 locale === 'ar' ? 'tracking-normal' : 'tracking-widest'
               )}
             >
-              {locale === 'en' ? 'العربية' : 'EN'}
+              {locale === 'en' ? 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©' : 'EN'}
             </Link>
           ) : null}
           <div className="hidden lg:block font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">
@@ -128,7 +128,7 @@ export default function Navbar() {
           </div>
 
           <Link 
-            href={`/${locale}/contact`}
+            href={`/contact`}
             className="hidden sm:inline-flex btn btn-secondary"
           >
             {dictionary.common.bookConsultationShort}
@@ -202,7 +202,7 @@ export default function Navbar() {
 
               <div className="mt-6 flex flex-col gap-3">
                 <Link
-                  href={`/${locale}/contact`}
+                  href={`/contact`}
                   className="btn btn-primary w-full"
                   onClick={() => setMenuOpen(false)}
                 >
@@ -217,7 +217,7 @@ export default function Navbar() {
                     }}
                     className="btn btn-secondary w-full"
                   >
-                    {locale === 'en' ? 'العربية' : 'English'}
+                    {locale === 'en' ? 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©' : 'English'}
                   </Link>
                 ) : null}
               </div>
@@ -232,3 +232,4 @@ export default function Navbar() {
     </header>
   );
 }
+

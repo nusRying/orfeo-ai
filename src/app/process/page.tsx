@@ -135,7 +135,7 @@ export default function ProcessPage() {
             </motion.p>
           </div>
           <motion.div variants={itemVars} className="flex flex-wrap gap-4">
-            <Link href={`/${locale}/contact`} className="btn btn-primary">
+            <Link href={`/contact`} className="btn btn-primary">
               {dictionary.common.bookConsultationShort} <ArrowIcon size={16} />
             </Link>
           </motion.div>
